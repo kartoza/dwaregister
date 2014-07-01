@@ -1,0 +1,28 @@
+for shp in 'DM10_theewaterskloof.shp' 'DM11_inanda.shp' 'DM12_hazelmere.shp' 'DM13_craigieburn.shp' 'DM14_pongolapoort.shp' 'DM15_vygeboom.shp' 'DM16_gariep.shp' 'DM17_vaal.shp'  'DM2_voelvlei.shp' 'DM3_boskop.shp' 'DM4_wriggleswade.shp' 'DM5_midmar.shp' 'DM6_brandvlei_kwaggaskloof.shp' 'DM7_mtata.shp' 'DM8_grootdraai.shp' 'DM9_vanderkloof.shp'; do echo 'shp2pgsql -s 4148 -c -D -I '$shp' dam_ | psql -d dwaregister'; done
+
+
+shp2pgsql -s 4148 -c -D -I 'DM1_allemanskraal.shp' parcels_external | psql -d dwaregister 2>>/tmp/pgerrors
+shp2pgsql -s 4148 -c -D -I DM10_theewaterskloof.shp dam_10 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM11_inanda.shp dam_11 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM12_hazelmere.shp dam_12 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM13_craigieburn.shp dam_13 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM14_pongolapoort.shp dam_14 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM15_vygeboom.shp dam_15 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM16_gariep.shp dam_16 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM17_vaal.shp dam_17 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM2_voelvlei.shp dam_2 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM3_boskop.shp dam_3 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM4_wriggleswade.shp dam_4 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM5_midmar.shp dam_5 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM6_brandvlei_kwaggaskloof.shp dam_6 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM7_mtata.shp dam_7 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM7b_mtata_sie dam_7b | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM8_grootdraai.shp dam_8 | psql -d dwaregister
+shp2pgsql -s 4148 -c -D -I DM9_vanderkloof.shp dam_9 | psql -d dwaregister
+
+
+sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,qds,right_type,right1,right2,right3,scheme_name,scheme_ref_num,kode,captured_by
+
+dwaregister=# copy parcels_aggregate (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,qds,right_type,right1,right2,right3,scheme_name,scheme_ref_num,kode,captured_by) from '/data/KirchhoffSurveyors/revit-machine/DWA DAMS REGISTER AS PER TOR/parcels_aggregate.csv' with (format csv,header);
+COPY 664
+
