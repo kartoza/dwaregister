@@ -3,7 +3,7 @@
     <title></title>
     <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
         <customproperties/>
-        <layer-tree-layer expanded="0" checked="Qt::Checked" id="dams_all_geo20140415161916184" name="DWA official dams">
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="dams_all_geo20140415161916184" name="DWA official dams">
             <customproperties/>
         </layer-tree-layer>
         <layer-tree-group expanded="1" checked="Qt::Checked" name="working layers">
@@ -20,7 +20,7 @@
         </layer-tree-group>
         <layer-tree-group expanded="1" checked="Qt::Unchecked" name="non-spatial tables">
             <customproperties/>
-            <layer-tree-group expanded="0" checked="Qt::Unchecked" name="regular editing">
+            <layer-tree-group expanded="1" checked="Qt::Unchecked" name="regular editing">
                 <customproperties/>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="parcel_description20140411125955804" name="parcel_description">
                     <customproperties/>
@@ -102,10 +102,10 @@
     <mapcanvas>
         <units>degrees</units>
         <extent>
-            <xmin>17.28601131439210548</xmin>
-            <ymin>-35.05074553489690459</ymin>
-            <xmax>32.81232395172119709</xmax>
-            <ymax>-21.78064675331120625</ymax>
+            <xmin>30.66402771620822065</xmin>
+            <ymin>-29.75441663110649415</ymin>
+            <xmax>31.19808957114145542</xmax>
+            <ymax>-29.43210195693780662</ymax>
         </extent>
         <projections>1</projections>
         <destinationsrs>
@@ -144,8 +144,8 @@
         </custom-order>
     </layer-tree-canvas>
     <legend updateDrawingOrder="true">
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="DWA official dams" showFeatureCount="0">
-            <filegroup open="false" hidden="false">
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="DWA official dams" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
                 <legendlayerfile isInOverview="0" layerid="dams_all_geo20140415161916184" visible="1"/>
             </filegroup>
         </legendlayer>
@@ -167,7 +167,7 @@
             </legendlayer>
         </legendgroup>
         <legendgroup open="true" checked="Qt::Unchecked" name="non-spatial tables">
-            <legendgroup open="false" checked="Qt::Unchecked" name="regular editing">
+            <legendgroup open="true" checked="Qt::Unchecked" name="regular editing">
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="parcel_description" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="parcel_description20140411125955804" visible="0"/>
@@ -241,7 +241,7 @@
         </legendgroup>
     </legend>
     <Composer title="purchase_plan_atlas" visible="0">
-        <Composition snapGridTolerance="2" gridVisible="0" printResolution="300" paperWidth="297" snapGridOffsetX="0" guidesVisible="1" snapGridResolution="10" snapGridOffsetY="0" alignmentSnap="1" snapping="0" numPages="1" paperHeight="210" alignmentSnapTolerance="2" smartGuides="1" printAsRaster="1" generateWorldFile="0">
+        <Composition gridVisible="0" printResolution="300" paperWidth="297" snapGridOffsetX="0" guidesVisible="1" snapGridResolution="10" snapGridOffsetY="0" alignmentSnap="1" snapping="0" snapTolerancePixels="10" numPages="1" paperHeight="210" smartGuides="1" printAsRaster="1" generateWorldFile="0">
             <symbol alpha="1" type="fill" name="">
                 <layer pass="0" class="SimpleFill" locked="0">
                     <prop k="border_width_map_unit_scale" v="0,0"/>
@@ -364,10 +364,10 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype labelontop="0" editable="1" widgetv2type="RelationReference" name="sgcode">
-                    <widgetv2config fieldEditable="1" ShowForm="0" Relation="" labelOnTop="0" AllowNULL="0"/>
+                    <widgetv2config fieldEditable="1" ShowForm="0" Relation="dam_prop_link20140415190316715_sgcode_parcel_description20140411125955804_lpi_code" labelOnTop="0" AllowNULL="0"/>
                 </edittype>
                 <edittype labelontop="0" editable="1" widgetv2type="RelationReference" name="dam_no">
-                    <widgetv2config fieldEditable="1" ShowForm="0" Relation="" labelOnTop="0" AllowNULL="0"/>
+                    <widgetv2config fieldEditable="1" ShowForm="0" Relation="dam_prop_link20140415190316715_dam_no_dams_all_geo20140415161916184_dam_no" labelOnTop="0" AllowNULL="0"/>
                 </edittype>
             </edittypes>
             <editform>../../../Documents/AfriSpatial/KirchhoffSurveyors</editform>
@@ -468,12 +468,17 @@
                 <property key="labeling/bufferNoFill" value="false"/>
                 <property key="labeling/bufferSize" value="0.5"/>
                 <property key="labeling/bufferSizeInMapUnits" value="false"/>
+                <property key="labeling/bufferSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/bufferSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/bufferTransp" value="0"/>
+                <property key="labeling/centroidInside" value="false"/>
                 <property key="labeling/centroidWhole" value="false"/>
                 <property key="labeling/decimals" value="3"/>
                 <property key="labeling/displayAll" value="false"/>
                 <property key="labeling/dist" value="0"/>
                 <property key="labeling/distInMapUnits" value="false"/>
+                <property key="labeling/distMapUnitMaxScale" value="0"/>
+                <property key="labeling/distMapUnitMinScale" value="0"/>
                 <property key="labeling/enabled" value="true"/>
                 <property key="labeling/fieldName" value=" dam_name ||'&#xa;'|| dam_no"/>
                 <property key="labeling/fontBold" value="false"/>
@@ -486,6 +491,8 @@
                 <property key="labeling/fontMinPixelSize" value="3"/>
                 <property key="labeling/fontSize" value="6"/>
                 <property key="labeling/fontSizeInMapUnits" value="false"/>
+                <property key="labeling/fontSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/fontStrikeout" value="false"/>
                 <property key="labeling/fontUnderline" value="false"/>
                 <property key="labeling/fontWeight" value="50"/>
@@ -493,6 +500,8 @@
                 <property key="labeling/formatNumbers" value="false"/>
                 <property key="labeling/isExpression" value="true"/>
                 <property key="labeling/labelOffsetInMapUnits" value="true"/>
+                <property key="labeling/labelOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/labelOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/labelPerPart" value="false"/>
                 <property key="labeling/leftDirectionSymbol" value="&lt;"/>
                 <property key="labeling/limitNumLabels" value="false"/>
@@ -513,6 +522,10 @@
                 <property key="labeling/previewBkgrdColor" value="#ffffff"/>
                 <property key="labeling/priority" value="5"/>
                 <property key="labeling/quadOffset" value="4"/>
+                <property key="labeling/repeatDistance" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMinScale" value="0"/>
+                <property key="labeling/repeatDistanceUnit" value="1"/>
                 <property key="labeling/reverseDirectionSymbol" value="false"/>
                 <property key="labeling/rightDirectionSymbol" value=">"/>
                 <property key="labeling/scaleMax" value="250000"/>
@@ -526,9 +539,13 @@
                 <property key="labeling/shadowOffsetAngle" value="135"/>
                 <property key="labeling/shadowOffsetDist" value="1"/>
                 <property key="labeling/shadowOffsetGlobal" value="true"/>
+                <property key="labeling/shadowOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowOffsetUnits" value="1"/>
                 <property key="labeling/shadowRadius" value="1.5"/>
                 <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+                <property key="labeling/shadowRadiusMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowRadiusMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowRadiusUnits" value="1"/>
                 <property key="labeling/shadowScale" value="100"/>
                 <property key="labeling/shadowTransparency" value="30"/>
@@ -539,6 +556,8 @@
                 <property key="labeling/shapeBorderColorG" value="128"/>
                 <property key="labeling/shapeBorderColorR" value="128"/>
                 <property key="labeling/shapeBorderWidth" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeBorderWidthUnits" value="1"/>
                 <property key="labeling/shapeDraw" value="false"/>
                 <property key="labeling/shapeFillColorA" value="255"/>
@@ -546,15 +565,21 @@
                 <property key="labeling/shapeFillColorG" value="255"/>
                 <property key="labeling/shapeFillColorR" value="255"/>
                 <property key="labeling/shapeJoinStyle" value="64"/>
+                <property key="labeling/shapeOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeOffsetUnits" value="1"/>
                 <property key="labeling/shapeOffsetX" value="0"/>
                 <property key="labeling/shapeOffsetY" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeRadiiUnits" value="1"/>
                 <property key="labeling/shapeRadiiX" value="0"/>
                 <property key="labeling/shapeRadiiY" value="0"/>
                 <property key="labeling/shapeRotation" value="0"/>
                 <property key="labeling/shapeRotationType" value="0"/>
                 <property key="labeling/shapeSVGFile" value=""/>
+                <property key="labeling/shapeSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeSizeType" value="0"/>
                 <property key="labeling/shapeSizeUnits" value="1"/>
                 <property key="labeling/shapeSizeX" value="0"/>
@@ -736,7 +761,7 @@
             <excludeAttributesWFS/>
             <attributeactions/>
         </maplayer>
-        <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
+        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
             <id>floodline20140416072157317</id>
             <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' srid=4148 type=POLYGON table="public"."floodline" (geom) sql=</datasource>
             <title></title>
@@ -796,12 +821,17 @@
                 <property key="labeling/bufferNoFill" value="false"/>
                 <property key="labeling/bufferSize" value="1"/>
                 <property key="labeling/bufferSizeInMapUnits" value="false"/>
+                <property key="labeling/bufferSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/bufferSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/bufferTransp" value="0"/>
+                <property key="labeling/centroidInside" value="false"/>
                 <property key="labeling/centroidWhole" value="false"/>
                 <property key="labeling/decimals" value="3"/>
                 <property key="labeling/displayAll" value="false"/>
                 <property key="labeling/dist" value="0"/>
                 <property key="labeling/distInMapUnits" value="false"/>
+                <property key="labeling/distMapUnitMaxScale" value="0"/>
+                <property key="labeling/distMapUnitMinScale" value="0"/>
                 <property key="labeling/enabled" value="false"/>
                 <property key="labeling/fieldName" value=""/>
                 <property key="labeling/fontBold" value="true"/>
@@ -814,13 +844,17 @@
                 <property key="labeling/fontMinPixelSize" value="3"/>
                 <property key="labeling/fontSize" value="11"/>
                 <property key="labeling/fontSizeInMapUnits" value="false"/>
+                <property key="labeling/fontSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/fontStrikeout" value="false"/>
                 <property key="labeling/fontUnderline" value="false"/>
                 <property key="labeling/fontWeight" value="75"/>
                 <property key="labeling/fontWordSpacing" value="0"/>
                 <property key="labeling/formatNumbers" value="false"/>
-                <property key="labeling/isExpression" value="false"/>
+                <property key="labeling/isExpression" value="true"/>
                 <property key="labeling/labelOffsetInMapUnits" value="true"/>
+                <property key="labeling/labelOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/labelOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/labelPerPart" value="false"/>
                 <property key="labeling/leftDirectionSymbol" value="&lt;"/>
                 <property key="labeling/limitNumLabels" value="false"/>
@@ -841,6 +875,10 @@
                 <property key="labeling/previewBkgrdColor" value="#ffffff"/>
                 <property key="labeling/priority" value="5"/>
                 <property key="labeling/quadOffset" value="4"/>
+                <property key="labeling/repeatDistance" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMinScale" value="0"/>
+                <property key="labeling/repeatDistanceUnit" value="1"/>
                 <property key="labeling/reverseDirectionSymbol" value="false"/>
                 <property key="labeling/rightDirectionSymbol" value=">"/>
                 <property key="labeling/scaleMax" value="10000000"/>
@@ -854,9 +892,13 @@
                 <property key="labeling/shadowOffsetAngle" value="135"/>
                 <property key="labeling/shadowOffsetDist" value="1"/>
                 <property key="labeling/shadowOffsetGlobal" value="true"/>
+                <property key="labeling/shadowOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowOffsetUnits" value="1"/>
                 <property key="labeling/shadowRadius" value="1.5"/>
                 <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+                <property key="labeling/shadowRadiusMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowRadiusMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowRadiusUnits" value="1"/>
                 <property key="labeling/shadowScale" value="100"/>
                 <property key="labeling/shadowTransparency" value="30"/>
@@ -867,6 +909,8 @@
                 <property key="labeling/shapeBorderColorG" value="128"/>
                 <property key="labeling/shapeBorderColorR" value="128"/>
                 <property key="labeling/shapeBorderWidth" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeBorderWidthUnits" value="1"/>
                 <property key="labeling/shapeDraw" value="false"/>
                 <property key="labeling/shapeFillColorA" value="255"/>
@@ -874,15 +918,21 @@
                 <property key="labeling/shapeFillColorG" value="255"/>
                 <property key="labeling/shapeFillColorR" value="255"/>
                 <property key="labeling/shapeJoinStyle" value="64"/>
+                <property key="labeling/shapeOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeOffsetUnits" value="1"/>
                 <property key="labeling/shapeOffsetX" value="0"/>
                 <property key="labeling/shapeOffsetY" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeRadiiUnits" value="1"/>
                 <property key="labeling/shapeRadiiX" value="0"/>
                 <property key="labeling/shapeRadiiY" value="0"/>
                 <property key="labeling/shapeRotation" value="0"/>
                 <property key="labeling/shapeRotationType" value="0"/>
                 <property key="labeling/shapeSVGFile" value=""/>
+                <property key="labeling/shapeSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeSizeType" value="0"/>
                 <property key="labeling/shapeSizeUnits" value="1"/>
                 <property key="labeling/shapeSizeX" value="0"/>
@@ -1025,7 +1075,7 @@
             <excludeAttributesWFS/>
             <attributeactions/>
         </maplayer>
-        <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
+        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>parcel_description20140411125955804</id>
             <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="public"."parcel_description" sql=</datasource>
             <title></title>
@@ -1048,7 +1098,7 @@
             </srs>
             <customproperties/>
             <provider encoding="UTF-8">postgres</provider>
-            <previewExpression>COALESCE("id", '&lt;NULL>')</previewExpression>
+            <previewExpression>COALESCE("lpi_code", '&lt;NULL>')</previewExpression>
             <vectorjoins/>
             <edittypes>
                 <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="file_no">
@@ -1057,8 +1107,8 @@
                 <edittype labelontop="0" editable="1" widgetv2type="ValueRelation" name="sg_off_name">
                     <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="name" Layer="sg_offices20140415190317207" Value="name" labelOnTop="0" AllowMulti="0"/>
                 </edittype>
-                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="id">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                <edittype labelontop="0" editable="0" widgetv2type="TextEdit" name="id">
+                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="diagram_no">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -1206,12 +1256,130 @@
             <editforminit></editforminit>
             <featformsuppress>0</featformsuppress>
             <annotationform>../../../Documents/AfriSpatial/KirchhoffSurveyors</annotationform>
-            <editorlayout>generatedlayout</editorlayout>
+            <editorlayout>tablayout</editorlayout>
+            <aliases>
+                <alias field="allotment_region_name" index="37" name="Allotment Region Name"/>
+                <alias field="area" index="7" name="Area"/>
+                <alias field="area_unit" index="8" name="Area unit"/>
+                <alias field="capture_timestamp" index="38" name="Capture Timestamp"/>
+                <alias field="captured_by" index="34" name="Captured By..."/>
+                <alias field="cluster" index="35" name="Cluster"/>
+                <alias field="compilation" index="11" name="Compilation"/>
+                <alias field="compilation_new" index="29" name="New Compilation"/>
+                <alias field="crs" index="6" name="Coordinate Reference System"/>
+                <alias field="date_survey" index="12" name="Survey Date"/>
+                <alias field="deed_no" index="9" name="Deed number"/>
+                <alias field="deed_office" index="28" name="Deeds Office"/>
+                <alias field="description" index="4" name="Description"/>
+                <alias field="description_old" index="5" name="Old description"/>
+                <alias field="dgm_valid_from" index="41" name="Diagram Valid From..."/>
+                <alias field="dgm_valid_to" index="42" name="Diagram Valid To..."/>
+                <alias field="diagram_no" index="3" name="Diagram Number"/>
+                <alias field="dwa_allocation" index="39" name="DWA Allocation"/>
+                <alias field="dwa_legal_status" index="40" name="DWA Legal Status"/>
+                <alias field="farm_name" index="31" name="Farm Name"/>
+                <alias field="farm_no" index="18" name="Farm Number"/>
+                <alias field="file_no" index="0" name="File Number"/>
+                <alias field="kode" index="14" name="Kirchhoff Barcode"/>
+                <alias field="lease_obj_key" index="46" name="Lease Object Key"/>
+                <alias field="lpi_code" index="23" name=""/>
+                <alias field="mag_district" index="26" name="Magisterial District"/>
+                <alias field="mjrcode" index="16" name="Major Code"/>
+                <alias field="mnrcode" index="17" name="Minor Code"/>
+                <alias field="notes" index="13" name="Notes"/>
+                <alias field="ownership_share" index="45" name="Ownership Share"/>
+                <alias field="parent" index="10" name="Parent"/>
+                <alias field="portion" index="19" name="Portion"/>
+                <alias field="prev_parent_portion" index="20" name="Previous Parent Portion"/>
+                <alias field="province" index="25" name="Province"/>
+                <alias field="reg_division" index="27" name="Registration Division"/>
+                <alias field="region" index="36" name="Region"/>
+                <alias field="registered_owner" index="24" name="Registered Owner"/>
+                <alias field="registration_date" index="43" name="Registration Date"/>
+                <alias field="remainder" index="21" name="Remainder"/>
+                <alias field="sale_price" index="44" name="Sale Price"/>
+                <alias field="scheme_name" index="32" name="Scheme Name"/>
+                <alias field="scheme_ref_num" index="33" name="Scheme Reference Site"/>
+                <alias field="servitude_obj_key" index="47" name="Servitude Object Key"/>
+                <alias field="sg_off_code" index="15" name="SG Office Code"/>
+                <alias field="sg_off_name" index="1" name="SG Office Name"/>
+                <alias field="sg_town_code" index="22" name="SG Town Code"/>
+                <alias field="town" index="30" name="Town"/>
+                <alias field="unit" index="49" name="Unit"/>
+                <alias field="usage_purpose" index="48" name="Usage Purpose"/>
+            </aliases>
             <excludeAttributesWMS/>
             <excludeAttributesWFS/>
+            <attributeEditorForm>
+                <attributeEditorContainer name="SG Diagram">
+                    <attributeEditorContainer name="Verbatim">
+                        <attributeEditorField index="0" name="file_no"/>
+                        <attributeEditorField index="1" name="sg_off_name"/>
+                        <attributeEditorField index="3" name="diagram_no"/>
+                        <attributeEditorField index="4" name="description"/>
+                        <attributeEditorField index="5" name="description_old"/>
+                        <attributeEditorField index="7" name="area"/>
+                        <attributeEditorField index="8" name="area_unit"/>
+                        <attributeEditorField index="10" name="parent"/>
+                        <attributeEditorField index="11" name="compilation"/>
+                        <attributeEditorField index="29" name="compilation_new"/>
+                        <attributeEditorField index="12" name="date_survey"/>
+                        <attributeEditorField index="13" name="notes"/>
+                        <attributeEditorField index="18" name="farm_no"/>
+                        <attributeEditorField index="19" name="portion"/>
+                        <attributeEditorField index="20" name="prev_parent_portion"/>
+                        <attributeEditorField index="21" name="remainder"/>
+                        <attributeEditorField index="31" name="farm_name"/>
+                        <attributeEditorField index="32" name="scheme_name"/>
+                        <attributeEditorField index="33" name="scheme_ref_num"/>
+                        <attributeEditorField index="41" name="dgm_valid_from"/>
+                        <attributeEditorField index="42" name="dgm_valid_to"/>
+                        <attributeEditorField index="43" name="registration_date"/>
+                        <attributeEditorField index="49" name="unit"/>
+                    </attributeEditorContainer>
+                    <attributeEditorContainer name="Derived">
+                        <attributeEditorField index="16" name="mjrcode"/>
+                        <attributeEditorField index="6" name="crs"/>
+                        <attributeEditorField index="15" name="sg_off_code"/>
+                        <attributeEditorField index="17" name="mnrcode"/>
+                        <attributeEditorField index="22" name="sg_town_code"/>
+                        <attributeEditorField index="23" name="lpi_code"/>
+                        <attributeEditorField index="25" name="province"/>
+                        <attributeEditorField index="26" name="mag_district"/>
+                        <attributeEditorField index="27" name="reg_division"/>
+                        <attributeEditorField index="30" name="town"/>
+                    </attributeEditorContainer>
+                </attributeEditorContainer>
+                <attributeEditorContainer name="Ownership">
+                    <attributeEditorField index="9" name="deed_no"/>
+                    <attributeEditorField index="24" name="registered_owner"/>
+                    <attributeEditorField index="28" name="deed_office"/>
+                    <attributeEditorField index="44" name="sale_price"/>
+                    <attributeEditorField index="45" name="ownership_share"/>
+                </attributeEditorContainer>
+                <attributeEditorContainer name="DWA">
+                    <attributeEditorField index="35" name="cluster"/>
+                    <attributeEditorField index="36" name="region"/>
+                    <attributeEditorField index="37" name="allotment_region_name"/>
+                    <attributeEditorField index="39" name="dwa_allocation"/>
+                    <attributeEditorField index="40" name="dwa_legal_status"/>
+                    <attributeEditorField index="46" name="lease_obj_key"/>
+                    <attributeEditorField index="47" name="servitude_obj_key"/>
+                    <attributeEditorField index="48" name="usage_purpose"/>
+                </attributeEditorContainer>
+                <attributeEditorContainer name="Relationships">
+                    <attributeEditorRelation relation="dam_prop_link20140415190316715_sgcode_parcel_description20140411125955804_lpi_code" name="dam_prop_link20140415190316715_sgcode_parcel_description20140411125955804_lpi_code"/>
+                    <attributeEditorRelation relation="right_prop_link20140427165755568_sgcode_parcel_description20140411125955804_lpi_code" name="right_prop_link20140427165755568_sgcode_parcel_description20140411125955804_lpi_code"/>
+                </attributeEditorContainer>
+                <attributeEditorContainer name="Management">
+                    <attributeEditorField index="2" name="id"/>
+                    <attributeEditorField index="34" name="captured_by"/>
+                    <attributeEditorField index="38" name="capture_timestamp"/>
+                </attributeEditorContainer>
+            </attributeEditorForm>
             <attributeactions/>
         </maplayer>
-        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
+        <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
             <id>parcels_external20140414162504596</id>
             <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='gid' srid=4148 type=MULTIPOLYGON table="public"."parcels_external" (geom) sql=</datasource>
             <title></title>
@@ -1271,12 +1439,17 @@
                 <property key="labeling/bufferNoFill" value="false"/>
                 <property key="labeling/bufferSize" value="1"/>
                 <property key="labeling/bufferSizeInMapUnits" value="false"/>
+                <property key="labeling/bufferSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/bufferSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/bufferTransp" value="0"/>
+                <property key="labeling/centroidInside" value="false"/>
                 <property key="labeling/centroidWhole" value="false"/>
                 <property key="labeling/decimals" value="3"/>
                 <property key="labeling/displayAll" value="false"/>
                 <property key="labeling/dist" value="0"/>
                 <property key="labeling/distInMapUnits" value="false"/>
+                <property key="labeling/distMapUnitMaxScale" value="0"/>
+                <property key="labeling/distMapUnitMinScale" value="0"/>
                 <property key="labeling/enabled" value="false"/>
                 <property key="labeling/fieldName" value=""/>
                 <property key="labeling/fontBold" value="true"/>
@@ -1289,13 +1462,17 @@
                 <property key="labeling/fontMinPixelSize" value="3"/>
                 <property key="labeling/fontSize" value="11"/>
                 <property key="labeling/fontSizeInMapUnits" value="false"/>
+                <property key="labeling/fontSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/fontStrikeout" value="false"/>
                 <property key="labeling/fontUnderline" value="false"/>
                 <property key="labeling/fontWeight" value="75"/>
                 <property key="labeling/fontWordSpacing" value="0"/>
                 <property key="labeling/formatNumbers" value="false"/>
-                <property key="labeling/isExpression" value="false"/>
+                <property key="labeling/isExpression" value="true"/>
                 <property key="labeling/labelOffsetInMapUnits" value="true"/>
+                <property key="labeling/labelOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/labelOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/labelPerPart" value="false"/>
                 <property key="labeling/leftDirectionSymbol" value="&lt;"/>
                 <property key="labeling/limitNumLabels" value="false"/>
@@ -1316,6 +1493,10 @@
                 <property key="labeling/previewBkgrdColor" value="#ffffff"/>
                 <property key="labeling/priority" value="5"/>
                 <property key="labeling/quadOffset" value="4"/>
+                <property key="labeling/repeatDistance" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMinScale" value="0"/>
+                <property key="labeling/repeatDistanceUnit" value="1"/>
                 <property key="labeling/reverseDirectionSymbol" value="false"/>
                 <property key="labeling/rightDirectionSymbol" value=">"/>
                 <property key="labeling/scaleMax" value="10000000"/>
@@ -1329,9 +1510,13 @@
                 <property key="labeling/shadowOffsetAngle" value="135"/>
                 <property key="labeling/shadowOffsetDist" value="1"/>
                 <property key="labeling/shadowOffsetGlobal" value="true"/>
+                <property key="labeling/shadowOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowOffsetUnits" value="1"/>
                 <property key="labeling/shadowRadius" value="1.5"/>
                 <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+                <property key="labeling/shadowRadiusMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowRadiusMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowRadiusUnits" value="1"/>
                 <property key="labeling/shadowScale" value="100"/>
                 <property key="labeling/shadowTransparency" value="30"/>
@@ -1342,6 +1527,8 @@
                 <property key="labeling/shapeBorderColorG" value="128"/>
                 <property key="labeling/shapeBorderColorR" value="128"/>
                 <property key="labeling/shapeBorderWidth" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeBorderWidthUnits" value="1"/>
                 <property key="labeling/shapeDraw" value="false"/>
                 <property key="labeling/shapeFillColorA" value="255"/>
@@ -1349,15 +1536,21 @@
                 <property key="labeling/shapeFillColorG" value="255"/>
                 <property key="labeling/shapeFillColorR" value="255"/>
                 <property key="labeling/shapeJoinStyle" value="64"/>
+                <property key="labeling/shapeOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeOffsetUnits" value="1"/>
                 <property key="labeling/shapeOffsetX" value="0"/>
                 <property key="labeling/shapeOffsetY" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeRadiiUnits" value="1"/>
                 <property key="labeling/shapeRadiiX" value="0"/>
                 <property key="labeling/shapeRadiiY" value="0"/>
                 <property key="labeling/shapeRotation" value="0"/>
                 <property key="labeling/shapeRotationType" value="0"/>
                 <property key="labeling/shapeSVGFile" value=""/>
+                <property key="labeling/shapeSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeSizeType" value="0"/>
                 <property key="labeling/shapeSizeUnits" value="1"/>
                 <property key="labeling/shapeSizeX" value="0"/>
@@ -1476,12 +1669,17 @@
                 <property key="labeling/bufferNoFill" value="false"/>
                 <property key="labeling/bufferSize" value="1"/>
                 <property key="labeling/bufferSizeInMapUnits" value="false"/>
+                <property key="labeling/bufferSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/bufferSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/bufferTransp" value="0"/>
+                <property key="labeling/centroidInside" value="false"/>
                 <property key="labeling/centroidWhole" value="false"/>
                 <property key="labeling/decimals" value="3"/>
                 <property key="labeling/displayAll" value="false"/>
                 <property key="labeling/dist" value="0"/>
                 <property key="labeling/distInMapUnits" value="false"/>
+                <property key="labeling/distMapUnitMaxScale" value="0"/>
+                <property key="labeling/distMapUnitMinScale" value="0"/>
                 <property key="labeling/enabled" value="true"/>
                 <property key="labeling/fieldName" value="'Purchase plan for '||dam_no"/>
                 <property key="labeling/fontBold" value="true"/>
@@ -1494,6 +1692,8 @@
                 <property key="labeling/fontMinPixelSize" value="3"/>
                 <property key="labeling/fontSize" value="11"/>
                 <property key="labeling/fontSizeInMapUnits" value="false"/>
+                <property key="labeling/fontSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/fontStrikeout" value="false"/>
                 <property key="labeling/fontUnderline" value="false"/>
                 <property key="labeling/fontWeight" value="75"/>
@@ -1501,6 +1701,8 @@
                 <property key="labeling/formatNumbers" value="false"/>
                 <property key="labeling/isExpression" value="true"/>
                 <property key="labeling/labelOffsetInMapUnits" value="true"/>
+                <property key="labeling/labelOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/labelOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/labelPerPart" value="false"/>
                 <property key="labeling/leftDirectionSymbol" value="&lt;"/>
                 <property key="labeling/limitNumLabels" value="false"/>
@@ -1521,6 +1723,10 @@
                 <property key="labeling/previewBkgrdColor" value="#ffffff"/>
                 <property key="labeling/priority" value="5"/>
                 <property key="labeling/quadOffset" value="4"/>
+                <property key="labeling/repeatDistance" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMinScale" value="0"/>
+                <property key="labeling/repeatDistanceUnit" value="1"/>
                 <property key="labeling/reverseDirectionSymbol" value="false"/>
                 <property key="labeling/rightDirectionSymbol" value=">"/>
                 <property key="labeling/scaleMax" value="500000"/>
@@ -1534,9 +1740,13 @@
                 <property key="labeling/shadowOffsetAngle" value="135"/>
                 <property key="labeling/shadowOffsetDist" value="1"/>
                 <property key="labeling/shadowOffsetGlobal" value="true"/>
+                <property key="labeling/shadowOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowOffsetUnits" value="1"/>
                 <property key="labeling/shadowRadius" value="1.5"/>
                 <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+                <property key="labeling/shadowRadiusMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowRadiusMapUnitMinScale" value="0"/>
                 <property key="labeling/shadowRadiusUnits" value="1"/>
                 <property key="labeling/shadowScale" value="100"/>
                 <property key="labeling/shadowTransparency" value="30"/>
@@ -1547,6 +1757,8 @@
                 <property key="labeling/shapeBorderColorG" value="128"/>
                 <property key="labeling/shapeBorderColorR" value="128"/>
                 <property key="labeling/shapeBorderWidth" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeBorderWidthUnits" value="1"/>
                 <property key="labeling/shapeDraw" value="false"/>
                 <property key="labeling/shapeFillColorA" value="255"/>
@@ -1554,15 +1766,21 @@
                 <property key="labeling/shapeFillColorG" value="255"/>
                 <property key="labeling/shapeFillColorR" value="255"/>
                 <property key="labeling/shapeJoinStyle" value="64"/>
+                <property key="labeling/shapeOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeOffsetMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeOffsetUnits" value="1"/>
                 <property key="labeling/shapeOffsetX" value="0"/>
                 <property key="labeling/shapeOffsetY" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeRadiiUnits" value="1"/>
                 <property key="labeling/shapeRadiiX" value="0"/>
                 <property key="labeling/shapeRadiiY" value="0"/>
                 <property key="labeling/shapeRotation" value="0"/>
                 <property key="labeling/shapeRotationType" value="0"/>
                 <property key="labeling/shapeSVGFile" value=""/>
+                <property key="labeling/shapeSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/shapeSizeType" value="0"/>
                 <property key="labeling/shapeSizeUnits" value="1"/>
                 <property key="labeling/shapeSizeX" value="0"/>
@@ -1608,11 +1826,14 @@
                 <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="gid">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
-                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="kode">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
                 <edittype labelontop="0" editable="1" widgetv2type="ValueRelation" name="dam_no">
                     <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="dam_no" Layer="dams_all_geo20140415161916184" Value="dam_no" labelOnTop="0" AllowMulti="0"/>
+                </edittype>
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="validated_by">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                </edittype>
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="digitised_date">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
             </edittypes>
             <editform>../../../Documents/AfriSpatial/KirchhoffSurveyors</editform>
@@ -1621,7 +1842,7 @@
             <annotationform>../../../Documents/AfriSpatial/KirchhoffSurveyors</annotationform>
             <editorlayout>generatedlayout</editorlayout>
             <aliases>
-                <alias field="dam_no" index="2" name=""/>
+                <alias field="dam_no" index="1" name=""/>
             </aliases>
             <excludeAttributesWMS/>
             <excludeAttributesWFS/>
