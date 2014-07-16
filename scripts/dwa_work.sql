@@ -733,3 +733,74 @@ XMLPARSE (DOCUMENT '<StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xm
 SELECT f_table_catalog,f_table_schema,f_table_name,f_geometry_column,stylename,styleqml,stylesld,useasdefault,description,owner,update_time FROM layer_styles;
 --I saved the styles as default styles locally again after setting postgresql config xmloption to document from content, after restore didn't work 
 --in the end I backed up layer styles, restored it into the db as a temp file then transferred all the records across to layer_styles
+
+ALTER TABLE purchase_plans_surveyed
+  ADD COLUMN source character varying(255);
+COMMENT ON COLUMN purchase_plans_surveyed.source IS 'note the source and original format of this feature';
+
+ALTER TABLE purchase_plans_digitised RENAME validated_by  TO digitised_by;
+
+
+ALTER TABLE purchase_plans_digitised
+  ADD COLUMN comment character varying(255);
+
+  ALTER TABLE purchase_plans_surveyed
+  RENAME TO purchase_plans_external;
+
+ALTER TABLE purchase_plans_final
+   ADD COLUMN comment character varying(255);
+
+   ALTER TABLE purchase_plans_digitised
+   ADD COLUMN moved_to_final boolean NOT NULL DEFAULT FALSE;
+
+
+SELECT id FROM sg.farm_portions lpi JOIN purchase_plans_digitised pp ON ST_Intersect(lpi.geom,pp.geom) WHERE ;
+
+
+--move basemap layers to another schema
+--DROP SCHEMA static;
+CREATE SCHEMA project;
+GRANT USAGE ON SCHEMA project TO editor;
+
+set search_path to public; --project
+
+--moved all project tables to project schema, leaving basemap / static tables in public
+for table in `cat tables2schemaproject`; do psql -d dwaregister -c "alter table $table set schema project"; done
+
+alter table project.dwafdams_capacity_sae set schema public;
+
+ALTER TABLE project.parcel_description
+  ADD COLUMN prev_parent_mnrcode integer;
+ALTER TABLE project.parcel_description
+  ADD CONSTRAINT parcel_description_prev_parent_mnrcode_fkey FOREIGN KEY (mnrcode) REFERENCES project.minor_codes (code)
+   ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+   ALTER TABLE project.parcel_description
+  ADD COLUMN prev_parent_farm_no integer;
+
+  CREATE TABLE project.right_types
+(
+  id serial NOT NULL,
+  right_type character varying NOT NULL,
+  CONSTRAINT right_types_pkey PRIMARY KEY (id),
+  CONSTRAINT right_types_code_key UNIQUE (right_type)
+);
+ALTER TABLE project.right_types
+  OWNER TO gavin;
+GRANT ALL ON TABLE project.right_types TO gavin;
+GRANT SELECT ON TABLE project.right_types TO public;
+GRANT SELECT, UPDATE, INSERT ON TABLE project.right_types TO editor;
+
+insert into project.right_types (right_type) VALUES
+('servitude'),
+('lease');
+
+ALTER TABLE project.rights
+  ADD CONSTRAINT rights_right_types_fkey FOREIGN KEY (right_type) REFERENCES project.right_types (right_type)
+   ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE INDEX fki_rights_right_types_fkey
+  ON project.rights(right_type);
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE project.purchase_plans_digitised TO approval;
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE project.purchase_plans_final TO approval;
