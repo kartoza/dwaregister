@@ -804,3 +804,18 @@ CREATE INDEX fki_rights_right_types_fkey
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE project.purchase_plans_digitised TO approval;
 
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE project.purchase_plans_final TO approval;
+
+--moving temp tables to my private schema
+CREATE SCHEMA gavinwork;
+set search_path to project; 
+ALTER TABLE beacons SET SCHEMA gavinwork;
+ALTER TABLE beacons_bulk SET SCHEMA gavinwork;
+ALTER TABLE diagram_no_duplicate SET SCHEMA gavinwork;
+ALTER TABLE diagram_no_null SET SCHEMA gavinwork;
+ALTER TABLE mag_dist_no_match SET SCHEMA gavinwork;
+ALTER TABLE  parcel_def SET SCHEMA gavinwork;
+ALTER TABLE parcels_aggregate SET SCHEMA gavinwork;
+ALTER TABLE parcels_duplicates SET SCHEMA gavinwork;
+ALTER TABLE parcels_lpi_null SET SCHEMA gavinwork;
+ALTER TABLE regions_duplicates SET SCHEMA gavinwork;
+set search_path to public;
