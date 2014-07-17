@@ -3,7 +3,7 @@
     <title></title>
     <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
         <customproperties/>
-        <layer-tree-layer expanded="1" checked="Qt::Checked" id="dams_all_geo20140415161916184" name="DWA official dams">
+        <layer-tree-layer expanded="0" checked="Qt::Checked" id="dams_all_geo20140415161916184" name="DWA official dams">
             <customproperties/>
         </layer-tree-layer>
         <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="working layers">
@@ -24,9 +24,12 @@
                 <customproperties/>
             </layer-tree-layer>
         </layer-tree-group>
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="provinces20140716224953030" name="provinces">
+            <customproperties/>
+        </layer-tree-layer>
         <layer-tree-group expanded="1" checked="Qt::Unchecked" name="non-spatial tables">
             <customproperties/>
-            <layer-tree-group expanded="1" checked="Qt::Unchecked" name="regular editing">
+            <layer-tree-group expanded="0" checked="Qt::Unchecked" name="regular editing">
                 <customproperties/>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="parcel_description20140411125955804" name="parcel_description">
                     <customproperties/>
@@ -41,7 +44,7 @@
                     <customproperties/>
                 </layer-tree-layer>
             </layer-tree-group>
-            <layer-tree-group expanded="1" checked="Qt::Unchecked" name="occasional editing">
+            <layer-tree-group expanded="0" checked="Qt::Unchecked" name="occasional editing">
                 <customproperties/>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="right_types20140716072529496" name="right_types">
                     <customproperties/>
@@ -78,9 +81,6 @@
                 </layer-tree-layer>
             </layer-tree-group>
         </layer-tree-group>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="provinces20140716063529603" name="provinces">
-            <customproperties/>
-        </layer-tree-layer>
     </layer-tree-group>
     <relations>
         <relation referencingLayer="dam_prop_link20140415190316715" referencedLayer="dams_all_geo20140415161916184" id="dam_prop_link20140415190316715_dam_no_dams_all_geo20140415161916184_dam_no" name="damp_prop_link2dam">
@@ -114,10 +114,10 @@
     <mapcanvas>
         <units>degrees</units>
         <extent>
-            <xmin>30.66402771620822065</xmin>
-            <ymin>-29.75441663110649415</ymin>
-            <xmax>31.19808957114145542</xmax>
-            <ymax>-29.43210195693780662</ymax>
+            <xmin>30.66696160750224465</xmin>
+            <ymin>-29.7980649636465138</ymin>
+            <xmax>31.09596983798788017</xmax>
+            <ymax>-29.35543742425657143</ymax>
         </extent>
         <projections>1</projections>
         <destinationsrs>
@@ -155,13 +155,13 @@
             <item>spatial_ref_sys20140416000039358</item>
             <item>purchase_plans_final20140715213132324</item>
             <item>parcels_sgcopy20140715213132401</item>
-            <item>provinces20140716063529603</item>
             <item>right_types20140716072529496</item>
+            <item>provinces20140716224953030</item>
         </custom-order>
     </layer-tree-canvas>
     <legend updateDrawingOrder="true">
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="DWA official dams" showFeatureCount="0">
-            <filegroup open="true" hidden="false">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="DWA official dams" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
                 <legendlayerfile isInOverview="0" layerid="dams_all_geo20140415161916184" visible="1"/>
             </filegroup>
         </legendlayer>
@@ -192,8 +192,13 @@
                 </filegroup>
             </legendlayer>
         </legendgroup>
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="provinces" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+                <legendlayerfile isInOverview="0" layerid="provinces20140716224953030" visible="1"/>
+            </filegroup>
+        </legendlayer>
         <legendgroup open="true" checked="Qt::Unchecked" name="non-spatial tables">
-            <legendgroup open="true" checked="Qt::Unchecked" name="regular editing">
+            <legendgroup open="false" checked="Qt::Unchecked" name="regular editing">
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="parcel_description" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="parcel_description20140411125955804" visible="0"/>
@@ -215,7 +220,7 @@
                     </filegroup>
                 </legendlayer>
             </legendgroup>
-            <legendgroup open="true" checked="Qt::Unchecked" name="occasional editing">
+            <legendgroup open="false" checked="Qt::Unchecked" name="occasional editing">
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="right_types" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="right_types20140716072529496" visible="0"/>
@@ -270,11 +275,6 @@
                 </legendlayer>
             </legendgroup>
         </legendgroup>
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="provinces" showFeatureCount="0">
-            <filegroup open="false" hidden="false">
-                <legendlayerfile isInOverview="0" layerid="provinces20140716063529603" visible="0"/>
-            </filegroup>
-        </legendlayer>
     </legend>
     <Composer title="purchase_plan_atlas" visible="0">
         <Composition gridVisible="0" printResolution="300" paperWidth="297" snapGridOffsetX="0" guidesVisible="1" snapGridResolution="10" snapGridOffsetY="0" alignmentSnap="1" snapping="0" snapTolerancePixels="10" numPages="1" paperHeight="210" smartGuides="1" printAsRaster="1" generateWorldFile="0">
@@ -333,27 +333,53 @@
                     <Layer>floodline20140416072157317</Layer>
                     <Layer>purchase_plans_digitised20140410112253038</Layer>
                     <Layer>parcels_external20140414162504596</Layer>
+                    <Layer>provinces20140716224953030</Layer>
                 </LayerSet>
                 <ComposerMapGrid leftAnnotationDirection="0" annotationFont="Ubuntu,11,-1,5,50,0,0,0,0,0" gridFramePenThickness="0.5" showAnnotation="0" bottomAnnotationDirection="0" bottomAnnotationPosition="1" name="Grid 1" gridStyle="0" intervalX="0" intervalY="0" gridFrameStyle="0" rightAnnotationPosition="1" topAnnotationDirection="0" leftAnnotationPosition="1" blendMode="0" show="0" frameFillColor1="255,255,255,255" gridFrameWidth="2" frameFillColor2="0,0,0,255" annotationFontColor="0,0,0,255" gridFramePenColor="0,0,0,255" offsetX="0" annotationPrecision="3" offsetY="0" uuid="{a54ebcd0-74d6-4ae4-8f05-ccfe926adf99}" frameAnnotationDistance="1" unit="0" topAnnotationPosition="1" rightAnnotationDirection="0" annotationFormat="0" crossLength="3">
-                    <symbol alpha="1" type="line" name="">
-                        <layer pass="0" class="SimpleLine" locked="0">
-                            <prop k="capstyle" v="flat"/>
-                            <prop k="color" v="0,0,0,255"/>
-                            <prop k="customdash" v="5;2"/>
-                            <prop k="customdash_map_unit_scale" v="0,0"/>
-                            <prop k="customdash_unit" v="MM"/>
-                            <prop k="draw_inside_polygon" v="0"/>
-                            <prop k="joinstyle" v="bevel"/>
-                            <prop k="offset" v="0"/>
-                            <prop k="offset_map_unit_scale" v="0,0"/>
-                            <prop k="offset_unit" v="MM"/>
-                            <prop k="penstyle" v="solid"/>
-                            <prop k="use_custom_dash" v="0"/>
-                            <prop k="width" v="0.3"/>
-                            <prop k="width_map_unit_scale" v="0,0"/>
-                            <prop k="width_unit" v="MM"/>
-                        </layer>
-                    </symbol>
+                    <lineStyle>
+                        <symbol alpha="1" type="line" name="">
+                            <layer pass="0" class="SimpleLine" locked="0">
+                                <prop k="capstyle" v="square"/>
+                                <prop k="color" v="0,0,0,255"/>
+                                <prop k="customdash" v="5;2"/>
+                                <prop k="customdash_map_unit_scale" v="0,0"/>
+                                <prop k="customdash_unit" v="MM"/>
+                                <prop k="draw_inside_polygon" v="0"/>
+                                <prop k="joinstyle" v="bevel"/>
+                                <prop k="offset" v="0"/>
+                                <prop k="offset_map_unit_scale" v="0,0"/>
+                                <prop k="offset_unit" v="MM"/>
+                                <prop k="penstyle" v="solid"/>
+                                <prop k="use_custom_dash" v="0"/>
+                                <prop k="width" v="0"/>
+                                <prop k="width_map_unit_scale" v="0,0"/>
+                                <prop k="width_unit" v="MM"/>
+                            </layer>
+                        </symbol>
+                    </lineStyle>
+                    <markerStyle>
+                        <symbol alpha="1" type="marker" name="">
+                            <layer pass="0" class="SimpleMarker" locked="0">
+                                <prop k="angle" v="0"/>
+                                <prop k="color" v="0,0,0,255"/>
+                                <prop k="color_border" v="0,0,0,255"/>
+                                <prop k="horizontal_anchor_point" v="1"/>
+                                <prop k="name" v="circle"/>
+                                <prop k="offset" v="0,0"/>
+                                <prop k="offset_map_unit_scale" v="0,0"/>
+                                <prop k="offset_unit" v="MM"/>
+                                <prop k="outline_style" v="solid"/>
+                                <prop k="outline_width" v="0"/>
+                                <prop k="outline_width_map_unit_scale" v="0,0"/>
+                                <prop k="outline_width_unit" v="MM"/>
+                                <prop k="scale_method" v="area"/>
+                                <prop k="size" v="2"/>
+                                <prop k="size_map_unit_scale" v="0,0"/>
+                                <prop k="size_unit" v="MM"/>
+                                <prop k="vertical_anchor_point" v="1"/>
+                            </layer>
+                        </symbol>
+                    </markerStyle>
                 </ComposerMapGrid>
                 <AtlasMap scalingMode="2" atlasDriven="1" margin="0.10000000000000001"/>
                 <ComposerItem pagey="2.2105" page="1" id="" lastValidViewScaleFactor="1.59212" positionMode="0" positionLock="false" x="2.35586" y="2.2105" zValue="1" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="291.739" outlineWidth="0.3" uuid="{704e9078-5177-4e60-85bb-718189f3bd33}" height="188" itemRotation="0" frame="true" pagex="2.35586">
@@ -364,7 +390,7 @@
         </Composition>
         <Atlas hideCoverage="false" coverageLayer="purchase_plans_digitised20140410112253038" singleFile="true" filenamePattern="'output_'||$feature" enabled="true" filterFeatures="false" sortFeatures="false"/>
     </Composer>
-    <projectlayers layercount="21">
+    <projectlayers layercount="22">
         <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>dam_prop_link20140415190316715</id>
             <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."dam_prop_link" sql=</datasource>
@@ -1652,7 +1678,7 @@
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
             <id>parcels_sgcopy20140715213132401</id>
-            <datasource>dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='tid' srid=4148 type=MULTIPOLYGON table="project"."parcels_sgcopy" (geom) sql=</datasource>
+            <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='tid' srid=4148 type=MULTIPOLYGON table="project"."parcels_sgcopy" (geom) sql=</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
@@ -1739,8 +1765,102 @@
             <attributeactions/>
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
-            <id>provinces20140716063529603</id>
-            <datasource>dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='gid' srid=4326 type=MULTIPOLYGON table="public"."provinces" (geom) sql=</datasource>
+            <id>provinces20140716222126018</id>
+            <datasource>dbname='../../sg-diagram-downloader/data/sg_diagrams.sqlite' table="provinces" (geometry) sql=</datasource>
+            <title></title>
+            <abstract></abstract>
+            <keywordList>
+                <value></value>
+            </keywordList>
+            <layername>provinces</layername>
+            <srs>
+                <spatialrefsys>
+                    <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+                    <srsid>3452</srsid>
+                    <srid>4326</srid>
+                    <authid>EPSG:4326</authid>
+                    <description>WGS 84</description>
+                    <projectionacronym>longlat</projectionacronym>
+                    <ellipsoidacronym>WGS84</ellipsoidacronym>
+                    <geographicflag>true</geographicflag>
+                </spatialrefsys>
+            </srs>
+            <provider encoding="UTF-8">spatialite</provider>
+            <previewExpression></previewExpression>
+            <vectorjoins/>
+            <renderer-v2 symbollevels="0" type="singleSymbol">
+                <symbols>
+                    <symbol alpha="1" type="fill" name="0">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="border_width_map_unit_scale" v="0,0"/>
+                            <prop k="border_width_unit" v="MM"/>
+                            <prop k="color" v="88,150,143,255"/>
+                            <prop k="color_border" v="0,0,0,255"/>
+                            <prop k="joinstyle" v="bevel"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="offset_map_unit_scale" v="0,0"/>
+                            <prop k="offset_unit" v="MM"/>
+                            <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                </symbols>
+                <rotation/>
+                <sizescale scalemethod="area"/>
+            </renderer-v2>
+            <customproperties/>
+            <blendMode>0</blendMode>
+            <featureBlendMode>0</featureBlendMode>
+            <layerTransparency>0</layerTransparency>
+            <displayfield>PK_UID</displayfield>
+            <label>0</label>
+            <labelattributes>
+                <label fieldname="" text="Label"/>
+                <family fieldname="" name="Ubuntu"/>
+                <size fieldname="" units="pt" value="12"/>
+                <bold fieldname="" on="0"/>
+                <italic fieldname="" on="0"/>
+                <underline fieldname="" on="0"/>
+                <strikeout fieldname="" on="0"/>
+                <color fieldname="" red="0" blue="0" green="0"/>
+                <x fieldname=""/>
+                <y fieldname=""/>
+                <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
+                <angle fieldname="" value="0" auto="0"/>
+                <alignment fieldname="" value="center"/>
+                <buffercolor fieldname="" red="255" blue="255" green="255"/>
+                <buffersize fieldname="" units="pt" value="1"/>
+                <bufferenabled fieldname="" on=""/>
+                <multilineenabled fieldname="" on=""/>
+                <selectedonly on=""/>
+            </labelattributes>
+            <edittypes>
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="PK_UID">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                </edittype>
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="gid">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                </edittype>
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="province">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                </edittype>
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="Geometry">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                </edittype>
+            </edittypes>
+            <editform>.</editform>
+            <editforminit></editforminit>
+            <featformsuppress>0</featformsuppress>
+            <annotationform>.</annotationform>
+            <editorlayout>generatedlayout</editorlayout>
+            <excludeAttributesWMS/>
+            <excludeAttributesWFS/>
+            <attributeactions/>
+        </maplayer>
+        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
+            <id>provinces20140716224953030</id>
+            <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='gid' srid=4326 type=MULTIPOLYGON table="public"."provinces" (geom) sql=</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
@@ -1765,25 +1885,171 @@
             <renderer-v2 symbollevels="0" type="singleSymbol">
                 <symbols>
                     <symbol alpha="1" type="fill" name="0">
-                        <layer pass="0" class="SimpleFill" locked="0">
-                            <prop k="border_width_map_unit_scale" v="0,0"/>
-                            <prop k="border_width_unit" v="MM"/>
-                            <prop k="color" v="145,247,219,255"/>
-                            <prop k="color_border" v="0,0,0,255"/>
+                        <layer pass="0" class="SimpleLine" locked="0">
+                            <prop k="capstyle" v="square"/>
+                            <prop k="color" v="80,80,80,255"/>
+                            <prop k="customdash" v="4.5;2.5;0.25;2;0.25;2"/>
+                            <prop k="customdash_map_unit_scale" v="0,0"/>
+                            <prop k="customdash_unit" v="MM"/>
+                            <prop k="draw_inside_polygon" v="0"/>
                             <prop k="joinstyle" v="bevel"/>
-                            <prop k="offset" v="0,0"/>
+                            <prop k="offset" v="0"/>
                             <prop k="offset_map_unit_scale" v="0,0"/>
                             <prop k="offset_unit" v="MM"/>
-                            <prop k="style" v="solid"/>
-                            <prop k="style_border" v="solid"/>
-                            <prop k="width_border" v="0.26"/>
+                            <prop k="penstyle" v="solid"/>
+                            <prop k="use_custom_dash" v="1"/>
+                            <prop k="width" v="0.5"/>
+                            <prop k="width_map_unit_scale" v="0,0"/>
+                            <prop k="width_unit" v="MM"/>
                         </layer>
                     </symbol>
                 </symbols>
                 <rotation/>
                 <sizescale scalemethod="area"/>
             </renderer-v2>
-            <customproperties/>
+            <customproperties>
+                <property key="labeling" value="pal"/>
+                <property key="labeling/addDirectionSymbol" value="false"/>
+                <property key="labeling/angleOffset" value="0"/>
+                <property key="labeling/blendMode" value="0"/>
+                <property key="labeling/bufferBlendMode" value="0"/>
+                <property key="labeling/bufferColorA" value="255"/>
+                <property key="labeling/bufferColorB" value="255"/>
+                <property key="labeling/bufferColorG" value="255"/>
+                <property key="labeling/bufferColorR" value="255"/>
+                <property key="labeling/bufferDraw" value="false"/>
+                <property key="labeling/bufferJoinStyle" value="64"/>
+                <property key="labeling/bufferNoFill" value="false"/>
+                <property key="labeling/bufferSize" value="1"/>
+                <property key="labeling/bufferSizeInMapUnits" value="false"/>
+                <property key="labeling/bufferSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/bufferSizeMapUnitMinScale" value="0"/>
+                <property key="labeling/bufferTransp" value="0"/>
+                <property key="labeling/centroidInside" value="false"/>
+                <property key="labeling/centroidWhole" value="false"/>
+                <property key="labeling/decimals" value="3"/>
+                <property key="labeling/displayAll" value="false"/>
+                <property key="labeling/dist" value="0"/>
+                <property key="labeling/distInMapUnits" value="false"/>
+                <property key="labeling/distMapUnitMaxScale" value="0"/>
+                <property key="labeling/distMapUnitMinScale" value="0"/>
+                <property key="labeling/enabled" value="false"/>
+                <property key="labeling/fieldName" value=""/>
+                <property key="labeling/fontBold" value="true"/>
+                <property key="labeling/fontCapitals" value="0"/>
+                <property key="labeling/fontFamily" value="Ubuntu"/>
+                <property key="labeling/fontItalic" value="true"/>
+                <property key="labeling/fontLetterSpacing" value="0"/>
+                <property key="labeling/fontLimitPixelSize" value="false"/>
+                <property key="labeling/fontMaxPixelSize" value="10000"/>
+                <property key="labeling/fontMinPixelSize" value="3"/>
+                <property key="labeling/fontSize" value="11"/>
+                <property key="labeling/fontSizeInMapUnits" value="false"/>
+                <property key="labeling/fontSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
+                <property key="labeling/fontStrikeout" value="false"/>
+                <property key="labeling/fontUnderline" value="false"/>
+                <property key="labeling/fontWeight" value="75"/>
+                <property key="labeling/fontWordSpacing" value="0"/>
+                <property key="labeling/formatNumbers" value="false"/>
+                <property key="labeling/isExpression" value="true"/>
+                <property key="labeling/labelOffsetInMapUnits" value="true"/>
+                <property key="labeling/labelOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/labelOffsetMapUnitMinScale" value="0"/>
+                <property key="labeling/labelPerPart" value="false"/>
+                <property key="labeling/leftDirectionSymbol" value="&lt;"/>
+                <property key="labeling/limitNumLabels" value="false"/>
+                <property key="labeling/maxCurvedCharAngleIn" value="20"/>
+                <property key="labeling/maxCurvedCharAngleOut" value="-20"/>
+                <property key="labeling/maxNumLabels" value="2000"/>
+                <property key="labeling/mergeLines" value="false"/>
+                <property key="labeling/minFeatureSize" value="0"/>
+                <property key="labeling/multilineAlign" value="0"/>
+                <property key="labeling/multilineHeight" value="1"/>
+                <property key="labeling/namedStyle" value="Bold Italic"/>
+                <property key="labeling/obstacle" value="true"/>
+                <property key="labeling/placeDirectionSymbol" value="0"/>
+                <property key="labeling/placement" value="0"/>
+                <property key="labeling/placementFlags" value="0"/>
+                <property key="labeling/plussign" value="false"/>
+                <property key="labeling/preserveRotation" value="true"/>
+                <property key="labeling/previewBkgrdColor" value="#ffffff"/>
+                <property key="labeling/priority" value="5"/>
+                <property key="labeling/quadOffset" value="4"/>
+                <property key="labeling/repeatDistance" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
+                <property key="labeling/repeatDistanceMapUnitMinScale" value="0"/>
+                <property key="labeling/repeatDistanceUnit" value="1"/>
+                <property key="labeling/reverseDirectionSymbol" value="false"/>
+                <property key="labeling/rightDirectionSymbol" value=">"/>
+                <property key="labeling/scaleMax" value="10000000"/>
+                <property key="labeling/scaleMin" value="1"/>
+                <property key="labeling/scaleVisibility" value="false"/>
+                <property key="labeling/shadowBlendMode" value="6"/>
+                <property key="labeling/shadowColorB" value="0"/>
+                <property key="labeling/shadowColorG" value="0"/>
+                <property key="labeling/shadowColorR" value="0"/>
+                <property key="labeling/shadowDraw" value="false"/>
+                <property key="labeling/shadowOffsetAngle" value="135"/>
+                <property key="labeling/shadowOffsetDist" value="1"/>
+                <property key="labeling/shadowOffsetGlobal" value="true"/>
+                <property key="labeling/shadowOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowOffsetMapUnitMinScale" value="0"/>
+                <property key="labeling/shadowOffsetUnits" value="1"/>
+                <property key="labeling/shadowRadius" value="1.5"/>
+                <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+                <property key="labeling/shadowRadiusMapUnitMaxScale" value="0"/>
+                <property key="labeling/shadowRadiusMapUnitMinScale" value="0"/>
+                <property key="labeling/shadowRadiusUnits" value="1"/>
+                <property key="labeling/shadowScale" value="100"/>
+                <property key="labeling/shadowTransparency" value="30"/>
+                <property key="labeling/shadowUnder" value="0"/>
+                <property key="labeling/shapeBlendMode" value="0"/>
+                <property key="labeling/shapeBorderColorA" value="255"/>
+                <property key="labeling/shapeBorderColorB" value="128"/>
+                <property key="labeling/shapeBorderColorG" value="128"/>
+                <property key="labeling/shapeBorderColorR" value="128"/>
+                <property key="labeling/shapeBorderWidth" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeBorderWidthMapUnitMinScale" value="0"/>
+                <property key="labeling/shapeBorderWidthUnits" value="1"/>
+                <property key="labeling/shapeDraw" value="false"/>
+                <property key="labeling/shapeFillColorA" value="255"/>
+                <property key="labeling/shapeFillColorB" value="255"/>
+                <property key="labeling/shapeFillColorG" value="255"/>
+                <property key="labeling/shapeFillColorR" value="255"/>
+                <property key="labeling/shapeJoinStyle" value="64"/>
+                <property key="labeling/shapeOffsetMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeOffsetMapUnitMinScale" value="0"/>
+                <property key="labeling/shapeOffsetUnits" value="1"/>
+                <property key="labeling/shapeOffsetX" value="0"/>
+                <property key="labeling/shapeOffsetY" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeRadiiMapUnitMinScale" value="0"/>
+                <property key="labeling/shapeRadiiUnits" value="1"/>
+                <property key="labeling/shapeRadiiX" value="0"/>
+                <property key="labeling/shapeRadiiY" value="0"/>
+                <property key="labeling/shapeRotation" value="0"/>
+                <property key="labeling/shapeRotationType" value="0"/>
+                <property key="labeling/shapeSVGFile" value=""/>
+                <property key="labeling/shapeSizeMapUnitMaxScale" value="0"/>
+                <property key="labeling/shapeSizeMapUnitMinScale" value="0"/>
+                <property key="labeling/shapeSizeType" value="0"/>
+                <property key="labeling/shapeSizeUnits" value="1"/>
+                <property key="labeling/shapeSizeX" value="0"/>
+                <property key="labeling/shapeSizeY" value="0"/>
+                <property key="labeling/shapeTransparency" value="0"/>
+                <property key="labeling/shapeType" value="0"/>
+                <property key="labeling/textColorA" value="255"/>
+                <property key="labeling/textColorB" value="0"/>
+                <property key="labeling/textColorG" value="0"/>
+                <property key="labeling/textColorR" value="0"/>
+                <property key="labeling/textTransp" value="0"/>
+                <property key="labeling/upsidedownLabels" value="0"/>
+                <property key="labeling/wrapChar" value=""/>
+                <property key="labeling/xOffset" value="0"/>
+                <property key="labeling/yOffset" value="0"/>
+            </customproperties>
             <blendMode>0</blendMode>
             <featureBlendMode>0</featureBlendMode>
             <layerTransparency>0</layerTransparency>
@@ -1810,20 +2076,20 @@
                 <selectedonly on=""/>
             </labelattributes>
             <edittypes>
-                <edittype labelontop="0" editable="0" widgetv2type="TextEdit" name="gid">
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="gid">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
-                <edittype labelontop="0" editable="0" widgetv2type="TextEdit" name="code">
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="code">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
-                <edittype labelontop="0" editable="0" widgetv2type="TextEdit" name="province">
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="province">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
             </edittypes>
-            <editform></editform>
+            <editform>.</editform>
             <editforminit></editforminit>
             <featformsuppress>0</featformsuppress>
-            <annotationform></annotationform>
+            <annotationform>.</annotationform>
             <editorlayout>generatedlayout</editorlayout>
             <excludeAttributesWMS/>
             <excludeAttributesWFS/>
@@ -2076,7 +2342,7 @@
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
             <id>purchase_plans_final20140715213132324</id>
-            <datasource>dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='gid' srid=4148 type=MULTIPOLYGON table="project"."purchase_plans_final" (geom) sql=</datasource>
+            <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='gid' srid=4148 type=MULTIPOLYGON table="project"."purchase_plans_final" (geom) sql=</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
@@ -2269,7 +2535,7 @@
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>right_types20140716072529496</id>
-            <datasource>dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."right_types" sql=</datasource>
+            <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."right_types" sql=</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
@@ -2293,17 +2559,17 @@
             <previewExpression></previewExpression>
             <vectorjoins/>
             <edittypes>
-                <edittype labelontop="0" editable="0" widgetv2type="TextEdit" name="id">
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="id">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
-                <edittype labelontop="0" editable="0" widgetv2type="TextEdit" name="right_type">
+                <edittype labelontop="0" editable="1" widgetv2type="TextEdit" name="right_type">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
             </edittypes>
-            <editform></editform>
+            <editform>.</editform>
             <editforminit></editforminit>
             <featformsuppress>0</featformsuppress>
-            <annotationform></annotationform>
+            <annotationform>.</annotationform>
             <editorlayout>generatedlayout</editorlayout>
             <excludeAttributesWMS/>
             <excludeAttributesWFS/>
@@ -2689,9 +2955,11 @@
                 <value>parcels_sgcopy20140715213132401</value>
                 <value>purchase_plans_digitised20140410112253038</value>
                 <value>purchase_plans_final20140715213132324</value>
-                <value>provinces20140716063529603</value>
+                <value>provinces20140716222126018</value>
+                <value>provinces20140716224953030</value>
             </LayerSnappingList>
             <LayerSnappingEnabledList type="QStringList">
+                <value>enabled</value>
                 <value>enabled</value>
                 <value>enabled</value>
                 <value>enabled</value>
@@ -2709,6 +2977,7 @@
                 <value>1</value>
                 <value>1</value>
                 <value>1</value>
+                <value>1</value>
             </LayerSnappingToleranceUnitList>
             <LayerSnapToList type="QStringList">
                 <value>to_vertex_and_segment</value>
@@ -2718,8 +2987,10 @@
                 <value>to_vertex_and_segment</value>
                 <value>to_vertex_and_segment</value>
                 <value>to_vertex_and_segment</value>
+                <value>to_vertex_and_segment</value>
             </LayerSnapToList>
             <LayerSnappingToleranceList type="QStringList">
+                <value>10.000000</value>
                 <value>10.000000</value>
                 <value>10.000000</value>
                 <value>10.000000</value>
