@@ -26,3 +26,32 @@ sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,rema
 dwaregister=# copy parcels_aggregate (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,qds,right_type,right1,right2,right3,scheme_name,scheme_ref_num,kode,captured_by) from '/data/KirchhoffSurveyors/revit-machine/DWA DAMS REGISTER AS PER TOR/parcels_aggregate.csv' with (format csv,header);
 COPY 664
 
+#deploying new Kirchhoff projects
+
+cd '/data/dwa/QGIS Projects'
+sed -i 's/localhost/gis/' datacapture_gavin.qgs
+mv datacapture_gavin.qgs datacapture_sinethemba.qgs
+sed -i 's/gavin/sinethemba/' datacapture_sinethemba.qgs
+sed -i 's/s0sten1ble/scibAfyad9/' datacapture_sinethemba.qgs
+cp datacapture_sinethemba.qgs datacapture_grace.qgs
+sed -i 's/gavin/grace/' datacapture_grace.qgs
+sed -i 's/s0sten1ble/yarhulf9Obs/' datacapture_grace.qgs
+cp datacapture_sinethemba.qgs datacapture_simba.qgs
+sed -i 's/gavin/simba/' datacapture_simba.qgs
+sed -i 's/s0sten1ble/TyHaldAys8/' datacapture_simba.qgs
+cp datacapture_sinethemba.qgs datacapture_grantvn.qgs
+sed -i 's/gavin/grantvn/' datacapture_grantvn.qgs
+sed -i 's/s0sten1ble/bookDepyul4/' datacapture_grantvn.qgs
+cp datacapture_sinethemba.qgs datacapture_samuel.qgs
+sed -i 's/gavin/samuel/' datacapture_samuel.qgs
+sed -i 's/s0sten1ble/Fardyag8/' datacapture_samuel.qgs
+cp datacapture_sinethemba.qgs datacapture_francois.qgs
+sed -i 's/gavin/francois/' datacapture_francois.qgs
+sed -i 's/s0sten1ble/yudTorc4/' datacapture_francois.qgs
+cp datacapture_sinethemba.qgs datacapture_chris.qgs
+sed -i 's/gavin/chris/' datacapture_chris.qgs
+sed -i 's/s0sten1ble/gieWrok1/' datacapture_chris.qgs
+
+
+
+

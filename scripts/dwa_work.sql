@@ -819,3 +819,36 @@ ALTER TABLE parcels_duplicates SET SCHEMA gavinwork;
 ALTER TABLE parcels_lpi_null SET SCHEMA gavinwork;
 ALTER TABLE regions_duplicates SET SCHEMA gavinwork;
 set search_path to public;
+
+--set up script to create folders for images
+SELECT replace(dam_no,'/','_') as dirname from dams_all_geo;
+
+--populating parcel_description
+
+create table gavinwork.parcels_sgcopy_duplicates as
+select * from project.parcels_sgcopy
+  WHERE id IN (SELECT id 
+                  FROM (SELECT row_number() OVER (PARTITION by id), id 
+                           FROM project.parcels_sgcopy) x 
+                 WHERE x.row_number > 1);
+
+delete from project.parcels_sgcopy
+where id in (select r.id 
+from project.parcels_sgcopy r inner join gavinwork.parcels_sgcopy_duplicates rd on r.id = rd.id);
+
+insert into project.parcel_description (lpi_code) 
+(select ps.id from project.parcels_sgcopy ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null);
+
+ALTER TABLE project.parcels_sgcopy
+  ADD UNIQUE (id);
+
+--creating directories for Kirchhoff SG diagram saving
+
+ 
+copy (SELECT replace(dam_no,'/','_')||'/vector' as dirname from dams_all_geo) TO '/tmp/dirstomake';
+--for dir in `cat dirstomake`; do mkdir -p $dir;done
+copy (SELECT replace(dam_no,'/','_')||'/raster' as dirname from dams_all_geo) TO '/tmp/dirstomake';
+--for dir in `cat dirstomake`; do mkdir -p $dir;done
+
+
+--write a trigger that adds a record to parcel_description whenever a record is added to parcels_sgcopy
