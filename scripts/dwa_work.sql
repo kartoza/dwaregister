@@ -839,6 +839,13 @@ from project.parcels_sgcopy r inner join gavinwork.parcels_sgcopy_duplicates rd 
 insert into project.parcel_description (lpi_code) 
 (select ps.id from project.parcels_sgcopy ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null);
 
+WITH unique_parcels AS (SELECT id 
+                  FROM (SELECT row_number() OVER (PARTITION by id), id 
+                           FROM project.parcels_sgcopy) x 
+                 WHERE x.row_number = 1) 
+insert into project.parcel_description (lpi_code) 
+(select ps.id from unique_parcels ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null);
+
 ALTER TABLE project.parcels_sgcopy
   ADD UNIQUE (id);
 
@@ -852,3 +859,13 @@ copy (SELECT replace(dam_no,'/','_')||'/raster' as dirname from dams_all_geo) TO
 
 
 --write a trigger that adds a record to parcel_description whenever a record is added to parcels_sgcopy
+
+CONSTRAINT parcel_description_mnrcode_fkey FOREIGN KEY (mnrcode)
+      REFERENCES project.minor_codes (code) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+
+alter table project.parcel_description alter column mnrcode type character varying (4) USING mnrcode::character varying (4);
+
+alter table project.minor_codes alter column code type character varying (4) USING code::character varying;
+
+alter table project.parcel_description alter column prev_parent_portion type character varying USING prev_parent_portion::character varying;

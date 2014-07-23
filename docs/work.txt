@@ -56,6 +56,11 @@ cp datacapture_sinethemba.qgs datacapture_dirk.qgs
 sed -i 's/gavin/dirk/' datacapture_dirk.qgs
 sed -i 's/s0sten1ble/eyRilviff8/' datacapture_dirk.qgs
 
+#setting up PG services 
+
+sudo su -
+echo $'[dwa]\ndbname=dwaregister\nuser=chris\npassword=gieWrok1\nhost=localhost' > /home/chris/.pg_service.conf
+echo $'[dwa]\ndbname=dwaregister\nuser=sinethemba\npassword=scibAfyad9\nhost=localhost' > /home/sinethemba/.pg_service.conf
 
 
 
