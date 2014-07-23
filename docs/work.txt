@@ -27,7 +27,8 @@ dwaregister=# copy parcels_aggregate (sg_off_name,sg_off_code,mjrcode,mnrcode,fa
 COPY 664
 
 #deploying new Kirchhoff projects
-
+#do a git pull in /home/gavin/dev/dwaregister, then 
+cp qgis/datacapture.qgs /data/dwa/QGIS\ Projects/datacapture_gavin.qgs
 cd '/data/dwa/QGIS Projects'
 sed -i 's/localhost/gis/' datacapture_gavin.qgs
 mv datacapture_gavin.qgs datacapture_sinethemba.qgs
@@ -51,6 +52,9 @@ sed -i 's/s0sten1ble/yudTorc4/' datacapture_francois.qgs
 cp datacapture_sinethemba.qgs datacapture_chris.qgs
 sed -i 's/gavin/chris/' datacapture_chris.qgs
 sed -i 's/s0sten1ble/gieWrok1/' datacapture_chris.qgs
+cp datacapture_sinethemba.qgs datacapture_dirk.qgs
+sed -i 's/gavin/dirk/' datacapture_dirk.qgs
+sed -i 's/s0sten1ble/eyRilviff8/' datacapture_dirk.qgs
 
 
 
