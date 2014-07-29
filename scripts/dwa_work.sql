@@ -888,8 +888,9 @@ validated: checked by Chris or another supervisor. Boolean flag
 
 add 'purchase plans digitised by chris' either as a separate table or as a class of an existing one. 
 
-CREATE VIEW project.progress AS
-SELECT lpi_code,
+--DROP VIEW project.progress;
+CREATE OR REPLACE VIEW project.progress AS
+SELECT id,lpi_code,
 CASE 
 	WHEN diagram_no IS NOT NULL THEN 'diagram'
 	WHEN registered_owner IS NOT NULL THEN 'owner'
@@ -902,3 +903,5 @@ CREATE ROLE geoserver LOGIN
   NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 
   GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_read;
+
+GRANT SELECT ON project.progress to editor;

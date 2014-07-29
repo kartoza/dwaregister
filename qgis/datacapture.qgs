@@ -24,12 +24,12 @@
                 <customproperties/>
             </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-layer expanded="1" checked="Qt::Checked" id="provinces20140716224953030" name="provinces">
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Basemap20140729160827961" name="Base map">
             <customproperties/>
         </layer-tree-layer>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="non-spatial tables">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="non-spatial tables">
             <customproperties/>
-            <layer-tree-group expanded="0" checked="Qt::Unchecked" name="regular editing">
+            <layer-tree-group expanded="1" checked="Qt::Unchecked" name="regular editing">
                 <customproperties/>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="parcel_description20140411125955804" name="parcel_description">
                     <customproperties/>
@@ -44,7 +44,7 @@
                     <customproperties/>
                 </layer-tree-layer>
             </layer-tree-group>
-            <layer-tree-group expanded="1" checked="Qt::Unchecked" name="occasional editing">
+            <layer-tree-group expanded="0" checked="Qt::Unchecked" name="occasional editing">
                 <customproperties/>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="right_types20140716072529496" name="right_types">
                     <customproperties/>
@@ -82,11 +82,11 @@
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="spatial_ref_sys20140416000039358" name="spatial_ref_sys">
                     <customproperties/>
                 </layer-tree-layer>
+                <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="provinces20140716224953030" name="provinces">
+                    <customproperties/>
+                </layer-tree-layer>
             </layer-tree-group>
         </layer-tree-group>
-        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Basemap20140729160827961" name="Base map">
-            <customproperties/>
-        </layer-tree-layer>
     </layer-tree-group>
     <relations>
         <relation referencingLayer="dam_prop_link20140415190316715" referencedLayer="dams_all_geo20140415161916184" id="dam_prop_link20140415190316715_dam_no_dams_all_geo20140415161916184_dam_no" name="damp_prop_link2dam">
@@ -211,13 +211,13 @@
                 </filegroup>
             </legendlayer>
         </legendgroup>
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="provinces" showFeatureCount="0">
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Base map" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-                <legendlayerfile isInOverview="0" layerid="provinces20140716224953030" visible="1"/>
+                <legendlayerfile isInOverview="0" layerid="Basemap20140729160827961" visible="1"/>
             </filegroup>
         </legendlayer>
-        <legendgroup open="false" checked="Qt::Unchecked" name="non-spatial tables">
-            <legendgroup open="false" checked="Qt::Unchecked" name="regular editing">
+        <legendgroup open="true" checked="Qt::Unchecked" name="non-spatial tables">
+            <legendgroup open="true" checked="Qt::Unchecked" name="regular editing">
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="parcel_description" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="parcel_description20140411125955804" visible="0"/>
@@ -239,7 +239,7 @@
                     </filegroup>
                 </legendlayer>
             </legendgroup>
-            <legendgroup open="true" checked="Qt::Unchecked" name="occasional editing">
+            <legendgroup open="false" checked="Qt::Unchecked" name="occasional editing">
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="right_types" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="right_types20140716072529496" visible="0"/>
@@ -297,13 +297,13 @@
                         <legendlayerfile isInOverview="0" layerid="spatial_ref_sys20140416000039358" visible="0"/>
                     </filegroup>
                 </legendlayer>
+                <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="provinces" showFeatureCount="0">
+                    <filegroup open="false" hidden="false">
+                        <legendlayerfile isInOverview="0" layerid="provinces20140716224953030" visible="0"/>
+                    </filegroup>
+                </legendlayer>
             </legendgroup>
         </legendgroup>
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Base map" showFeatureCount="0">
-            <filegroup open="true" hidden="false">
-                <legendlayerfile isInOverview="0" layerid="Basemap20140729160827961" visible="1"/>
-            </filegroup>
-        </legendlayer>
     </legend>
     <projectlayers layercount="23">
         <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
@@ -1940,6 +1940,9 @@
                 <edittype widgetv2type="RelationReference" name="id">
                     <widgetv2config fieldEditable="0" ShowForm="1" Relation="parcels_sgcopy20140715213132401_id_parcel_description20140411125955804_lpi_code" labelOnTop="0" AllowNULL="0"/>
                 </edittype>
+                <edittype widgetv2type="TextEdit" name="progress_id">
+                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
+                </edittype>
                 <edittype widgetv2type="TextEdit" name="progress_capture_status">
                     <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
                 </edittype>
@@ -1947,7 +1950,7 @@
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>progress20140729112755633</id>
-            <datasource>dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='lpi_code' table="project"."progress" sql=</datasource>
+            <datasource>dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."progress" sql=</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
@@ -1980,6 +1983,9 @@
             <excludeAttributesWFS/>
             <attributeactions/>
             <edittypes>
+                <edittype widgetv2type="TextEdit" name="id">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                </edittype>
                 <edittype widgetv2type="TextEdit" name="lpi_code">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
