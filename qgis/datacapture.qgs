@@ -1950,7 +1950,7 @@
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>progress20140729112755633</id>
-            <datasource>dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."progress" sql=</datasource>
+            <datasource>host=localhost dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."progress" sql=</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
