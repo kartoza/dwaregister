@@ -31,6 +31,7 @@ COPY 664
 cp qgis/datacapture.qgs /data/dwa/QGIS\ Projects/datacapture_gavin.qgs
 cd '/data/dwa/QGIS Projects'
 sed -i 's/localhost/gis/' datacapture_gavin.qgs
+sed -i 's/layers=topp:states&amp;styles=&amp;url=http:\/\/localhost:8080\/geoserver\/wms/layers=dwaregister:dwa_basemap&amp;styles=&amp;url=http:\/\/gis:8080\/geoserver\/wms?&amp;/' datacapture_gavin.qgs
 mv datacapture_gavin.qgs datacapture_sinethemba.qgs
 sed -i 's/gavin/sinethemba/' datacapture_sinethemba.qgs
 sed -i 's/s0sten1ble/scibAfyad9/' datacapture_sinethemba.qgs

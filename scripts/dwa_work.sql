@@ -869,3 +869,36 @@ alter table project.parcel_description alter column mnrcode type character varyi
 alter table project.minor_codes alter column code type character varying (4) USING code::character varying;
 
 alter table project.parcel_description alter column prev_parent_portion type character varying USING prev_parent_portion::character varying;
+
+--monitoring progress
+--dam progress
+validated purchase plan in database
+% of parcels downloaded
+% of parcels captured
+% of parcels validated
+
+--parcel progress
+downloaded: SG diagrams downloaded for this parcel. Is there a folder with this SG21code on the server and does it have at least one image file in it?
+captured: minimum data captured (SG diagram no and title deed number). Is there a record with this SG21 code and does it have these fields completed?
+owner ship data known: owner fields complete. Is owner field completed?
+validated: checked by Chris or another supervisor. Boolean flag
+
+--overall progress
+% of current known total parcels done, etc. 
+
+add 'purchase plans digitised by chris' either as a separate table or as a class of an existing one. 
+
+CREATE VIEW project.progress AS
+SELECT lpi_code,
+CASE 
+	WHEN diagram_no IS NOT NULL THEN 'diagram'
+	WHEN registered_owner IS NOT NULL THEN 'owner'
+	ELSE 'not done'
+END
+AS capture_status FROM project.parcel_description; 
+
+CREATE ROLE geoserver LOGIN
+  ENCRYPTED PASSWORD 'Glittyish5'
+  NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+
+  GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_read;
