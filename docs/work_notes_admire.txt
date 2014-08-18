@@ -1,0 +1,24 @@
+Changing project path and testing it out with sed
+
+sed -i 's/dbname='\''dwaregister'\'' host=localhost port=5432 user='\''gavin'\'' password='\''s0sten1ble'\'' sslmode=disable key='\''gid'\''/http:\/\/kirchhoffgistomcat.mooo.com:8080\/geoserver\/wfs?SERVICE=WFS\&amp;VERSION=1.0.0\&amp;REQUEST=GetFeature\&amp;SRSNAME=EPSG:4148\&amp;username=grace\&amp;password=gr@ce@w@ter\&amp;/g' datacapture_admire.qgs
+
+sed -i 's/dbname='\''dwaregister'\'' host=localhost port=5432 user='\''gavin'\'' password='\''s0sten1ble'\'' sslmode=disable key='\''id'\''/http:\/\/kirchhoffgistomcat.mooo.com:8080\/geoserver\/wfs?SERVICE=WFS\&amp;VERSION=1.0.0\&amp;REQUEST=GetFeature\&amp;SRSNAME=EPSG:4148\&amp;username=grace\&amp;password=gr@ce@w@ter\&amp;/g' datacapture_admire.qgs
+
+sed -i 's/dbname='\''dwaregister'\'' host=localhost port=5432 user='\''gavin'\'' password='\''s0sten1ble'\'' sslmode=disable key='\''tid'\''/http:\/\/kirchhoffgistomcat.mooo.com:8080\/geoserver\/wfs?SERVICE=WFS\&amp;VERSION=1.0.0\&amp;REQUEST=GetFeature\&amp;SRSNAME=EPSG:4148\&amp;username=grace\&amp;password=gr@ce@w@ter\&amp;/g' datacapture_admire.qgs
+
+
+sed -i 's/table="project"."/TYPENAME=dwaregister:/g' datacapture_admire.qgs
+
+sed -i 's/" sql=//g' datacapture_admire.qgs
+
+sed -i 's/" (geom) sql=//g' datacapture_admire.qgs
+
+sed -i 's/type=POLYGON/\&amp;/g' datacapture_admire.qgs
+
+sed -i 's/type=MULTIPOLYGON/\&amp;/g' datacapture_admire.qgs
+
+sed -i 's/type=POINT/\&amp;/g' datacapture_admire.qgs
+
+sed -i 's/table="public"."/TYPENAME=dwaregister:/g' datacapture_admire.qgs
+
+sed -i 's /provider encoding="UTF-8">postgres/provider encoding="System">WFS/g' datacapture_admire.qgs
