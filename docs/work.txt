@@ -31,31 +31,31 @@ COPY 664
 cd '/data/dwa/QGIS Projects'
 cp /home/gavin/dev/dwaregister/qgis/datacapture.qgs datacapture_gavin.qgs
 sed -i 's/localhost/gis/' datacapture_gavin.qgs
-sed -i 's/topp:states/dwaregister:dwa_basemap/' datacapture_gavin.qgs
+sed -i 's/kirchhoffgistomcat.mooo.com/gis/' datacapture_gavin.qgs
 mv datacapture_gavin.qgs datacapture_sinethemba.qgs
 sed -i 's/gavin/sinethemba/' datacapture_sinethemba.qgs
 sed -i 's/s0sten1ble/scibAfyad9/' datacapture_sinethemba.qgs
 cp datacapture_sinethemba.qgs datacapture_grace.qgs
-sed -i 's/gavin/grace/' datacapture_grace.qgs
-sed -i 's/s0sten1ble/yarhulf9Obs/' datacapture_grace.qgs
+sed -i 's/sinethemba/grace/' datacapture_grace.qgs
+sed -i 's/scibAfyad9/yarhulf9Obs/' datacapture_grace.qgs
 cp datacapture_sinethemba.qgs datacapture_simba.qgs
-sed -i 's/gavin/simba/' datacapture_simba.qgs
-sed -i 's/s0sten1ble/TyHaldAys8/' datacapture_simba.qgs
+sed -i 's/sinethemba/simba/' datacapture_simba.qgs
+sed -i 's/scibAfyad9/TyHaldAys8/' datacapture_simba.qgs
 cp datacapture_sinethemba.qgs datacapture_grantvn.qgs
-sed -i 's/gavin/grantvn/' datacapture_grantvn.qgs
-sed -i 's/s0sten1ble/bookDepyul4/' datacapture_grantvn.qgs
+sed -i 's/sinethemba/grantvn/' datacapture_grantvn.qgs
+sed -i 's/scibAfyad9/bookDepyul4/' datacapture_grantvn.qgs
 cp datacapture_sinethemba.qgs datacapture_samuel.qgs
-sed -i 's/gavin/samuel/' datacapture_samuel.qgs
-sed -i 's/s0sten1ble/Fardyag8/' datacapture_samuel.qgs
+sed -i 's/sinethemba/samuel/' datacapture_samuel.qgs
+sed -i 's/scibAfyad9/Fardyag8/' datacapture_samuel.qgs
 cp datacapture_sinethemba.qgs datacapture_francois.qgs
-sed -i 's/gavin/francois/' datacapture_francois.qgs
-sed -i 's/s0sten1ble/yudTorc4/' datacapture_francois.qgs
+sed -i 's/sinethemba/francois/' datacapture_francois.qgs
+sed -i 's/scibAfyad9/yudTorc4/' datacapture_francois.qgs
 cp datacapture_sinethemba.qgs datacapture_chris.qgs
-sed -i 's/gavin/chris/' datacapture_chris.qgs
-sed -i 's/s0sten1ble/gieWrok1/' datacapture_chris.qgs
+sed -i 's/sinethemba/chris/' datacapture_chris.qgs
+sed -i 's/scibAfyad9/gieWrok1/' datacapture_chris.qgs
 cp datacapture_sinethemba.qgs datacapture_dirk.qgs
-sed -i 's/gavin/dirk/' datacapture_dirk.qgs
-sed -i 's/s0sten1ble/eyRilviff8/' datacapture_dirk.qgs
+sed -i 's/sinethemba/dirk/' datacapture_dirk.qgs
+sed -i 's/scibAfyad9/eyRilviff8/' datacapture_dirk.qgs
 
 #setting up PG services 
 

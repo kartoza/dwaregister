@@ -25,7 +25,9 @@
             </layer-tree-layer>
         </layer-tree-group>
         <layer-tree-layer expanded="1" checked="Qt::Checked" id="Basemap20140729160827961" name="Base map">
-            <customproperties/>
+            <customproperties>
+                <property key="overview" value="0"/>
+            </customproperties>
         </layer-tree-layer>
         <layer-tree-group expanded="1" checked="Qt::Unchecked" name="non-spatial tables">
             <customproperties/>
@@ -74,7 +76,7 @@
                     <customproperties/>
                 </layer-tree-layer>
             </layer-tree-group>
-            <layer-tree-group expanded="0" checked="Qt::Unchecked" name="no editing">
+            <layer-tree-group expanded="1" checked="Qt::Unchecked" name="no editing">
                 <customproperties/>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="progress20140729112755633" name="progress">
                     <customproperties/>
@@ -83,7 +85,9 @@
                     <customproperties/>
                 </layer-tree-layer>
                 <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="provinces20140716224953030" name="provinces">
-                    <customproperties/>
+                    <customproperties>
+                        <property key="overview" value="1"/>
+                    </customproperties>
                 </layer-tree-layer>
             </layer-tree-group>
         </layer-tree-group>
@@ -123,10 +127,10 @@
     <mapcanvas>
         <units>degrees</units>
         <extent>
-            <xmin>30.443790989264091</xmin>
-            <ymin>-25.97586693524058887</ymin>
-            <xmax>30.8296109732482293</xmax>
-            <ymax>-25.74603276509378702</ymax>
+            <xmin>18.83240225987346506</xmin>
+            <ymin>-34.11120992802340623</ymin>
+            <xmax>19.73106686713110847</xmax>
+            <ymax>-33.50391563058700939</ymax>
         </extent>
         <projections>1</projections>
         <destinationsrs>
@@ -286,7 +290,7 @@
                     </filegroup>
                 </legendlayer>
             </legendgroup>
-            <legendgroup open="false" checked="Qt::Unchecked" name="no editing">
+            <legendgroup open="true" checked="Qt::Unchecked" name="no editing">
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="progress" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="progress20140729112755633" visible="0"/>
@@ -299,7 +303,7 @@
                 </legendlayer>
                 <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="provinces" showFeatureCount="0">
                     <filegroup open="false" hidden="false">
-                        <legendlayerfile isInOverview="0" layerid="provinces20140716224953030" visible="0"/>
+                        <legendlayerfile isInOverview="1" layerid="provinces20140716224953030" visible="0"/>
                     </filegroup>
                 </legendlayer>
             </legendgroup>
@@ -308,7 +312,7 @@
     <projectlayers layercount="23">
         <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
             <id>Basemap20140729160827961</id>
-            <datasource>crs=EPSG:4148&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=topp:states&amp;styles=&amp;url=http://localhost:8080/geoserver/wms</datasource>
+            <datasource>crs=EPSG:4148&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=dwaregister:dwa_basemap&amp;styles=&amp;url=http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
@@ -1950,7 +1954,7 @@
         </maplayer>
         <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>progress20140729112755633</id>
-            <datasource>host=localhost dbname='dwaregister' port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."progress" sql=</datasource>
+            <datasource>dbname='dwaregister' host=localhost port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."progress" sql=</datasource>
             <title></title>
             <abstract></abstract>
             <keywordList>
@@ -2793,7 +2797,7 @@
             </srs>
             <customproperties/>
             <provider encoding="UTF-8">postgres</provider>
-            <previewExpression>COALESCE("id", '&lt;NULL>')</previewExpression>
+            <previewExpression>COALESCE( "sgcode", '&lt;NULL>' )</previewExpression>
             <vectorjoins/>
             <expressionfields/>
             <editform>../../../Documents/AfriSpatial/KirchhoffSurveyors</editform>

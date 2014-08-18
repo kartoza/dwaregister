@@ -137,6 +137,9 @@ GRANT editor TO samuel;
 CREATE ROLE francois LOGIN ENCRYPTED PASSWORD 'md5db3cf67206afa8a1cd5bd6b5c70e3351'
    VALID UNTIL 'infinity';
 GRANT editor TO francois;
+CREATE ROLE dirk LOGIN ENCRYPTED PASSWORD 'eyRilviff8'
+   VALID UNTIL 'infinity';
+GRANT editor TO dirk;
 
 CREATE ROLE guest LOGIN ENCRYPTED PASSWORD 'md5fe4ceeb01d43a6c29d8f4fe93313c6c1'
    VALID UNTIL 'infinity';
@@ -825,7 +828,8 @@ SELECT replace(dam_no,'/','_') as dirname from dams_all_geo;
 
 --populating parcel_description
 
-create table gavinwork.parcels_sgcopy_duplicates as
+--create table gavinwork.parcels_sgcopy_duplicates as
+insert into gavinwork.parcels_sgcopy_duplicates 
 select * from project.parcels_sgcopy
   WHERE id IN (SELECT id 
                   FROM (SELECT row_number() OVER (PARTITION by id), id 
@@ -836,18 +840,20 @@ delete from project.parcels_sgcopy
 where id in (select r.id 
 from project.parcels_sgcopy r inner join gavinwork.parcels_sgcopy_duplicates rd on r.id = rd.id);
 
-insert into project.parcel_description (lpi_code) 
-(select ps.id from project.parcels_sgcopy ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null);
 
 WITH unique_parcels AS (SELECT id 
                   FROM (SELECT row_number() OVER (PARTITION by id), id 
                            FROM project.parcels_sgcopy) x 
                  WHERE x.row_number = 1) 
 insert into project.parcel_description (lpi_code) 
-(select ps.id from unique_parcels ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null);
+(select ps.id from unique_parcels ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null)
+RETURNING *;
 
 ALTER TABLE project.parcels_sgcopy
   ADD UNIQUE (id);
+
+  ALTER TABLE project.parcels_sgcopy
+  DROP CONSTRAINT parcels_sgcopy_id_key;
 
 --creating directories for Kirchhoff SG diagram saving
 
@@ -897,6 +903,7 @@ CASE
 	ELSE 'not done'
 END
 AS capture_status FROM project.parcel_description; 
+GRANT SELECT ON project.progress to editor;
 
 CREATE ROLE geoserver LOGIN
   ENCRYPTED PASSWORD 'Glittyish5'
@@ -905,3 +912,6 @@ CREATE ROLE geoserver LOGIN
   GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_read;
 
 GRANT SELECT ON project.progress to editor;
+
+--Grace query about default rights in right prop link relation 13 Aug
+select * from project.right_prop_link order by right_id;
