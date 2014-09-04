@@ -1,4 +1,4 @@
-﻿
+﻿--Gavin
 
 --removing duplicates from regions after aggregating each province
 
@@ -119,7 +119,7 @@ drop table dam_7b;
 
 CREATE ROLE editor
   NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
-  CREATE ROLE grace LOGIN ENCRYPTED PASSWORD 'md545e9dd0ce18784a8adbb33b88ca8e936'
+CREATE ROLE grace LOGIN ENCRYPTED PASSWORD 'md545e9dd0ce18784a8adbb33b88ca8e936'
    VALID UNTIL 'infinity';
 GRANT editor TO grace;
 CREATE ROLE simba LOGIN ENCRYPTED PASSWORD 'md5a73ae0a8106ff455e05addd1578c32d7'
@@ -140,6 +140,12 @@ GRANT editor TO francois;
 CREATE ROLE dirk LOGIN ENCRYPTED PASSWORD 'eyRilviff8'
    VALID UNTIL 'infinity';
 GRANT editor TO dirk;
+CREATE ROLE portia LOGIN ENCRYPTED PASSWORD 'deecOczaij5'
+   VALID UNTIL 'infinity';
+GRANT editor TO portia;
+CREATE ROLE elias LOGIN ENCRYPTED PASSWORD 'CekEipdesIr0'
+   VALID UNTIL 'infinity';
+GRANT editor TO elias;
 
 CREATE ROLE guest LOGIN ENCRYPTED PASSWORD 'md5fe4ceeb01d43a6c29d8f4fe93313c6c1'
    VALID UNTIL 'infinity';
@@ -841,6 +847,7 @@ where id in (select r.id
 from project.parcels_sgcopy r inner join gavinwork.parcels_sgcopy_duplicates rd on r.id = rd.id);
 
 
+--write a trigger that adds a record to parcel_description whenever a record is added to parcels_sgcopy:
 WITH unique_parcels AS (SELECT id 
                   FROM (SELECT row_number() OVER (PARTITION by id), id 
                            FROM project.parcels_sgcopy) x 
@@ -864,7 +871,7 @@ copy (SELECT replace(dam_no,'/','_')||'/raster' as dirname from dams_all_geo) TO
 --for dir in `cat dirstomake`; do mkdir -p $dir;done
 
 
---write a trigger that adds a record to parcel_description whenever a record is added to parcels_sgcopy
+
 
 CONSTRAINT parcel_description_mnrcode_fkey FOREIGN KEY (mnrcode)
       REFERENCES project.minor_codes (code) MATCH SIMPLE
@@ -915,7 +922,9 @@ GRANT SELECT ON project.progress to editor;
 
 --Grace query about default rights in right prop link relation 13 Aug
 select * from project.right_prop_link order by right_id;
+--/Gavin
 
+--Admire
 --Creating roles for wfs in geoserver
 CREATE ROLE web_edit
   NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
@@ -958,5 +967,9 @@ CREATE INDEX parcels_sgcopy_id_idx ON project.parcels_sgcopy  (id);
 CREATE INDEX progress_lpi_code_id_idx ON project.progress  (lpi_code);
 CREATE INDEX directory_progress_directory_idx ON project.directory_progress  (directory);
 
+--/Admire
 
+--Gavin
+--Note that directory progress table will have one record per image in a parcel and when this gets joined to parcels it does an inner join and results in nultiple copies of that parcel in the layer. This allow the action to open all the images but might have other undesirable effects. If it does, then we must create a view that summarises directory progress and maybe sets up paths that will allow the action to still open all the images even with a single record join.  
+--/Gavin
 

@@ -30,7 +30,12 @@ COPY 664
 #do a git pull in /home/gavin/dev/dwaregister, then 
 cd '/data/dwa/QGIS Projects'
 cp /home/gavin/dev/dwaregister/qgis/datacapture.qgs datacapture_gavin.qgs
-sed -i 's/localhost/gis/' datacapture_gavin.qgs
+
+#Changing filepath for an action to work in qgis for windows on the server:
+
+sed -i 's/= 72/= 46/g' datacapture_gavin.qgs
+
+sed -i 's/gauss/gis/' datacapture_gavin.qgs
 sed -i 's/kirchhoffgistomcat.mooo.com/gis/' datacapture_gavin.qgs
 mv datacapture_gavin.qgs datacapture_sinethemba.qgs
 sed -i 's/gavin/sinethemba/' datacapture_sinethemba.qgs
@@ -56,12 +61,41 @@ sed -i 's/scibAfyad9/gieWrok1/' datacapture_chris.qgs
 cp datacapture_sinethemba.qgs datacapture_dirk.qgs
 sed -i 's/sinethemba/dirk/' datacapture_dirk.qgs
 sed -i 's/scibAfyad9/eyRilviff8/' datacapture_dirk.qgs
+cp datacapture_sinethemba.qgs datacapture_portia.qgs
+sed -i 's/sinethemba/portia/' datacapture_portia.qgs
+sed -i 's/scibAfyad9/deecOczaij5/' datacapture_portia.qgs
+cp datacapture_sinethemba.qgs datacapture_elias.qgs
+sed -i 's/sinethemba/elias/' datacapture_elias.qgs
+sed -i 's/scibAfyad9/CekEipdesIr0/' datacapture_elias.qgs
 
-#setting up PG services 
+#Changing action to work for linux from windows project file
+cp datacapture_chris.qgs datacapture_chris_linux.qgs
+sed -i 's/type="5" name="Show Images"/type="0" name="Show Images"/g' datacapture_chris_linux.qgs
+
+sed -i 's/\[/eog \[/g' datacapture_chris_linux.qgs
+
+#Open a text editor in linux open datacapture_admire.qgs
+
+#manually replace the following string:  [%'Z:\\' || 'SurveyDiagrams'||'\\' ||  &quot;id&quot;||'\\'||&quot;directory_progress_file&quot;    %]
+
+# with the following string: [% &quot;directory_progress_full_directory&quot;||'/ '||&quot;directory_progress_file&quot; %]
+
+
+#setting up PG services for local Ubuntu users
 
 sudo su -
 echo $'[dwa]\ndbname=dwaregister\nuser=chris\npassword=gieWrok1\nhost=localhost' > /home/chris/.pg_service.conf
 echo $'[dwa]\ndbname=dwaregister\nuser=sinethemba\npassword=scibAfyad9\nhost=localhost' > /home/sinethemba/.pg_service.conf
 
-
+#setting up PG service files for network users to fetch and place in their home dirs (? confirm where these must go on Windows...)
+echo $'[dwa]\ndbname=dwaregister\nuser=chris\npassword=gieWrok1\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/chris/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=sinethemba\npassword=scibAfyad9\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/sinethemba/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=grace\npassword=yarhulf9Obs\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/grace/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=simba\npassword=TyHaldAys8\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/simba/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=grantvn\npassword=bookDepyul4\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/grantvn/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=samuel\npassword=Fardyag8\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/samuel/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=francois\npassword=yudTorc4\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/francois/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=dirk\npassword=eyRilviff8\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/dirk/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=portia\npassword=deecOczaij5\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/portia/.pg_service.conf'
+echo $'[dwa]\ndbname=dwaregister\nuser=elias\npassword=CekEipdesIr0\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/elias/.pg_service.conf'
 

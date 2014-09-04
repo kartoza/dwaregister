@@ -1,4 +1,4 @@
-Changing project path for wfs layers to work in qgis
+#Changing project path for wfs layers to work in qgis
 
 cp /home/admire/src/dwaregister/qgis/datacapture.qgs datacapture_admire.qgs
 
@@ -30,35 +30,21 @@ sed -i 's/table="public"."/TYPENAME=dwaregister:/g' datacapture_admire.qgs
 sed -i 's /provider encoding="UTF-8">postgres/provider encoding="System">WFS/g' datacapture_admire.qgs
 
 
-Load the project into qgis and then manually  remove the following layers from the working layers group
+#Load the project into qgis and then manually  remove the following layers from the working layers group
 
 floodline,purchase_plans_final,purchase_plans_digitised,parcels_external
 
-Add a wms layer for parcels_sgcopy and then save the project
+#Add a wms layer for parcels_sgcopy and then save the project
 floodline
 
-
-Changing filepath for an action to work in qgis for windows on the server:
-
+#Changing filepath for an action to work in qgis for windows on the server:
+#only for local testing
 cp /home/admire/src/dwaregister/qgis/datacapture.qgs datacapture_admire.qgs
 
 sed -i 's/localhost/gis/' datacapture_gavin.qgs
 
-sed -i 's/= 72/= 46/g' datacapture.qgs
+#See work.txt for remaining steps
 
-
-
-Changing action to work for linux from windows project file
-
-sed -i 's/type="5" name="Show Images"/type="0" name="Show Images"/g' datacapture_admire.qgs
-
-sed -i 's/\[/eog \[/g' datacapture_admire.qgs
-
-Open a text editor in linux open datacapture_admire.qgs
-
-replace the following string:  [%'Z:\\' || 'SurveyDiagrams'||'\\' ||  &quot;id&quot;||'\\'||&quot;directory_progress_file&quot;    %]
-
-with the following string: [% &quot;directory_progress_full_directory&quot;||'/ '||&quot;directory_progress_file&quot; %]
 
 
 
