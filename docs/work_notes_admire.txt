@@ -1,0 +1,77 @@
+Changing project path for wfs layers to work in qgis
+
+cp /home/admire/src/dwaregister/qgis/datacapture.qgs datacapture_admire.qgs
+
+sed -i 's/dbname='\''dwaregister'\'' host=localhost port=5432 user='\''gavin'\'' password='\''s0sten1ble'\'' sslmode=disable key='\''gid'\''/http:\/\/kirchhoffgistomcat.mooo.com:8080\/geoserver\/wfs?SERVICE=WFS\&amp;VERSION=1.0.0\&amp;REQUEST=GetFeature\&amp;SRSNAME=EPSG:4148\&amp;username=grace\&amp;password=gr@ce@w@ter\&amp;/g' datacapture_admire.qgs
+
+sed -i 's/dbname='\''dwaregister'\'' host=localhost port=5432 user='\''gavin'\'' password='\''s0sten1ble'\'' sslmode=disable key='\''tid'\''/http:\/\/kirchhoffgistomcat.mooo.com:8080\/geoserver\/wfs?SERVICE=WFS\&amp;VERSION=1.0.0\&amp;REQUEST=GetFeature\&amp;SRSNAME=EPSG:4148\&amp;username=grace\&amp;password=gr@ce@w@ter\&amp;/g' datacapture_admire.qgs
+
+
+sed -i 's/dbname='\''dwaregister'\'' host=localhost port=5432 user='\''gavin'\'' password='\''s0sten1ble'\'' sslmode=disable key='\''id'\''/http:\/\/kirchhoffgistomcat.mooo.com:8080\/geoserver\/wfs?SERVICE=WFS\&amp;VERSION=1.0.0\&amp;REQUEST=GetFeature\&amp;SRSNAME=EPSG:4148\&amp;username=grace\&amp;password=gr@ce@w@ter\&amp;/g' datacapture_admire.qgs
+
+sed -i 's/ srid=4326//g' datacapture_admire.qgs
+
+sed -i 's/ srid=4148//g' datacapture_admire.qgs
+
+sed -i 's/" sql=//g' datacapture_admire.qgs
+
+sed -i 's/" (geom) sql=//g' datacapture_admire.qgs
+
+sed -i 's/type=POLYGON//g' datacapture_admire.qgs
+
+sed -i 's/type=MULTIPOLYGON//g' datacapture_admire.qgs
+
+sed -i 's/type=POINT//g' datacapture_admire.qgs
+
+sed -i 's/table="project"."/TYPENAME=dwaregister:/g' datacapture_admire.qgs
+
+sed -i 's/table="public"."/TYPENAME=dwaregister:/g' datacapture_admire.qgs
+
+sed -i 's /provider encoding="UTF-8">postgres/provider encoding="System">WFS/g' datacapture_admire.qgs
+
+
+Load the project into qgis and then manually  remove the following layers from the working layers group
+
+floodline,purchase_plans_final,purchase_plans_digitised,parcels_external
+
+Add a wms layer for parcels_sgcopy and then save the project
+floodline
+
+
+Changing filepath for an action to work in qgis for windows on the server:
+
+cp /home/admire/src/dwaregister/qgis/datacapture.qgs datacapture_admire.qgs
+
+sed -i 's/localhost/gis/' datacapture_gavin.qgs
+
+sed -i 's/= 72/= 46/g' datacapture.qgs
+
+
+
+Changing action to work for linux from windows project file
+
+sed -i 's/type="5" name="Show Images"/type="0" name="Show Images"/g' datacapture_admire.qgs
+
+sed -i 's/\[/eog \[/g' datacapture_admire.qgs
+
+Open a text editor in linux open datacapture_admire.qgs
+
+replace the following string:  [%'Z:\\' || 'SurveyDiagrams'||'\\' ||  &quot;id&quot;||'\\'||&quot;directory_progress_file&quot;    %]
+
+with the following string: [% &quot;directory_progress_full_directory&quot;||'/ '||&quot;directory_progress_file&quot; %]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

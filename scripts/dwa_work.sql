@@ -915,3 +915,48 @@ GRANT SELECT ON project.progress to editor;
 
 --Grace query about default rights in right prop link relation 13 Aug
 select * from project.right_prop_link order by right_id;
+
+--Creating roles for wfs in geoserver
+CREATE ROLE web_edit
+  NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+CREATE ROLE geoserver_edit LOGIN
+  ENCRYPTED PASSWORD 'gisrocks'
+  NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+GRANT web_edit TO geoserver_edit;
+
+--Granting permisions for tables used in  for wfs layers.
+grant select,insert,update on project.floodline to web_edit;
+grant select,insert,update on project.purchase_plans_final to web_edit;
+grant select,insert,update on project.purchase_plans_digitised to web_edit;
+grant select,insert,update on project.parcels_sgcopy to web_edit;
+grant select,insert,update on project.parcels_external to web_edit;
+grant select,insert,update on project.parcel_description to web_edit;
+grant select,insert,update on project.dam_prop_link to web_edit;
+grant select,insert,update on project.right_prop_link to web_edit;
+grant select,insert,update on project.rights to web_edit;
+grant select,insert,update on project.sgdiag_checklist to web_edit;
+grant select,insert,update on project.sg_province to web_edit;
+grant select,insert,update on project.sg_office_codes to web_edit;
+grant select,insert,update on project.sg_offices to web_edit;
+grant select,insert,update on project.regions to web_edit;
+grant select,insert,update on project.major_codes to web_edit;
+grant select,insert,update on project.minor_codes to web_edit;
+
+--Grant permisions for sequences
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA project TO web_edit
+
+--Creating geoserver view for parcels_sgcopy
+
+select a.gid,a.id,a.geom,b.capture_status,c.file from project.parcels_sgcopy as a
+left join project.progress as b on a.id = b.lpi_code
+left join (SELECT distinct on (directory) directory, 't'::boolean as file FROM project.directory_progress WHERE file IS NOT NULL) as c on a.id=c.directory
+WHERE a.id IS NOT NULL
+
+--creating indexs on fields used for geoserver joins
+CREATE INDEX parcels_sgcopy_geom_idx ON project.parcels_sgcopy  (geom);
+CREATE INDEX parcels_sgcopy_id_idx ON project.parcels_sgcopy  (id);
+CREATE INDEX progress_lpi_code_id_idx ON project.progress  (lpi_code);
+CREATE INDEX directory_progress_directory_idx ON project.directory_progress  (directory);
+
+
+
