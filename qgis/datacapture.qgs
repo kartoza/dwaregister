@@ -24,7 +24,7 @@
                 <customproperties/>
             </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Basemap20140729160827961" name="Base map">
+        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="Basemap20140729160827961" name="Base map">
             <customproperties>
                 <property key="overview" value="1"/>
             </customproperties>
@@ -51,9 +51,6 @@
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="right_types20140716072529496" name="right_types">
                     <customproperties/>
                 </layer-tree-layer>
-                <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="sgdiag_checklist20140415190317372" name="sgdiag_checklist">
-                    <customproperties/>
-                </layer-tree-layer>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="units20140415190317455" name="units">
                     <customproperties/>
                 </layer-tree-layer>
@@ -76,7 +73,7 @@
                     <customproperties/>
                 </layer-tree-layer>
             </layer-tree-group>
-            <layer-tree-group expanded="1" checked="Qt::Unchecked" name="no editing">
+            <layer-tree-group expanded="0" checked="Qt::Unchecked" name="no editing">
                 <customproperties/>
                 <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="progress20140729112755633" name="progress">
                     <customproperties/>
@@ -111,9 +108,6 @@
         </relation>
         <relation referencingLayer="sg_province20140415190317279" referencedLayer="parcel_description20140411125955804" id="sg_province20140415190317279_province_parcel_description20140411125955804_province" name="sg_provinces">
             <fieldRef referencedField="province" referencingField="province"/>
-        </relation>
-        <relation referencingLayer="sgdiag_checklist20140415190317372" referencedLayer="parcel_description20140411125955804" id="sgdiag_checklist20140415190317372_sgcode_parcel_description20140411125955804_lpi_code" name="sgdiag_parcel">
-            <fieldRef referencedField="lpi_code" referencingField="sgcode"/>
         </relation>
         <relation referencingLayer="units20140415190317455" referencedLayer="parcel_description20140411125955804" id="units20140415190317455_unit_parcel_description20140411125955804_area_unit" name="area_units">
             <fieldRef referencedField="area_unit" referencingField="unit"/>
@@ -161,7 +155,6 @@
             <item>purchase_plans_digitised20140410112253038</item>
             <item>parcels_external20140414162504596</item>
             <item>parcel_description20140411125955804</item>
-            <item>sgdiag_checklist20140415190317372</item>
             <item>dam_prop_link20140415190316715</item>
             <item>right_prop_link20140427165755568</item>
             <item>rights20140427165833483</item>
@@ -214,9 +207,9 @@
                 </filegroup>
             </legendlayer>
         </legendgroup>
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Base map" showFeatureCount="0">
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="Base map" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-                <legendlayerfile isInOverview="1" layerid="Basemap20140729160827961" visible="1"/>
+                <legendlayerfile isInOverview="1" layerid="Basemap20140729160827961" visible="0"/>
             </filegroup>
         </legendlayer>
         <legendgroup open="true" checked="Qt::Unchecked" name="non-spatial tables">
@@ -246,11 +239,6 @@
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="right_types" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="right_types20140716072529496" visible="0"/>
-                    </filegroup>
-                </legendlayer>
-                <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="sgdiag_checklist" showFeatureCount="0">
-                    <filegroup open="true" hidden="false">
-                        <legendlayerfile isInOverview="0" layerid="sgdiag_checklist20140415190317372" visible="0"/>
                     </filegroup>
                 </legendlayer>
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="units" showFeatureCount="0">
@@ -289,7 +277,7 @@
                     </filegroup>
                 </legendlayer>
             </legendgroup>
-            <legendgroup open="true" checked="Qt::Unchecked" name="no editing">
+            <legendgroup open="false" checked="Qt::Unchecked" name="no editing">
                 <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="progress" showFeatureCount="0">
                     <filegroup open="true" hidden="false">
                         <legendlayerfile isInOverview="0" layerid="progress20140729112755633" visible="0"/>
@@ -308,7 +296,7 @@
             </legendgroup>
         </legendgroup>
     </legend>
-    <projectlayers layercount="23">
+    <projectlayers layercount="22">
         <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
             <id>Basemap20140729160827961</id>
             <datasource>crs=EPSG:4148&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=dwaregister:dwa_basemap&amp;styles=&amp;url=http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms</datasource>
@@ -1987,8 +1975,8 @@
                 <edittype widgetv2type="RelationReference" name="id">
                     <widgetv2config fieldEditable="0" ShowForm="1" Relation="parcels_sgcopy20140715213132401_id_parcel_description20140411125955804_lpi_code" labelOnTop="0" AllowNULL="0"/>
                 </edittype>
-                <edittype widgetv2type="Hidden" name="progress_id">
-                    <widgetv2config fieldEditable="0" labelOnTop="0"/>
+                <edittype widgetv2type="TextEdit" name="progress_id">
+                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="progress_capture_status">
                     <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
@@ -2533,7 +2521,7 @@
                 </edittype>
             </edittypes>
         </maplayer>
-        <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
+        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>regions20140415190317096</id>
             <datasource>dbname='dwaregister' host=gauss port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."regions" sql=</datasource>
             <title></title>
@@ -2581,7 +2569,7 @@
                     <widgetv2config fieldEditable="1" labelOnTop="0" Editable="0"/>
                 </edittype>
                 <edittype widgetv2type="ValueRelation" name="province">
-                    <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="province" Layer="provinces20140716224953030" Value="province" labelOnTop="0" AllowMulti="0"/>
+                    <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="province" Layer="sg_province20140415190317279" Value="province" labelOnTop="0" AllowMulti="0"/>
                 </edittype>
             </edittypes>
         </maplayer>
@@ -2654,7 +2642,7 @@
             </srs>
             <customproperties/>
             <provider encoding="UTF-8">postgres</provider>
-            <previewExpression></previewExpression>
+            <previewExpression>COALESCE("id", '&lt;NULL>')</previewExpression>
             <vectorjoins/>
             <expressionfields/>
             <editform>.</editform>
@@ -2766,7 +2754,7 @@
                 </edittype>
             </edittypes>
         </maplayer>
-        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
+        <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>sg_offices20140415190317207</id>
             <datasource>dbname='dwaregister' host=gauss port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."sg_offices" sql=</datasource>
             <title></title>
@@ -2805,11 +2793,11 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="ValueRelation" name="name">
-                    <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="province" Layer="provinces20140716224953030" Value="province" labelOnTop="0" AllowMulti="0"/>
+                    <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="province" Layer="sg_province20140415190317279" Value="province" labelOnTop="0" AllowMulti="0"/>
                 </edittype>
             </edittypes>
         </maplayer>
-        <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
+        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>sg_province20140415190317279</id>
             <datasource>dbname='dwaregister' host=gauss port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."sg_province" sql=</datasource>
             <title></title>
@@ -2844,68 +2832,10 @@
             <excludeAttributesWFS/>
             <attributeactions/>
             <edittypes>
-                <edittype widgetv2type="ValueRelation" name="province">
-                    <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="province" Layer="provinces20140716224953030" Value="province" labelOnTop="0" AllowMulti="0"/>
+                <edittype widgetv2type="TextEdit" name="province">
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="id">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
-            </edittypes>
-        </maplayer>
-        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
-            <id>sgdiag_checklist20140415190317372</id>
-            <datasource>dbname='dwaregister' host=gauss port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."sgdiag_checklist" sql=</datasource>
-            <title></title>
-            <abstract></abstract>
-            <keywordList>
-                <value></value>
-            </keywordList>
-            <layername>sgdiag_checklist</layername>
-            <srs>
-                <spatialrefsys>
-                    <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
-                    <srsid>3452</srsid>
-                    <srid>4326</srid>
-                    <authid>EPSG:4326</authid>
-                    <description>WGS 84</description>
-                    <projectionacronym>longlat</projectionacronym>
-                    <ellipsoidacronym>WGS84</ellipsoidacronym>
-                    <geographicflag>true</geographicflag>
-                </spatialrefsys>
-            </srs>
-            <customproperties/>
-            <provider encoding="UTF-8">postgres</provider>
-            <previewExpression>COALESCE("id", '&lt;NULL>')</previewExpression>
-            <vectorjoins/>
-            <expressionfields/>
-            <editform>/../../Documents/AfriSpatial/KirchhoffSurveyors</editform>
-            <editforminit></editforminit>
-            <featformsuppress>0</featformsuppress>
-            <annotationform>/../../Documents/AfriSpatial/KirchhoffSurveyors</annotationform>
-            <editorlayout>generatedlayout</editorlayout>
-            <excludeAttributesWMS/>
-            <excludeAttributesWFS/>
-            <attributeactions/>
-            <edittypes>
-                <edittype widgetv2type="TextEdit" name="id">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
-                <edittype widgetv2type="TextEdit" name="sgcode">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
-                <edittype widgetv2type="TextEdit" name="sgfileno">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
-                <edittype widgetv2type="TextEdit" name="downloaded">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
-                <edittype widgetv2type="TextEdit" name="page">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
-                <edittype widgetv2type="TextEdit" name="comment">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-                </edittype>
-                <edittype widgetv2type="TextEdit" name="filename">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
             </edittypes>
