@@ -11,7 +11,7 @@
             <layer-tree-layer expanded="1" checked="Qt::Checked" id="floodline20140416072157317" name="floodline">
                 <customproperties/>
             </layer-tree-layer>
-            <layer-tree-layer expanded="1" checked="Qt::Checked" id="purchase_plans_final20140715213132324" name="purchase_plans_final">
+            <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="purchase_plans_final20140715213132324" name="purchase_plans_final">
                 <customproperties/>
             </layer-tree-layer>
             <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="purchase_plans_digitised20140410112253038" name="purchase_plans_digitised">
@@ -24,7 +24,7 @@
                 <customproperties/>
             </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="Basemap20140729160827961" name="Base map">
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="Basemap20140729160827961" name="Base map">
             <customproperties>
                 <property key="overview" value="1"/>
             </customproperties>
@@ -119,10 +119,10 @@
     <mapcanvas>
         <units>degrees</units>
         <extent>
-            <xmin>27.29491718575301817</xmin>
-            <ymin>-31.52353662986720906</ymin>
-            <xmax>27.37107592048213078</xmax>
-            <ymax>-31.47188235091930864</ymax>
+            <xmin>18.90561272819124383</xmin>
+            <ymin>-34.13921833641000347</ymin>
+            <xmax>19.35365530783892041</xmax>
+            <ymax>-33.83533570926322653</ymax>
         </extent>
         <projections>1</projections>
         <destinationsrs>
@@ -186,9 +186,9 @@
                     <legendlayerfile isInOverview="0" layerid="floodline20140416072157317" visible="1"/>
                 </filegroup>
             </legendlayer>
-            <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="purchase_plans_final" showFeatureCount="0">
+            <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="purchase_plans_final" showFeatureCount="0">
                 <filegroup open="true" hidden="false">
-                    <legendlayerfile isInOverview="0" layerid="purchase_plans_final20140715213132324" visible="1"/>
+                    <legendlayerfile isInOverview="0" layerid="purchase_plans_final20140715213132324" visible="0"/>
                 </filegroup>
             </legendlayer>
             <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="purchase_plans_digitised" showFeatureCount="0">
@@ -207,9 +207,9 @@
                 </filegroup>
             </legendlayer>
         </legendgroup>
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="Base map" showFeatureCount="0">
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="Base map" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-                <legendlayerfile isInOverview="1" layerid="Basemap20140729160827961" visible="0"/>
+                <legendlayerfile isInOverview="1" layerid="Basemap20140729160827961" visible="1"/>
             </filegroup>
         </legendlayer>
         <legendgroup open="true" checked="Qt::Unchecked" name="non-spatial tables">
@@ -1705,30 +1705,14 @@
             <expressionfields/>
             <renderer-v2 symbollevels="0" type="RuleRenderer">
                 <rules>
-                    <rule filter="progress_capture_status  = 'diagram'" symbol="0" label="diagram captured"/>
-                    <rule filter="progress_capture_status  = 'not done'" symbol="1" label="not done yet"/>
-                    <rule symbol="2" label="not in parcel_description"/>
-                    <rule filter="progress_capture_status  = 'owner'" symbol="3" label="owner retrieved"/>
-                    <rule filter=" &quot;directory_progress_file&quot; is not null" symbol="4" label="With images"/>
-                    <rule scalemaxdenom="40000" scalemindenom="20000"/>
+                    <rule filter="progress_capture_status  = 'not done'" symbol="0" label="not done yet"/>
+                    <rule filter="progress_capture_status  = 'diagram'" symbol="1" label="diagram captured"/>
+                    <rule filter="progress_capture_status  = 'owner'" symbol="2" label="owner retrieved"/>
+                    <rule filter=" &quot;directory_progress_file&quot; is not null" symbol="3" label="SG diag downloaded"/>
+                    <rule filter=" &quot;progress_capture_status&quot; is null" symbol="4" label="not in parcel_description"/>
                 </rules>
                 <symbols>
                     <symbol alpha="1" type="fill" name="0">
-                        <layer pass="0" class="SimpleFill" locked="0">
-                            <prop k="border_width_map_unit_scale" v="0,0"/>
-                            <prop k="border_width_unit" v="MM"/>
-                            <prop k="color" v="0,170,255,255"/>
-                            <prop k="color_border" v="0,0,0,255"/>
-                            <prop k="joinstyle" v="bevel"/>
-                            <prop k="offset" v="0,0"/>
-                            <prop k="offset_map_unit_scale" v="0,0"/>
-                            <prop k="offset_unit" v="MM"/>
-                            <prop k="style" v="solid"/>
-                            <prop k="style_border" v="solid"/>
-                            <prop k="width_border" v="0.26"/>
-                        </layer>
-                    </symbol>
-                    <symbol alpha="1" type="fill" name="1">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1743,11 +1727,11 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol alpha="1" type="fill" name="2">
+                    <symbol alpha="1" type="fill" name="1">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
-                            <prop k="color" v="211,209,208,255"/>
+                            <prop k="color" v="0,170,255,255"/>
                             <prop k="color_border" v="0,0,0,255"/>
                             <prop k="joinstyle" v="bevel"/>
                             <prop k="offset" v="0,0"/>
@@ -1758,7 +1742,7 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol alpha="1" type="fill" name="3">
+                    <symbol alpha="1" type="fill" name="2">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1773,7 +1757,7 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol alpha="0.470588" type="fill" name="4">
+                    <symbol alpha="0.470588" type="fill" name="3">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1784,6 +1768,21 @@
                             <prop k="offset_map_unit_scale" v="0,0"/>
                             <prop k="offset_unit" v="MM"/>
                             <prop k="style" v="dense5"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol alpha="1" type="fill" name="4">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="border_width_map_unit_scale" v="0,0"/>
+                            <prop k="border_width_unit" v="MM"/>
+                            <prop k="color" v="211,209,208,255"/>
+                            <prop k="color_border" v="0,0,0,255"/>
+                            <prop k="joinstyle" v="bevel"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="offset_map_unit_scale" v="0,0"/>
+                            <prop k="offset_unit" v="MM"/>
+                            <prop k="style" v="solid"/>
                             <prop k="style_border" v="solid"/>
                             <prop k="width_border" v="0.26"/>
                         </layer>
@@ -1818,7 +1817,7 @@
                 <property key="labeling/distMapUnitMinScale" value="0"/>
                 <property key="labeling/enabled" value="true"/>
                 <property key="labeling/fieldName" value="id"/>
-                <property key="labeling/fontBold" value="false"/>
+                <property key="labeling/fontBold" value="true"/>
                 <property key="labeling/fontCapitals" value="0"/>
                 <property key="labeling/fontFamily" value="Ubuntu"/>
                 <property key="labeling/fontItalic" value="false"/>
@@ -1832,7 +1831,7 @@
                 <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
                 <property key="labeling/fontStrikeout" value="false"/>
                 <property key="labeling/fontUnderline" value="false"/>
-                <property key="labeling/fontWeight" value="50"/>
+                <property key="labeling/fontWeight" value="63"/>
                 <property key="labeling/fontWordSpacing" value="0"/>
                 <property key="labeling/formatNumbers" value="false"/>
                 <property key="labeling/isExpression" value="false"/>
@@ -1975,8 +1974,8 @@
                 <edittype widgetv2type="RelationReference" name="id">
                     <widgetv2config fieldEditable="0" ShowForm="1" Relation="parcels_sgcopy20140715213132401_id_parcel_description20140411125955804_lpi_code" labelOnTop="0" AllowNULL="0"/>
                 </edittype>
-                <edittype widgetv2type="TextEdit" name="progress_id">
-                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
+                <edittype widgetv2type="Hidden" name="progress_id">
+                    <widgetv2config fieldEditable="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="progress_capture_status">
                     <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
@@ -2984,47 +2983,12 @@
             <CanvasColorBluePart type="int">255</CanvasColorBluePart>
         </Gui>
         <Digitizing>
-            <LayerSnappingList type="QStringList">
-                <value>dams_all_geo20140415161916184</value>
-                <value>floodline20140416072157317</value>
-                <value>parcels_external20140414162504596</value>
-                <value>parcels_sgcopy20140715213132401</value>
-                <value>purchase_plans_digitised20140410112253038</value>
-                <value>purchase_plans_final20140715213132324</value>
-            </LayerSnappingList>
-            <LayerSnappingEnabledList type="QStringList">
-                <value>enabled</value>
-                <value>enabled</value>
-                <value>enabled</value>
-                <value>enabled</value>
-                <value>enabled</value>
-                <value>enabled</value>
-            </LayerSnappingEnabledList>
+            <LayerSnappingList type="QStringList"/>
+            <LayerSnappingEnabledList type="QStringList"/>
             <AvoidIntersectionsList type="QStringList"/>
-            <LayerSnappingToleranceUnitList type="QStringList">
-                <value>1</value>
-                <value>1</value>
-                <value>1</value>
-                <value>1</value>
-                <value>1</value>
-                <value>1</value>
-            </LayerSnappingToleranceUnitList>
-            <LayerSnapToList type="QStringList">
-                <value>to_vertex_and_segment</value>
-                <value>to_vertex_and_segment</value>
-                <value>to_vertex_and_segment</value>
-                <value>to_vertex_and_segment</value>
-                <value>to_vertex_and_segment</value>
-                <value>to_vertex_and_segment</value>
-            </LayerSnapToList>
-            <LayerSnappingToleranceList type="QStringList">
-                <value>10.000000</value>
-                <value>10.000000</value>
-                <value>10.000000</value>
-                <value>10.000000</value>
-                <value>10.000000</value>
-                <value>10.000000</value>
-            </LayerSnappingToleranceList>
+            <LayerSnappingToleranceUnitList type="QStringList"/>
+            <LayerSnapToList type="QStringList"/>
+            <LayerSnappingToleranceList type="QStringList"/>
         </Digitizing>
         <Identify>
             <disabledLayers type="QStringList"/>
