@@ -119,10 +119,10 @@
     <mapcanvas>
         <units>degrees</units>
         <extent>
-            <xmin>18.90561272819124383</xmin>
-            <ymin>-34.13921833641000347</ymin>
-            <xmax>19.35365530783892041</xmax>
-            <ymax>-33.83533570926322653</ymax>
+            <xmin>29.12031838610004186</xmin>
+            <ymin>-31.65390316069237642</ymin>
+            <xmax>29.63839760976499704</xmax>
+            <ymax>-31.30251853184466526</ymax>
         </extent>
         <projections>1</projections>
         <destinationsrs>
@@ -1708,8 +1708,8 @@
                     <rule filter="progress_capture_status  = 'not done'" symbol="0" label="not done yet"/>
                     <rule filter="progress_capture_status  = 'diagram'" symbol="1" label="diagram captured"/>
                     <rule filter="progress_capture_status  = 'owner'" symbol="2" label="owner retrieved"/>
-                    <rule filter=" &quot;directory_progress_file&quot; is not null" symbol="3" label="SG diag downloaded"/>
-                    <rule filter=" &quot;progress_capture_status&quot; is null" symbol="4" label="not in parcel_description"/>
+                    <rule filter=" &quot;progress_capture_status&quot; is null" symbol="3" label="not in parcel_description"/>
+                    <rule filter=" &quot;directory_progress_file&quot; is not null" symbol="4" label="SG diag downloaded"/>
                 </rules>
                 <symbols>
                     <symbol alpha="1" type="fill" name="0">
@@ -1757,22 +1757,7 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol alpha="0.470588" type="fill" name="3">
-                        <layer pass="0" class="SimpleFill" locked="0">
-                            <prop k="border_width_map_unit_scale" v="0,0"/>
-                            <prop k="border_width_unit" v="MM"/>
-                            <prop k="color" v="0,0,255,255"/>
-                            <prop k="color_border" v="0,0,255,255"/>
-                            <prop k="joinstyle" v="bevel"/>
-                            <prop k="offset" v="0,0"/>
-                            <prop k="offset_map_unit_scale" v="0,0"/>
-                            <prop k="offset_unit" v="MM"/>
-                            <prop k="style" v="dense5"/>
-                            <prop k="style_border" v="solid"/>
-                            <prop k="width_border" v="0.26"/>
-                        </layer>
-                    </symbol>
-                    <symbol alpha="1" type="fill" name="4">
+                    <symbol alpha="1" type="fill" name="3">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1783,6 +1768,21 @@
                             <prop k="offset_map_unit_scale" v="0,0"/>
                             <prop k="offset_unit" v="MM"/>
                             <prop k="style" v="solid"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol alpha="0.470588" type="fill" name="4">
+                        <layer pass="0" class="SimpleFill" locked="0">
+                            <prop k="border_width_map_unit_scale" v="0,0"/>
+                            <prop k="border_width_unit" v="MM"/>
+                            <prop k="color" v="170,0,255,255"/>
+                            <prop k="color_border" v="0,0,0,0"/>
+                            <prop k="joinstyle" v="bevel"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="offset_map_unit_scale" v="0,0"/>
+                            <prop k="offset_unit" v="MM"/>
+                            <prop k="style" v="diagonal_x"/>
                             <prop k="style_border" v="solid"/>
                             <prop k="width_border" v="0.26"/>
                         </layer>
@@ -1974,8 +1974,8 @@
                 <edittype widgetv2type="RelationReference" name="id">
                     <widgetv2config fieldEditable="0" ShowForm="1" Relation="parcels_sgcopy20140715213132401_id_parcel_description20140411125955804_lpi_code" labelOnTop="0" AllowNULL="0"/>
                 </edittype>
-                <edittype widgetv2type="Hidden" name="progress_id">
-                    <widgetv2config fieldEditable="0" labelOnTop="0"/>
+                <edittype widgetv2type="TextEdit" name="progress_id">
+                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="progress_capture_status">
                     <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
