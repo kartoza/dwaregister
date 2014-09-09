@@ -119,10 +119,10 @@
     <mapcanvas>
         <units>degrees</units>
         <extent>
-            <xmin>29.12031838610004186</xmin>
-            <ymin>-31.65390316069237642</ymin>
-            <xmax>29.63839760976499704</xmax>
-            <ymax>-31.30251853184466526</ymax>
+            <xmin>25.80846119735297606</xmin>
+            <ymin>-32.26678154940044863</ymin>
+            <xmax>26.27487214264702686</xmax>
+            <ymax>-31.95044067059954784</ymax>
         </extent>
         <projections>1</projections>
         <destinationsrs>
@@ -1127,7 +1127,7 @@
                 </edittype>
             </edittypes>
         </maplayer>
-        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
+        <maplayer minimumScale="0" maximumScale="1e+08" geometry="No geometry" type="vector" hasScaleBasedVisibilityFlag="0">
             <id>parcel_description20140411125955804</id>
             <datasource>dbname='dwaregister' host=gauss port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='id' table="project"."parcel_description" sql=</datasource>
             <title></title>
@@ -1296,7 +1296,7 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="diagram_no">
-                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
+                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="1"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="description">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -1353,7 +1353,7 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="sg_town_code">
-                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="lpi_code">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -1362,7 +1362,7 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="ValueRelation" name="province">
-                    <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="0" Key="province" Layer="provinces20140716063529603" Value="province" labelOnTop="0" AllowMulti="0"/>
+                    <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="1" Key="province" Layer="provinces20140716063529603" Value="province" labelOnTop="0" AllowMulti="0"/>
                 </edittype>
                 <edittype widgetv2type="ValueRelation" name="mag_district">
                     <widgetv2config OrderByValue="1" AllowNull="0" FilterExpression="" fieldEditable="0" Key="name" Layer="magisterial_districts20140414110253612" Value="name" labelOnTop="0" AllowMulti="0"/>
@@ -1401,13 +1401,13 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="capture_timestamp">
-                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="1"/>
+                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="dwa_allocation">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="dwa_legal_status">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="1"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="dgm_valid_from">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -1416,7 +1416,7 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="registration_date">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="1"/>
+                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="sale_price">
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
@@ -1431,7 +1431,7 @@
                     <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="usage_purpose">
-                    <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
+                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="ValueRelation" name="unit">
                     <widgetv2config OrderByValue="0" AllowNull="0" FilterExpression=" &quot;class&quot;=  'length' " fieldEditable="1" Key="unit" Layer="units20140415190317455" Value="unit" labelOnTop="0" AllowMulti="0"/>
@@ -1675,7 +1675,7 @@
                 </edittype>
             </edittypes>
         </maplayer>
-        <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
+        <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="0" scaleBasedLabelVisibilityFlag="0">
             <id>parcels_sgcopy20140715213132401</id>
             <datasource>dbname='dwaregister' host=gauss port=5432 user='gavin' password='s0sten1ble' sslmode=disable key='tid' srid=4148 type=MULTIPOLYGON table="project"."parcels_sgcopy" (geom) sql=</datasource>
             <title></title>
@@ -1705,14 +1705,29 @@
             <expressionfields/>
             <renderer-v2 symbollevels="0" type="RuleRenderer">
                 <rules>
-                    <rule filter="progress_capture_status  = 'not done'" symbol="0" label="not done yet"/>
-                    <rule filter="progress_capture_status  = 'diagram'" symbol="1" label="diagram captured"/>
-                    <rule filter="progress_capture_status  = 'owner'" symbol="2" label="owner retrieved"/>
-                    <rule filter=" &quot;progress_capture_status&quot; is null" symbol="3" label="not in parcel_description"/>
-                    <rule filter=" &quot;directory_progress_file&quot; is not null" symbol="4" label="SG diag downloaded"/>
+                    <rule filter=" &quot;directory_progress_file&quot; is not null" symbol="0" label="SG diag downloaded"/>
+                    <rule filter="progress_capture_status  = 'not done'" symbol="1" label="not done yet"/>
+                    <rule filter="progress_capture_status  = 'diagram'" symbol="2" label="diagram captured"/>
+                    <rule filter="progress_capture_status  = 'owner'" symbol="3" label="owner retrieved"/>
+                    <rule filter=" &quot;progress_capture_status&quot; is null" symbol="4" label="not in parcel_description"/>
                 </rules>
                 <symbols>
-                    <symbol alpha="1" type="fill" name="0">
+                    <symbol alpha="0.470588" type="fill" name="0">
+                        <layer pass="1" class="SimpleFill" locked="0">
+                            <prop k="border_width_map_unit_scale" v="0,0"/>
+                            <prop k="border_width_unit" v="MM"/>
+                            <prop k="color" v="170,0,255,255"/>
+                            <prop k="color_border" v="0,0,0,0"/>
+                            <prop k="joinstyle" v="bevel"/>
+                            <prop k="offset" v="0,0"/>
+                            <prop k="offset_map_unit_scale" v="0,0"/>
+                            <prop k="offset_unit" v="MM"/>
+                            <prop k="style" v="diagonal_x"/>
+                            <prop k="style_border" v="solid"/>
+                            <prop k="width_border" v="0.26"/>
+                        </layer>
+                    </symbol>
+                    <symbol alpha="1" type="fill" name="1">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1727,7 +1742,7 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol alpha="1" type="fill" name="1">
+                    <symbol alpha="1" type="fill" name="2">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1742,7 +1757,7 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol alpha="1" type="fill" name="2">
+                    <symbol alpha="1" type="fill" name="3">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1757,7 +1772,7 @@
                             <prop k="width_border" v="0.26"/>
                         </layer>
                     </symbol>
-                    <symbol alpha="1" type="fill" name="3">
+                    <symbol alpha="1" type="fill" name="4">
                         <layer pass="0" class="SimpleFill" locked="0">
                             <prop k="border_width_map_unit_scale" v="0,0"/>
                             <prop k="border_width_unit" v="MM"/>
@@ -1768,21 +1783,6 @@
                             <prop k="offset_map_unit_scale" v="0,0"/>
                             <prop k="offset_unit" v="MM"/>
                             <prop k="style" v="solid"/>
-                            <prop k="style_border" v="solid"/>
-                            <prop k="width_border" v="0.26"/>
-                        </layer>
-                    </symbol>
-                    <symbol alpha="0.470588" type="fill" name="4">
-                        <layer pass="0" class="SimpleFill" locked="0">
-                            <prop k="border_width_map_unit_scale" v="0,0"/>
-                            <prop k="border_width_unit" v="MM"/>
-                            <prop k="color" v="170,0,255,255"/>
-                            <prop k="color_border" v="0,0,0,0"/>
-                            <prop k="joinstyle" v="bevel"/>
-                            <prop k="offset" v="0,0"/>
-                            <prop k="offset_map_unit_scale" v="0,0"/>
-                            <prop k="offset_unit" v="MM"/>
-                            <prop k="style" v="diagonal_x"/>
                             <prop k="style_border" v="solid"/>
                             <prop k="width_border" v="0.26"/>
                         </layer>
@@ -1974,8 +1974,8 @@
                 <edittype widgetv2type="RelationReference" name="id">
                     <widgetv2config fieldEditable="0" ShowForm="1" Relation="parcels_sgcopy20140715213132401_id_parcel_description20140411125955804_lpi_code" labelOnTop="0" AllowNULL="0"/>
                 </edittype>
-                <edittype widgetv2type="TextEdit" name="progress_id">
-                    <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>
+                <edittype widgetv2type="Hidden" name="progress_id">
+                    <widgetv2config fieldEditable="0" labelOnTop="0"/>
                 </edittype>
                 <edittype widgetv2type="TextEdit" name="progress_capture_status">
                     <widgetv2config IsMultiline="0" fieldEditable="0" UseHtml="0" labelOnTop="0"/>

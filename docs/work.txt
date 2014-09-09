@@ -74,11 +74,9 @@ sed -i 's/type="5" name="Show Images"/type="0" name="Show Images"/g' datacapture
 
 sed -i 's/\[/eog \[/g' datacapture_chris_linux.qgs
 
-#Open a text editor in linux open datacapture_admire.qgs
+#ensure that rpl is installed
 
-#manually replace the following string:  [%'Z:\\' || 'SurveyDiagrams'||'\\' ||  &quot;id&quot;||'\\'||&quot;directory_progress_file&quot;    %]
-
-# with the following string: [% &quot;directory_progress_full_directory&quot;||'/ '||&quot;directory_progress_file&quot; %]
+rpl  -se "[%'Z:\\' || 'SurveyDiagrams'||'\\' ||  &quot;id&quot;||'\\'||&quot;directory_progress_file&quot;    %]" "[% &quot;directory_progress_full_directory&quot;||'/ '||&quot;directory_progress_file&quot; %]" datacapture_chris_linux.qgs
 
 
 #setting up PG services for local Ubuntu users
