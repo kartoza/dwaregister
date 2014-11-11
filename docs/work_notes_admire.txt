@@ -38,6 +38,9 @@ floodline,purchase_plans_final,purchase_plans_digitised,parcels_external
 floodline
 
 #Changing filepath for an action to work in qgis for windows on the server:
+
+...moved to Gavin's work.txt with the rest of the deployment script
+
 #only for local testing
 cp /home/admire/src/dwaregister/qgis/datacapture.qgs datacapture_admire.qgs
 
@@ -45,8 +48,20 @@ sed -i 's/localhost/gis/' datacapture_gavin.qgs
 
 #See work.txt for remaining steps
 
+##image action original lines:
 
+Windows (and should work on Linux but doesn't)
 
+    Open: [%'Z:\\' || 'SurveyDiagrams'||'\\' ||  &quot;id&quot;||'\\'||&quot;directory_progress_file&quot;%]
+
+Linux
+
+    Generic: eog [% &quot;directory_progress_full_directory&quot;||'/ '||&quot;directory_progress_file&quot; %]
+
+ On Kirchhoff gis after I (Gavin) set up QGIS in Docker I changed from eog because it needs too many dependencies and use qiv instead
+To remove even that dependency and just use Qt, I used:
+
+from PyQt4.QtGui import QLabel, QPixmap; import os; label = QLabel(None); pixmap = QPixmap(os.path.join('[% "directory_progress_full_directory" %]', '[% "image" %]')); label.setPixmap(pixmap); label.show()
 
 
 

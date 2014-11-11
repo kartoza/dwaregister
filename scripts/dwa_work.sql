@@ -146,6 +146,12 @@ GRANT editor TO portia;
 CREATE ROLE elias LOGIN ENCRYPTED PASSWORD 'CekEipdesIr0'
    VALID UNTIL 'infinity';
 GRANT editor TO elias;
+CREATE ROLE katrina LOGIN ENCRYPTED PASSWORD 'kedopMotib3'
+   VALID UNTIL 'infinity';
+GRANT editor TO katrina;
+CREATE ROLE olga LOGIN ENCRYPTED PASSWORD 'RacVeks1'
+   VALID UNTIL 'infinity';
+GRANT editor TO olga;
 
 CREATE ROLE guest LOGIN ENCRYPTED PASSWORD 'md5fe4ceeb01d43a6c29d8f4fe93313c6c1'
    VALID UNTIL 'infinity';
@@ -850,7 +856,7 @@ from project.parcels_sgcopy r inner join gavinwork.parcels_sgcopy_duplicates rd 
 --write a trigger that adds a record to parcel_description whenever a record is added to parcels_sgcopy:
 WITH unique_parcels AS (SELECT id 
                   FROM (SELECT row_number() OVER (PARTITION by id), id 
-                           FROM project.parcels_sgcopy) x 
+                           FROM project.parcels_sgcopy WHERE id IS NOT NULL) x 
                  WHERE x.row_number = 1) 
 insert into project.parcel_description (lpi_code) 
 (select ps.id from unique_parcels ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null)
@@ -973,3 +979,23 @@ CREATE INDEX directory_progress_directory_idx ON project.directory_progress  (di
 --Note that directory progress table will have one record per image in a parcel and when this gets joined to parcels it does an inner join and results in nultiple copies of that parcel in the layer. This allow the action to open all the images but might have other undesirable effects. If it does, then we must create a view that summarises directory progress and maybe sets up paths that will allow the action to still open all the images even with a single record join.  
 --/Gavin
 
+--Gavin
+--set up query to link dams (points) with parcels
+select neighbours.* from project.parcels_sgcopy p 
+JOIN (select p.id,p.geom,d.dam_no from project.parcels_sgcopy AS p JOIN public.dams_all_geo AS d ON ST_within(st_transform(d.geom,4148),p.geom)) AS neighbours 
+ON ST_intersects(p.geom,neighbours.geom) 
+; 
+
+--the data are so crap that even this doesn't work!
+update project.parcels_sgcopy set geom = st_makevalid(geom::geometry(Multipolygon,4148));
+
+--first make dam_prop_link unique so associations can't be added more than once. 
+ALTER TABLE project.dam_prop_link
+  ADD UNIQUE (sgcode, dam_no);
+
+--at least do the first one (the parcel in which the dam point falls)
+INSERT INTO project.dam_prop_link (sgcode,dam_no)
+SELECT DISTINCT p.id AS sgcode,d.dam_no from project.parcels_sgcopy p 
+	JOIN public.dams_all_geo d 
+	ON ST_Within(ST_SetSRID(d.geom,4148),p.geom)
+	WHERE p.id IS NOT NULL;

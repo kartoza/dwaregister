@@ -67,12 +67,18 @@ sed -i 's/scibAfyad9/deecOczaij5/' datacapture_portia.qgs
 cp datacapture_sinethemba.qgs datacapture_elias.qgs
 sed -i 's/sinethemba/elias/' datacapture_elias.qgs
 sed -i 's/scibAfyad9/CekEipdesIr0/' datacapture_elias.qgs
+cp datacapture_sinethemba.qgs datacapture_katrina.qgs
+sed -i 's/sinethemba/katrina/' datacapture_katrina.qgs
+sed -i 's/scibAfyad9/kedopMotib3/' datacapture_katrina.qgs
+cp datacapture_sinethemba.qgs datacapture_olga.qgs
+sed -i 's/sinethemba/olga/' datacapture_olga.qgs
+sed -i 's/scibAfyad9/RacVeks1/' datacapture_olga.qgs
 
 #Changing action to work for linux from windows project file
 cp datacapture_chris.qgs datacapture_chris_linux.qgs
 sed -i 's/type="5" name="Show Images"/type="0" name="Show Images"/g' datacapture_chris_linux.qgs
 
-sed -i 's/\[/eog \[/g' datacapture_chris_linux.qgs
+sed -i 's/\[/qiv \[/g' datacapture_chris_linux.qgs
 
 #ensure that rpl is installed
 
