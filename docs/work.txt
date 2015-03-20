@@ -73,6 +73,7 @@ sed -i 's/scibAfyad9/kedopMotib3/' datacapture_katrina.qgs
 cp datacapture_sinethemba.qgs datacapture_olga.qgs
 sed -i 's/sinethemba/olga/' datacapture_olga.qgs
 sed -i 's/scibAfyad9/RacVeks1/' datacapture_olga.qgs
+rm datacapture_sinethemba.qgs
 
 #Changing action to work for linux from windows project file
 cp datacapture_chris.qgs datacapture_chris_linux.qgs
