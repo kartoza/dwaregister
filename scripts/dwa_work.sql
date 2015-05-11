@@ -152,6 +152,12 @@ GRANT editor TO katrina;
 CREATE ROLE olga LOGIN ENCRYPTED PASSWORD 'RacVeks1'
    VALID UNTIL 'infinity';
 GRANT editor TO olga;
+CREATE ROLE david LOGIN ENCRYPTED PASSWORD 'Elephants0up'
+   VALID UNTIL 'infinity';
+GRANT approval TO david;
+CREATE ROLE kaylin LOGIN ENCRYPTED PASSWORD 'T3chC@mp'
+   VALID UNTIL 'infinity';
+GRANT approval TO kaylin;
 
 CREATE ROLE guest LOGIN ENCRYPTED PASSWORD 'md5fe4ceeb01d43a6c29d8f4fe93313c6c1'
    VALID UNTIL 'infinity';
@@ -159,6 +165,12 @@ CREATE ROLE guest LOGIN ENCRYPTED PASSWORD 'md5fe4ceeb01d43a6c29d8f4fe93313c6c1'
 --moving captured data into DB
 
 dwaregister=# copy parcels_aggregate (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,qds,right_type,right1,right2,right3,scheme_name,scheme_ref_num,kode,captured_by) from '/data/KirchhoffSurveyors/revit-machine/DWA DAMS REGISTER AS PER TOR/parcels_aggregate.csv' with (format csv,header);
+
+SET search_path = gavinwork,project,public;
+
+CREATE TABLE parcels_lpi_null AS
+select * FROM parcels_aggregate WHERE lpi_code IS NULL;
+DELETE FROM parcels_aggregate WHERE lpi_code IS NULL;
 
 --identifying unique records
 --drop table parcels_duplicates;
@@ -172,18 +184,16 @@ DELETE FROM parcels_aggregate WHERE id IN
                            FROM parcels_aggregate) x 
                  WHERE x.row_number > 1);
 
-CREATE TABLE parcels_lpi_null AS
-select * FROM parcels_aggregate WHERE lpi_code IS NULL;
-DELETE FROM parcels_aggregate WHERE lpi_code IS NULL;
-
+--drop table diagram_no_duplicate;
 CREATE TABLE diagram_no_duplicate AS
 SELECT * FROM (SELECT row_number() OVER (PARTITION BY diagram_no), * 
-                           FROM parcels_aggregate) x 
-                 WHERE x.row_number > 1;
+                           FROM parcels_aggregate WHERE diagram_no IS NOT NULL) x 
+                 WHERE x.row_number > 1 
+                 ORDER BY diagram_no;
                  
 DELETE FROM parcels_aggregate WHERE id IN
 (SELECT id FROM (SELECT row_number() OVER (PARTITION BY diagram_no), id 
-                           FROM parcels_aggregate) x 
+                           FROM parcels_aggregate WHERE diagram_no IS NOT NULL) x 
                  WHERE x.row_number > 1);
 
 CREATE TABLE diagram_no_null AS
@@ -204,6 +214,7 @@ select * from parcels_aggregate where prev_parent_portion !~ '[0-9]+'
 --update parcels_aggregate set prev_parent_portion = NULL WHERE prev_parent_portion !~ '[0-9]+'
 select prev_parent_portion::integer from parcels_aggregate 
 --update parcels_aggregate set prev_parent_portion = NULL WHERE prev_parent_portion like '%/%'
+--update parcels_aggregate set prev_parent_portion = NULL WHERE prev_parent_portion like '%,%'
 
 --attempt to clean up and standardise parcels_aggregate records (captured in Excel) to move into parcel_description
 ALTER TABLE parcel_description
@@ -213,8 +224,7 @@ ALTER TABLE parcel_description
 
 update parcels_aggregate set diagram_no = null where diagram_no in ('Not Clear','Unclear','Not clear')
 
-update parcels_aggregate set area = 1600, area_unit = 'morgen' where area = '1600morgen'
-update parcels_aggregate set area = null where area = '160Square'
+
 
 ALTER TABLE parcel_description
    ALTER COLUMN diagram_no DROP NOT NULL;
@@ -246,9 +256,14 @@ update parcels_aggregate set area = (regexp_split_to_array(area_raw, E'[,\\s]+')
 where area_unit = 'acre' AND (regexp_split_to_array(area_raw, E'[,\\s]+'))[1] ~ '[0-9]+';
 
 update parcels_aggregate set area_unit = 'square metres' 
-where area_raw ilike '%sq__re met%';
+where area_raw ilike '%sq__re%met%';
 update parcels_aggregate set area = (regexp_split_to_array(area_raw, E'[,\\s]+'))[1]
 where area_unit = 'square metres';
+
+update parcels_aggregate set area_unit = 'square roods' 
+where area_raw ilike '%sq__re%rood%';
+update parcels_aggregate set area = (regexp_split_to_array(area_raw, E'[,\\s]+'))[1]
+where area_unit = 'square roods';
 
 select distinct area_raw from parcels_aggregate where area_unit is null;
 
@@ -260,6 +275,9 @@ insert into units (unit,factor,class) VALUES ('hectare',10000,'area');
 insert into units (unit,factor,class) VALUES ('square feet',0.092902267,'area');
 insert into units (unit,factor,class) VALUES ('acre',4046.8564,'area');
 insert into units (unit,factor,class) VALUES ('square roods',1011.7141,'area');
+
+update parcels_aggregate set area = 1600, area_unit = 'morgen' where area = '1600morgen';
+update parcels_aggregate set area = null where area = '160Square';
 
 --there are too many other cases to waste time converting these. 
 
@@ -435,11 +453,11 @@ GRANT SELECT, UPDATE, INSERT ON TABLE right_prop_link TO editor;
 --moving rights values into right_prop_link
 
 insert into rights (description)
-(select right1 from parcels_aggregate
+(select distinct right1 from parcels_aggregate
 UNION
-SELECT right2 from parcels_aggregate
+SELECT distinct right2 from parcels_aggregate
 UNION 
-SELECT right3 FROM parcels_aggregate)
+SELECT distinct right3 FROM parcels_aggregate)
 
 --run after populating parcel_description
 insert into right_prop_link (sgcode,right_id)
@@ -932,7 +950,8 @@ CASE
 END
 AS capture_status,
 CASE WHEN registered_owner = 'do not need' THEN FALSE END 
-AS need_owner 
+AS need_owner,
+to_replace 
 FROM project.parcel_description; 
 GRANT SELECT ON project.progress to editor;
 
@@ -1128,6 +1147,7 @@ UPDATE project.purchase_plans_final de
 	FROM public.dams_all_geo d
 	WHERE ST_Contains(de.geom,ST_SetSRID(d.geom,4148));
 --no need to run on purchase_plans_digitised since in March 2015, dam_no is fully populated
+--test: SELECT gid from project.purchase_plans_final where dam_no is null;
 
 --report PER DAM on:
 --user dam_prop_link as the master link between dams and properties so ensure it is updated and correct. 
@@ -1292,6 +1312,125 @@ select gid,st_makevalid(geom) from project.purchase_plans_digitised where not st
 
 select gid,st_makevalid(geom) from project.purchase_plans_digitised where not st_issimple(geom);
 
+--reprocessing spreadsheets April 2015 to bring in records captured in them since initial database load a year ago. 
+
+--Gavin checked and combined spreadsheets for each dam. For Gariep had to load four spreadsheets into db and combine in db since four different people had captured different records in the whole dam parcel list. 
+
+--loaded spreadsheets into gavinwork schema using QGIS DB Manager. 
+
+create table gavinwork.gariep as 
+	select * from gavinwork.gariep_grant
+	where captured_by ilike '%grant%';
+
+insert into gavinwork.gariep
+	select * from gavinwork.gariep_sam
+	where captured_by ilike '%sam%';
+
+insert into gavinwork.gariep
+	select * from gavinwork.gariep_simba
+	where captured_by ilike '%simba%';
+
+insert into gavinwork.gariep
+	select * from gavinwork.gariep_sine
+	where captured_by ilike '%sine%';
+
+--new add in all the parcels that weren't 'captured_by' anyone but that do exist. 
+
+insert into gavinwork.gariep
+	select gg.* from gavinwork.gariep_grant gg
+	LEFT JOIN gavinwork.gariep g 
+	USING (lpi_code)
+	WHERE g.lpi_code is null;
+
+select count(*) from gavinwork.gariep;
+
+-- now add gariep to parcels_aggregate, making to not add any duplicates. 
+
+insert into gavinwork.parcels_aggregate (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,qds,right_type,right1,right2,right3,scheme_name,scheme_ref_num,kode,captured_by)
+	select g.sg_off_name,g.sg_off_code,g.mjrcode,g.mnrcode,g.farm_no,g.portion,g.prev_parent_portion,g.remainder,g.sg_town_code,g.lpi_code,g.registered_owner,g.province,g.mag_district,g.reg_division,g.deed_office,g.diagram_no,g.parent,g.deed_no,g.compilation,g.compilation_new,g.town,g.farm_name,g.area,g.qds,g.right_type,g.right1,g.right2,g.right3,g.scheme_name,g.scheme_ref_num,g.kode,g.captured_by
+	from gavinwork.gariep g
+	LEFT JOIN gavinwork.parcels_aggregate pa 
+	USING (lpi_code)
+	WHERE pa.lpi_code is null;
+
+--start loading records from parcels_aggregate into parcel_description
+
+update parcels_aggregate set diagram_no = null where diagram_no ilike '%clear%';
+
+--then back to line 187
+
+--modified from line 210 to only add records for lpi codes that are not present AND for farm geometries that ARE present
+
+INSERT INTO project.parcel_description (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,area_unit,scheme_name,scheme_ref_num,kode,captured_by)
+SELECT pa.sg_off_name,pa.sg_off_code,pa.mjrcode,pa.mnrcode::integer,pa.farm_no::integer,pa.portion::integer,pa.prev_parent_portion::integer,pa.remainder,pa.sg_town_code,pa.lpi_code,pa.registered_owner,pa.province,upper(pa.mag_district),pa.reg_division,pa.deed_office,pa.diagram_no,pa.parent,pa.deed_no,pa.compilation,pa.compilation_new,pa.town,pa.farm_name,pa.area::double precision,pa.area_unit,pa.scheme_name,pa.scheme_ref_num,pa.kode::integer,pa.captured_by 
+	FROM parcels_aggregate pa
+	JOIN parcels_sgcopy ps on pa.lpi_code=ps.id
+	LEFT JOIN parcel_description pd USING (lpi_code)
+		WHERE pd.lpi_code IS NULL
+	; 
+
+--drop table parcel_aggregate_dupl_diagram_no;
+create table parcel_aggregate_dupl_diagram_no AS SELECT * from parcels_aggregate where lpi_code in (select pa.lpi_code from parcel_description pd join parcels_aggregate pa using (province,diagram_no));
+delete from parcels_aggregate where lpi_code in (select pa.lpi_code from parcel_description pd join parcels_aggregate pa using (province,diagram_no));
+--insert into parcels_aggregate  select * from parcel_aggregate_dupl_diagram_no
 
 
+update parcels_aggregate set portion = null where portion = 'Admin1:';
+
+alter table parcel_description add column to_replace boolean;
+
+--records in parcel_aggregate that are in parcels_sgcopy AND not in previous parcels sg_copy AND not captured
+update parcel_description set to_replace = FALSE;
+update parcel_description set to_replace = TRUE where lpi_code IN (select pa.lpi_code from parcels_aggregate pa  
+join parcels_sgcopy ps on pa.lpi_code=ps.id
+left join parcels_aggregate_v1 pav1 using (lpi_code)
+WHERE pav1.lpi_code is null)
+AND diagram_no is null;
+
+
+
+CREATE TABLE parcel_description_swaps AS 
+SELECT * FROM parcel_description where to_replace = 't';
+
+ALTER TABLE project.dam_prop_link
+  DROP CONSTRAINT dam_prop_link_sgcode_fkey;
+
+/*ALTER TABLE project.dam_prop_link
+  ADD CONSTRAINT dam_prop_link_sgcode_fkey FOREIGN KEY (sgcode) REFERENCES project.parcel_description (lpi_code) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+  delete from dam_prop_link where sgcode = 'C08500000000037800022';
+
+  ALTER TABLE project.dam_prop_link
+  ADD CONSTRAINT dam_prop_link_dam_no_fkey FOREIGN KEY (dam_no) REFERENCES dams_all_geo (dam_no) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+*/
+
+ALTER TABLE project.parcel_description
+  DROP CONSTRAINT parcel_description_mnrcode_fkey;
+
+ALTER TABLE project.parcel_description
+  DROP CONSTRAINT parcel_description_mjrcode_fkey;
+
+ALTER TABLE project.parcel_description
+  DROP CONSTRAINT parcel_description_sg_off_code_fkey;
+
+DELETE FROM parcel_description where to_replace = 't';
+
+--every parcel in parcels_sg_copy has a matching record in parcel_description. (check line 887)
+--so, either drop parcels that match new ones or flag them and ask David to confirm merge
+
+update parcels_aggregate set mnrcode=null where mnrcode like '%MID%';
+update parcels_aggregate set farm_no=null where farm_no like '%MID%';
+
+create table project.parcel_description
+--20 april 2015 TO DO
+--update RIGHTS! Modify from line 455
+--run line 1114 after fixing geometries
+--do joins and edit to fix these fields, then re-instititute fkeys for them to lookup tables: mnrcode, mjrcode, sg_off
+--edit right_prop_link to be able to add this constraint:
+ALTER TABLE project.right_prop_link
+  ADD UNIQUE (sgcode, right_id);
+
+
+	
  

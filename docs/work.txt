@@ -73,9 +73,16 @@ sed -i 's/scibAfyad9/kedopMotib3/' datacapture_katrina.qgs
 cp datacapture_sinethemba.qgs datacapture_olga.qgs
 sed -i 's/sinethemba/olga/' datacapture_olga.qgs
 sed -i 's/scibAfyad9/RacVeks1/' datacapture_olga.qgs
+cp datacapture_sinethemba.qgs datacapture_david.qgs
+sed -i 's/sinethemba/david/' datacapture_david.qgs
+sed -i 's/scibAfyad9/Elephants0up/' datacapture_david.qgs
+cp datacapture_sinethemba.qgs datacapture_kaylin.qgs
+sed -i 's/sinethemba/kaylin/' datacapture_kaylin.qgs
+sed -i 's/scibAfyad9/T3chC@mp/' datacapture_kaylin.qgs
 rm datacapture_sinethemba.qgs
 
 #Changing action to work for linux from windows project file
+#also do for david and kaylin
 cp datacapture_chris.qgs datacapture_chris_linux.qgs
 sed -i 's/type="5" name="Show Images"/type="0" name="Show Images"/g' datacapture_chris_linux.qgs
 
@@ -91,6 +98,8 @@ rpl  -se "[%'Z:\\' || 'SurveyDiagrams'||'\\' ||  &quot;id&quot;||'\\'||&quot;dir
 sudo su -
 echo $'[dwa]\ndbname=dwaregister\nuser=chris\npassword=gieWrok1\nhost=localhost' > /home/chris/.pg_service.conf
 echo $'[dwa]\ndbname=dwaregister\nuser=sinethemba\npassword=scibAfyad9\nhost=localhost' > /home/sinethemba/.pg_service.conf
+echo $'[dwa]\ndbname=dwaregister\nuser=david\npassword=Elephants0up\nhost=gis' > /home/david/.pg_service.conf
+echo $'[dwa]\ndbname=dwaregister\nuser=kaylin\npassword=T3chC@mp\nhost=gis' > /home/kaylin/.pg_service.conf
 
 #setting up PG service files for network users to fetch and place in their home dirs (? confirm where these must go on Windows...)
 echo $'[dwa]\ndbname=dwaregister\nuser=chris\npassword=gieWrok1\nhost=gis' > '/data/dwa/QGIS Projects/servicefiles/chris/.pg_service.conf'
