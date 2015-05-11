@@ -146,6 +146,18 @@ GRANT editor TO portia;
 CREATE ROLE elias LOGIN ENCRYPTED PASSWORD 'CekEipdesIr0'
    VALID UNTIL 'infinity';
 GRANT editor TO elias;
+CREATE ROLE katrina LOGIN ENCRYPTED PASSWORD 'kedopMotib3'
+   VALID UNTIL 'infinity';
+GRANT editor TO katrina;
+CREATE ROLE olga LOGIN ENCRYPTED PASSWORD 'RacVeks1'
+   VALID UNTIL 'infinity';
+GRANT editor TO olga;
+CREATE ROLE david LOGIN ENCRYPTED PASSWORD 'Elephants0up'
+   VALID UNTIL 'infinity';
+GRANT approval TO david;
+CREATE ROLE kaylin LOGIN ENCRYPTED PASSWORD 'T3chC@mp'
+   VALID UNTIL 'infinity';
+GRANT approval TO kaylin;
 
 CREATE ROLE guest LOGIN ENCRYPTED PASSWORD 'md5fe4ceeb01d43a6c29d8f4fe93313c6c1'
    VALID UNTIL 'infinity';
@@ -153,6 +165,12 @@ CREATE ROLE guest LOGIN ENCRYPTED PASSWORD 'md5fe4ceeb01d43a6c29d8f4fe93313c6c1'
 --moving captured data into DB
 
 dwaregister=# copy parcels_aggregate (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,qds,right_type,right1,right2,right3,scheme_name,scheme_ref_num,kode,captured_by) from '/data/KirchhoffSurveyors/revit-machine/DWA DAMS REGISTER AS PER TOR/parcels_aggregate.csv' with (format csv,header);
+
+SET search_path = gavinwork,project,public;
+
+CREATE TABLE parcels_lpi_null AS
+select * FROM parcels_aggregate WHERE lpi_code IS NULL;
+DELETE FROM parcels_aggregate WHERE lpi_code IS NULL;
 
 --identifying unique records
 --drop table parcels_duplicates;
@@ -166,18 +184,16 @@ DELETE FROM parcels_aggregate WHERE id IN
                            FROM parcels_aggregate) x 
                  WHERE x.row_number > 1);
 
-CREATE TABLE parcels_lpi_null AS
-select * FROM parcels_aggregate WHERE lpi_code IS NULL;
-DELETE FROM parcels_aggregate WHERE lpi_code IS NULL;
-
+--drop table diagram_no_duplicate;
 CREATE TABLE diagram_no_duplicate AS
 SELECT * FROM (SELECT row_number() OVER (PARTITION BY diagram_no), * 
-                           FROM parcels_aggregate) x 
-                 WHERE x.row_number > 1;
+                           FROM parcels_aggregate WHERE diagram_no IS NOT NULL) x 
+                 WHERE x.row_number > 1 
+                 ORDER BY diagram_no;
                  
 DELETE FROM parcels_aggregate WHERE id IN
 (SELECT id FROM (SELECT row_number() OVER (PARTITION BY diagram_no), id 
-                           FROM parcels_aggregate) x 
+                           FROM parcels_aggregate WHERE diagram_no IS NOT NULL) x 
                  WHERE x.row_number > 1);
 
 CREATE TABLE diagram_no_null AS
@@ -198,8 +214,9 @@ select * from parcels_aggregate where prev_parent_portion !~ '[0-9]+'
 --update parcels_aggregate set prev_parent_portion = NULL WHERE prev_parent_portion !~ '[0-9]+'
 select prev_parent_portion::integer from parcels_aggregate 
 --update parcels_aggregate set prev_parent_portion = NULL WHERE prev_parent_portion like '%/%'
+--update parcels_aggregate set prev_parent_portion = NULL WHERE prev_parent_portion like '%,%'
 
-
+--attempt to clean up and standardise parcels_aggregate records (captured in Excel) to move into parcel_description
 ALTER TABLE parcel_description
    ALTER COLUMN crs DROP NOT NULL;
 
@@ -207,8 +224,7 @@ ALTER TABLE parcel_description
 
 update parcels_aggregate set diagram_no = null where diagram_no in ('Not Clear','Unclear','Not clear')
 
-update parcels_aggregate set area = 1600, area_unit = 'morgen' where area = '1600morgen'
-update parcels_aggregate set area = null where area = '160Square'
+
 
 ALTER TABLE parcel_description
    ALTER COLUMN diagram_no DROP NOT NULL;
@@ -240,9 +256,14 @@ update parcels_aggregate set area = (regexp_split_to_array(area_raw, E'[,\\s]+')
 where area_unit = 'acre' AND (regexp_split_to_array(area_raw, E'[,\\s]+'))[1] ~ '[0-9]+';
 
 update parcels_aggregate set area_unit = 'square metres' 
-where area_raw ilike '%sq__re met%';
+where area_raw ilike '%sq__re%met%';
 update parcels_aggregate set area = (regexp_split_to_array(area_raw, E'[,\\s]+'))[1]
 where area_unit = 'square metres';
+
+update parcels_aggregate set area_unit = 'square roods' 
+where area_raw ilike '%sq__re%rood%';
+update parcels_aggregate set area = (regexp_split_to_array(area_raw, E'[,\\s]+'))[1]
+where area_unit = 'square roods';
 
 select distinct area_raw from parcels_aggregate where area_unit is null;
 
@@ -254,6 +275,9 @@ insert into units (unit,factor,class) VALUES ('hectare',10000,'area');
 insert into units (unit,factor,class) VALUES ('square feet',0.092902267,'area');
 insert into units (unit,factor,class) VALUES ('acre',4046.8564,'area');
 insert into units (unit,factor,class) VALUES ('square roods',1011.7141,'area');
+
+update parcels_aggregate set area = 1600, area_unit = 'morgen' where area = '1600morgen';
+update parcels_aggregate set area = null where area = '160Square';
 
 --there are too many other cases to waste time converting these. 
 
@@ -429,11 +453,11 @@ GRANT SELECT, UPDATE, INSERT ON TABLE right_prop_link TO editor;
 --moving rights values into right_prop_link
 
 insert into rights (description)
-(select right1 from parcels_aggregate
+(select distinct right1 from parcels_aggregate
 UNION
-SELECT right2 from parcels_aggregate
+SELECT distinct right2 from parcels_aggregate
 UNION 
-SELECT right3 FROM parcels_aggregate)
+SELECT distinct right3 FROM parcels_aggregate)
 
 --run after populating parcel_description
 insert into right_prop_link (sgcode,right_id)
@@ -835,32 +859,48 @@ SELECT replace(dam_no,'/','_') as dirname from dams_all_geo;
 --populating parcel_description
 
 --create table gavinwork.parcels_sgcopy_duplicates as
-insert into gavinwork.parcels_sgcopy_duplicates 
-select * from project.parcels_sgcopy
+truncate gavinwork.parcels_sgcopy_duplicates;
+....
+create table gavinwork.parcels_sgcopy_duplicates_with_ogc_fid AS...
+--I added ogc_fid in March 2015 after realising that gid is just the gid from the original sg parcels and is thus not necessarily unique
+insert into gavinwork.parcels_sgcopy_duplicates_with_ogc_fid
+select distinct on (id) * from project.parcels_sgcopy
   WHERE id IN (SELECT id 
                   FROM (SELECT row_number() OVER (PARTITION by id), id 
                            FROM project.parcels_sgcopy) x 
                  WHERE x.row_number > 1);
-
+--if there is more than one duplicate this will have to be run multiple times
 delete from project.parcels_sgcopy
-where id in (select r.id 
-from project.parcels_sgcopy r inner join gavinwork.parcels_sgcopy_duplicates rd on r.id = rd.id);
+where ogc_fid in (select r.ogc_fid 
+from project.parcels_sgcopy r inner join gavinwork.parcels_sgcopy_duplicates_with_ogc_fid rd on r.ogc_fid = rd.ogc_fid);
 
+create table gavinwork.parcels_sgcopy_null_id AS
+select * from project.parcels_sgcopy
+  WHERE id IS NULL;
+
+DELETE from project.parcels_sgcopy
+  WHERE id IS NULL;
 
 --write a trigger that adds a record to parcel_description whenever a record is added to parcels_sgcopy:
+--until then, run this manually
 WITH unique_parcels AS (SELECT id 
                   FROM (SELECT row_number() OVER (PARTITION by id), id 
-                           FROM project.parcels_sgcopy) x 
+                           FROM project.parcels_sgcopy WHERE id IS NOT NULL) x 
                  WHERE x.row_number = 1) 
 insert into project.parcel_description (lpi_code) 
 (select ps.id from unique_parcels ps  left join project.parcel_description pd on ps.id = pd.lpi_code where pd.lpi_code is null)
 RETURNING *;
 
 ALTER TABLE project.parcels_sgcopy
+   ADD COLUMN ogc_fid serial;
+
+ALTER TABLE project.parcels_sgcopy
   ADD UNIQUE (id);
 
   ALTER TABLE project.parcels_sgcopy
   DROP CONSTRAINT parcels_sgcopy_id_key;
+
+ALTER TABLE project.parcels_sgcopy ALTER COLUMN id SET NOT NULL;
 
 --creating directories for Kirchhoff SG diagram saving
 
@@ -869,9 +909,6 @@ copy (SELECT replace(dam_no,'/','_')||'/vector' as dirname from dams_all_geo) TO
 --for dir in `cat dirstomake`; do mkdir -p $dir;done
 copy (SELECT replace(dam_no,'/','_')||'/raster' as dirname from dams_all_geo) TO '/tmp/dirstomake';
 --for dir in `cat dirstomake`; do mkdir -p $dir;done
-
-
-
 
 CONSTRAINT parcel_description_mnrcode_fkey FOREIGN KEY (mnrcode)
       REFERENCES project.minor_codes (code) MATCH SIMPLE
@@ -901,15 +938,21 @@ validated: checked by Chris or another supervisor. Boolean flag
 
 add 'purchase plans digitised by chris' either as a separate table or as a class of an existing one. 
 
---DROP VIEW project.progress;
+
+--In this "progress" view we define what we mean by various stages of data capture completion.  
+--DROP VIEW project.progress CASCADE;
 CREATE OR REPLACE VIEW project.progress AS
 SELECT id,lpi_code,
 CASE 
 	WHEN diagram_no IS NOT NULL THEN 'diagram'
-	WHEN registered_owner IS NOT NULL THEN 'owner'
+	WHEN registered_owner IS NOT NULL AND registered_owner <> 'do not need' THEN 'owner'
 	ELSE 'not done'
 END
-AS capture_status FROM project.parcel_description; 
+AS capture_status,
+CASE WHEN registered_owner = 'do not need' THEN FALSE END 
+AS need_owner,
+to_replace 
+FROM project.parcel_description; 
 GRANT SELECT ON project.progress to editor;
 
 CREATE ROLE geoserver LOGIN
@@ -961,7 +1004,7 @@ left join project.progress as b on a.id = b.lpi_code
 left join (SELECT distinct on (directory) directory, 't'::boolean as file FROM project.directory_progress WHERE file IS NOT NULL) as c on a.id=c.directory
 WHERE a.id IS NOT NULL
 
---creating indexs on fields used for geoserver joins
+--creating indexes on fields used for geoserver joins
 CREATE INDEX parcels_sgcopy_geom_idx ON project.parcels_sgcopy  (geom);
 CREATE INDEX parcels_sgcopy_id_idx ON project.parcels_sgcopy  (id);
 CREATE INDEX progress_lpi_code_id_idx ON project.progress  (lpi_code);
@@ -973,3 +1016,421 @@ CREATE INDEX directory_progress_directory_idx ON project.directory_progress  (di
 --Note that directory progress table will have one record per image in a parcel and when this gets joined to parcels it does an inner join and results in nultiple copies of that parcel in the layer. This allow the action to open all the images but might have other undesirable effects. If it does, then we must create a view that summarises directory progress and maybe sets up paths that will allow the action to still open all the images even with a single record join.  
 --/Gavin
 
+--Gavin
+
+--trials linking dams with parcels
+
+--set up query to link dams (points) with parcels
+select distinct on (p2.gid) p2.*,p1.dam_no from project.parcels_sgcopy p2 
+JOIN (select distinct on (p.gid) p.gid,p.id,p.geom,d.dam_no from project.parcels_sgcopy AS p JOIN public.dams_all_geo AS d ON ST_within(st_transform(d.geom,4148),p.geom) where p.gid is not null) AS p1 
+ON ST_intersects(p2.geom,p1.geom) WHERE p2.gid <> p1.gid
+
+--the data are so crap that even this doesn't work!
+update project.parcels_sgcopy set geom = st_makevalid(geom) where not st_isvalid(geom);
+
+--so use this to clean instead:
+update project.parcels_sgcopy p set geom = y.geom from (select gid, st_multi(st_collect(geom)) AS geom
+from (select gid, (st_dump(st_makevalid(geom))).geom as geom from project.parcels_sgcopy where not st_isvalid(geom)) x where st_geometrytype(geom)='ST_Polygon' GROUP by gid) y where p.gid = y.gid;
+
+--creation of layers to facilitate atlas generation as well as manually linking dams with parcels
+
+/* experimental - generate dam bounding boxes automatically
+--main parcel
+select pd.* from project.parcel_description pd inner join 
+(select distinct on (p.gid) p.gid,p.id,d.dam_no from project.parcels_sgcopy AS p JOIN public.dams_all_geo AS d ON ST_within(st_transform(d.geom,4148),p.geom) where p.gid is not null) parcels ON parcels.id = pd.lpi_code where parcels.dam_no = 'R102/05'
+--neighbouring parcels
+select pd.diagram_no, pd.lpi_code from project.parcel_description pd inner join 
+(select distinct on (p2.gid) p2.*,p1.dam_no from project.parcels_sgcopy p2 
+JOIN (select distinct on (p.gid) p.gid,p.id,p.geom,d.dam_no from project.parcels_sgcopy AS p JOIN public.dams_all_geo AS d ON ST_within(st_transform(d.geom,4148),p.geom) where p.gid is not null) AS p1 
+ON ST_intersects(p2.geom,p1.geom) WHERE p2.gid <> p1.gid)  parcels ON parcels.id = pd.lpi_code where parcels.dam_no = 'R102/05'
+*/
+
+--new table for Chris to capture outlines for reporting. 
+CREATE TABLE project.dam_atlas_boundaries
+(
+  id serial NOT NULL,
+  dam_no  character varying(32),
+  geom geometry(Polygon,4148),
+  CONSTRAINT dam_atlas_boundaries_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE project.dam_atlas_boundaries
+  OWNER TO gavin;
+
+CREATE INDEX sidx_dam_atlas_boundaries_geom
+  ON project.dam_atlas_boundaries
+  USING gist
+  (geom);
+
+--March 2015 dropped dam_atlas_boundaries since it has not been used and all boundaries are in 
+
+--new table for Chris to capture extents for atlas generation. 
+CREATE TABLE project.dam_extents
+(
+  id serial NOT NULL,
+  dam_no character varying(32),
+  dam_name character varying(75),
+  geom geometry(Polygon,4148),
+  CONSTRAINT dam_extents_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE project.dam_extents
+  OWNER TO gavin;
+
+CREATE INDEX sidx_dam_extents_geom
+  ON project.dam_extents
+  USING gist
+  (geom);
+
+--set backups to include dams_all_geo since Chris has been editing it
+
+--DONE
+
+--production queries to link dams with parcels
+
+--first make dam_prop_link unique so associations can't be added more than once. RUN ONCE
+ALTER TABLE project.dam_prop_link
+  ADD UNIQUE (sgcode, dam_no);
+
+--at least do the first one (the parcel in which the dam point falls) RUN WHENEVER 
+INSERT INTO project.dam_prop_link (sgcode,dam_no)
+SELECT c.* FROM
+	(
+	SELECT DISTINCT p.id AS sgcode,d.dam_no from project.parcels_sgcopy p 
+	JOIN public.dams_all_geo d 
+	ON ST_Within(ST_SetSRID(d.geom,4148),p.geom)
+	WHERE p.id IS NOT NULL
+	) c
+	LEFT JOIN project.dam_prop_link dpl
+	USING (sgcode,dam_no)
+	WHERE dpl.dam_no IS NULL;
+
+--update dam_prop_link with the properties covered by each dam boundary (Chris' manual dam boundaries) RUN WHENEVER
+
+INSERT INTO project.dam_prop_link (sgcode,dam_no)
+SELECT c.* FROM
+	(
+	SELECT DISTINCT p.id AS sgcode,d.dam_no from project.parcels_sgcopy p 
+	JOIN (
+	 SELECT dam_no,geom FROM project.purchase_plans_final
+	 UNION
+	 SELECT dam_no,geom FROM project.purchase_plans_digitised
+	 ) d 
+	ON ST_Intersects(d.geom,p.geom)
+	WHERE p.id IS NOT NULL
+	) c
+	LEFT JOIN project.dam_prop_link dpl
+	USING (sgcode,dam_no)
+	WHERE dpl.dam_no IS NULL and c.dam_no IS NOT NULL;
+
+--update dam extents with the dam number and name of the dam within the extent RUN WHENEVER
+
+UPDATE project.dam_extents de 
+	SET dam_no = d.dam_no,
+		dam_name = d.dam_name
+	FROM public.dams_all_geo d
+	WHERE ST_Contains(de.geom,ST_SetSRID(d.geom,4148));
+	
+
+--update dam boundaries with the dam number of the dam within the boundary RUN NEVER since dam_atlas boundaries dropped in MArch 2015
+UPDATE project.dam_atlas_boundaries de 
+	SET dam_no = d.dam_no
+	FROM public.dams_all_geo d
+	WHERE ST_Contains(de.geom,ST_SetSRID(d.geom,4148));
+
+UPDATE project.purchase_plans_final de 
+	SET dam_no = d.dam_no
+	FROM public.dams_all_geo d
+	WHERE ST_Contains(de.geom,ST_SetSRID(d.geom,4148));
+--no need to run on purchase_plans_digitised since in March 2015, dam_no is fully populated
+--test: SELECT gid from project.purchase_plans_final where dam_no is null;
+
+--report PER DAM on:
+--user dam_prop_link as the master link between dams and properties so ensure it is updated and correct. 
+
+--1.SG data downloaded  yes or no and number of parcels downloaded.
+CREATE OR REPLACE VIEW project.num_parcels_downloaded AS
+SELECT dpl.dam_no,count(*) AS num_parcels_downloaded
+	FROM project.dam_prop_link dpl
+	INNER JOIN 
+	(SELECT DISTINCT directory FROM project.directory_progress WHERE file IS NOT NULL) dp
+	ON dpl.sgcode = dp.directory
+	GROUP BY dpl.dam_no
+	ORDER BY dpl.dam_no;
+	
+GRANT SELECT ON project.num_parcels_downloaded TO editor;
+
+--2.Sgdata captured for how many parcels
+CREATE OR REPLACE VIEW project.sgdata_captured AS
+SELECT dam_no,count(pd.lpi_code) AS sg_data_captured
+	FROM project.parcel_description pd
+	INNER JOIN
+	project.dam_prop_link dpl
+	ON pd.lpi_code = dpl.sgcode
+	INNER JOIN project.progress p
+		USING (lpi_code)
+	WHERE pd.lpi_code IS NOT NULL
+		AND p.capture_status = 'diagram'
+	GROUP BY dpl.dam_no
+	ORDER by dam_no;
+	
+GRANT SELECT ON project.sgdata_captured TO editor;
+
+--3.Number of Complete  parcels completely enclosed in the dam extent polygon that do not have SG data captured for them
+	--( will make sure polygons go outside any parcels that may be important possible for 95% of dams )
+
+--DROP VIEW project.sgdata_not_captured;
+CREATE OR REPLACE VIEW project.sgdata_not_captured AS
+SELECT dam_no,count(pd.lpi_code) AS sgdata_not_captured
+	FROM project.parcel_description pd
+	INNER JOIN
+	(
+	SELECT DISTINCT p.id AS sgcode,d.dam_no from project.parcels_sgcopy p 
+	JOIN (
+	 SELECT dam_no,geom FROM project.purchase_plans_final
+	 UNION
+	 SELECT dam_no,geom FROM project.purchase_plans_digitised
+	 ) d 
+	ON ST_Contains(d.geom,p.geom)
+	WHERE p.id IS NOT NULL
+	) dpl
+	ON pd.lpi_code = dpl.sgcode
+	INNER JOIN project.progress p
+		USING (lpi_code)
+	WHERE pd.lpi_code IS NOT NULL
+		AND p.capture_status = 'not done'
+	GROUP BY dpl.dam_no
+	ORDER by dam_no;
+
+GRANT SELECT ON project.sgdata_not_captured TO editor;
+
+--4.Number of parcels that have ownership info captured
+
+CREATE OR REPLACE VIEW project.ownership_captured AS
+SELECT dam_no,count(pd.lpi_code) AS ownership_captured
+	FROM project.parcel_description pd
+	INNER JOIN
+	project.dam_prop_link dpl
+	ON pd.lpi_code = dpl.sgcode
+	INNER JOIN project.progress p
+		USING (lpi_code)
+	WHERE pd.lpi_code IS NOT NULL
+		AND p.capture_status = 'owner'
+	GROUP BY dpl.dam_no
+	ORDER by dam_no;
+
+GRANT SELECT ON project.ownership_captured TO editor;
+
+--5.Is there a Draft or Final  purchase plan area inside the polygon and if so what is its name and source ( geo referenced tiff, SG diagram or digital data from DWA)
+
+CREATE OR REPLACE VIEW project.purchase_plans AS
+SELECT pp.dam_no 
+	FROM (
+		SELECT dam_no,geom FROM project.purchase_plans_final
+		UNION
+		SELECT dam_no,geom FROM project.purchase_plans_digitised
+		) pp
+	JOIN project.purchase_plans_digitised dab
+	ON ST_Intersects(dab.geom,pp.geom);
+
+GRANT SELECT ON project.purchase_plans TO editor;
+
+--6. which dam boundaries (or purchase plans) intersect unalienated state land (incl river beds)
+
+--DROP VIEW project.unalienated_land;
+CREATE OR REPLACE VIEW project.unalienated_land AS
+SELECT DISTINCT dam_no FROM
+	(SELECT dam_no, geom FROM project.purchase_plans_final 
+		UNION
+		SELECT dam_no,geom FROM project.purchase_plans_digitised) db
+	JOIN
+	(SELECT * FROM sg.unalienated_state_land
+		UNION
+		SELECT * FROM sg.unalienated_river_bed) usl
+	ON ST_Intersects(usl.wkb_geometry,db.geom);
+
+GRANT SELECT ON project.unalienated_land TO editor;
+
+/*7.
+Another problem is that sometime the SG downloader downloaded diagrams that are defiantly not necessary to get ownership information  for
+
+Can I pick on these parcels in some way and edit something in form that says not necessary for ownership info and colour changes to show that we sg information but we will not be getting ownership info for this
+*/
+--clear not needed status for parcels linked to dams RUN WHENEVER 
+UPDATE project.parcel_description
+SET registered_owner = NULL
+WHERE id IN
+	(SELECT DISTINCT pd.id FROM project.parcel_description pd 
+	INNER JOIN
+	project.dam_prop_link dpl 
+	ON dpl.sgcode = pd.lpi_code) 
+	AND
+	registered_owner = 'do not need';
+
+--set not needed status for all parcels not linked to dams RUN WHENEVER
+UPDATE project.parcel_description 
+SET registered_owner = 'do not need'
+WHERE id NOT IN
+	(SELECT DISTINCT pd.id FROM project.parcel_description pd 
+	INNER JOIN
+	project.dam_prop_link dpl 
+	ON dpl.sgcode = pd.lpi_code)
+	AND
+	registered_owner IS NULL;
+	
+
+ --update SG diagram downloader to download compilations
+ --https://github.com/kartoza/sg-diagram-downloader/issues/30
+
+ --report for Simba on parcels supposedly captured at dam R102/05
+
+ --set up reporting Composer template to use dam extents
+
+ --adjusting units FK
+alter table project.parcel_description drop constraint parcel_description_area_unit_fkey;
+
+ ALTER TABLE project.parcel_description
+  ADD CONSTRAINT parcel_description_area_unit_fkey FOREIGN KEY (unit) REFERENCES project.units (unit)
+   ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ --report
+
+ copy (select dam_no,count(*) as number_of_linked_properties from project.dam_prop_link group by dam_no order by dam_no) to '/tmp/properties_per_dam.csv' with (format csv, header);
+ 
+ /data/dwa/properties_per_dam_19Feb2015.csv
+
+ --helping David fill in gaps
+
+SELECT fp.id, fp.geom FROM sg_old.farm_portion fp INNER JOIN project.purchase_plans_digitised pp ON ST_Intersects(pp.geom,fp.geom)
+
+select gid,st_makevalid(geom) from project.purchase_plans_digitised where not st_isvalid(geom);
+select gid,st_makevalid(geom) from project.purchase_plans_digitised where not st_isvalid(geom);
+
+select gid,st_makevalid(geom) from project.purchase_plans_digitised where not st_issimple(geom);
+
+--reprocessing spreadsheets April 2015 to bring in records captured in them since initial database load a year ago. 
+
+--Gavin checked and combined spreadsheets for each dam. For Gariep had to load four spreadsheets into db and combine in db since four different people had captured different records in the whole dam parcel list. 
+
+--loaded spreadsheets into gavinwork schema using QGIS DB Manager. 
+
+create table gavinwork.gariep as 
+	select * from gavinwork.gariep_grant
+	where captured_by ilike '%grant%';
+
+insert into gavinwork.gariep
+	select * from gavinwork.gariep_sam
+	where captured_by ilike '%sam%';
+
+insert into gavinwork.gariep
+	select * from gavinwork.gariep_simba
+	where captured_by ilike '%simba%';
+
+insert into gavinwork.gariep
+	select * from gavinwork.gariep_sine
+	where captured_by ilike '%sine%';
+
+--new add in all the parcels that weren't 'captured_by' anyone but that do exist. 
+
+insert into gavinwork.gariep
+	select gg.* from gavinwork.gariep_grant gg
+	LEFT JOIN gavinwork.gariep g 
+	USING (lpi_code)
+	WHERE g.lpi_code is null;
+
+select count(*) from gavinwork.gariep;
+
+-- now add gariep to parcels_aggregate, making to not add any duplicates. 
+
+insert into gavinwork.parcels_aggregate (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,qds,right_type,right1,right2,right3,scheme_name,scheme_ref_num,kode,captured_by)
+	select g.sg_off_name,g.sg_off_code,g.mjrcode,g.mnrcode,g.farm_no,g.portion,g.prev_parent_portion,g.remainder,g.sg_town_code,g.lpi_code,g.registered_owner,g.province,g.mag_district,g.reg_division,g.deed_office,g.diagram_no,g.parent,g.deed_no,g.compilation,g.compilation_new,g.town,g.farm_name,g.area,g.qds,g.right_type,g.right1,g.right2,g.right3,g.scheme_name,g.scheme_ref_num,g.kode,g.captured_by
+	from gavinwork.gariep g
+	LEFT JOIN gavinwork.parcels_aggregate pa 
+	USING (lpi_code)
+	WHERE pa.lpi_code is null;
+
+--start loading records from parcels_aggregate into parcel_description
+
+update parcels_aggregate set diagram_no = null where diagram_no ilike '%clear%';
+
+--then back to line 187
+
+--modified from line 210 to only add records for lpi codes that are not present AND for farm geometries that ARE present
+
+INSERT INTO project.parcel_description (sg_off_name,sg_off_code,mjrcode,mnrcode,farm_no,portion,prev_parent_portion,remainder,sg_town_code,lpi_code,registered_owner,province,mag_district,reg_division,deed_office,diagram_no,parent,deed_no,compilation,compilation_new,town,farm_name,area,area_unit,scheme_name,scheme_ref_num,kode,captured_by)
+SELECT pa.sg_off_name,pa.sg_off_code,pa.mjrcode,pa.mnrcode::integer,pa.farm_no::integer,pa.portion::integer,pa.prev_parent_portion::integer,pa.remainder,pa.sg_town_code,pa.lpi_code,pa.registered_owner,pa.province,upper(pa.mag_district),pa.reg_division,pa.deed_office,pa.diagram_no,pa.parent,pa.deed_no,pa.compilation,pa.compilation_new,pa.town,pa.farm_name,pa.area::double precision,pa.area_unit,pa.scheme_name,pa.scheme_ref_num,pa.kode::integer,pa.captured_by 
+	FROM parcels_aggregate pa
+	JOIN parcels_sgcopy ps on pa.lpi_code=ps.id
+	LEFT JOIN parcel_description pd USING (lpi_code)
+		WHERE pd.lpi_code IS NULL
+	; 
+
+--drop table parcel_aggregate_dupl_diagram_no;
+create table parcel_aggregate_dupl_diagram_no AS SELECT * from parcels_aggregate where lpi_code in (select pa.lpi_code from parcel_description pd join parcels_aggregate pa using (province,diagram_no));
+delete from parcels_aggregate where lpi_code in (select pa.lpi_code from parcel_description pd join parcels_aggregate pa using (province,diagram_no));
+--insert into parcels_aggregate  select * from parcel_aggregate_dupl_diagram_no
+
+
+update parcels_aggregate set portion = null where portion = 'Admin1:';
+
+alter table parcel_description add column to_replace boolean;
+
+--records in parcel_aggregate that are in parcels_sgcopy AND not in previous parcels sg_copy AND not captured
+update parcel_description set to_replace = FALSE;
+update parcel_description set to_replace = TRUE where lpi_code IN (select pa.lpi_code from parcels_aggregate pa  
+join parcels_sgcopy ps on pa.lpi_code=ps.id
+left join parcels_aggregate_v1 pav1 using (lpi_code)
+WHERE pav1.lpi_code is null)
+AND diagram_no is null;
+
+
+
+CREATE TABLE parcel_description_swaps AS 
+SELECT * FROM parcel_description where to_replace = 't';
+
+ALTER TABLE project.dam_prop_link
+  DROP CONSTRAINT dam_prop_link_sgcode_fkey;
+
+/*ALTER TABLE project.dam_prop_link
+  ADD CONSTRAINT dam_prop_link_sgcode_fkey FOREIGN KEY (sgcode) REFERENCES project.parcel_description (lpi_code) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+  delete from dam_prop_link where sgcode = 'C08500000000037800022';
+
+  ALTER TABLE project.dam_prop_link
+  ADD CONSTRAINT dam_prop_link_dam_no_fkey FOREIGN KEY (dam_no) REFERENCES dams_all_geo (dam_no) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+*/
+
+ALTER TABLE project.parcel_description
+  DROP CONSTRAINT parcel_description_mnrcode_fkey;
+
+ALTER TABLE project.parcel_description
+  DROP CONSTRAINT parcel_description_mjrcode_fkey;
+
+ALTER TABLE project.parcel_description
+  DROP CONSTRAINT parcel_description_sg_off_code_fkey;
+
+DELETE FROM parcel_description where to_replace = 't';
+
+--every parcel in parcels_sg_copy has a matching record in parcel_description. (check line 887)
+--so, either drop parcels that match new ones or flag them and ask David to confirm merge
+
+update parcels_aggregate set mnrcode=null where mnrcode like '%MID%';
+update parcels_aggregate set farm_no=null where farm_no like '%MID%';
+
+create table project.parcel_description
+--20 april 2015 TO DO
+--update RIGHTS! Modify from line 455
+--run line 1114 after fixing geometries
+--do joins and edit to fix these fields, then re-instititute fkeys for them to lookup tables: mnrcode, mjrcode, sg_off
+--edit right_prop_link to be able to add this constraint:
+ALTER TABLE project.right_prop_link
+  ADD UNIQUE (sgcode, right_id);
+
+
+	
+ 
