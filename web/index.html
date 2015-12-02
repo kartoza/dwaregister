@@ -7,20 +7,20 @@
 		<link rel="stylesheet" href="css/MarkerCluster.css" />
 		<link rel="stylesheet" href="css/MarkerCluster.Default.css" />
 		<link rel="stylesheet" type="text/css" href="css/own_style.css">
-	        <link rel="stylesheet" href="css/leaflet-search.css" />	
-        	<link rel="stylesheet" href="css/leaflet.print.css"/>
-                <link rel="stylesheet" href="css/leaflet.wmslegend.css"/>
-                <link rel="stylesheet" href="css/leaflet.defaultextent.css" />
+        <link rel="stylesheet" href="css/leaflet-search.css" />	
+    	<link rel="stylesheet" href="css/leaflet.print.css"/>
+        <link rel="stylesheet" href="css/leaflet.wmslegend.css"/>
+        <link rel="stylesheet" href="css/leaflet.defaultextent.css" />
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 		<script src="js/leaflet-hash.js"></script>
 		<script src="js/Autolinker.min.js"></script>
 		<script src="js/leaflet.markercluster.js"></script>
-       	        <script src="js/leaflet-search.js"></script>
-       		<script src="js/leaflet.print.js"></script>
-                <script src="js/leaflet.wmslegend.js"></script>
-                <script src="js/leaflet.defaultextent.js"></script>
-    		<script src="http://kirchhoffgistomcat.mooo.com:8080/geoserver/pdf/info.json?var=printConfig"></script>
+        <script src="js/leaflet-search.js"></script>
+   		<script src="js/leaflet.print.js"></script>
+        <script src="js/leaflet.wmslegend.js"></script>
+        <script src="js/leaflet.defaultextent.js"></script>
+		<script src="http://kirchhoffgistomcat.mooo.com:8080/geoserver/pdf/info.json?var=printConfig"></script>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	</head>
 	<body>
@@ -65,36 +65,54 @@
 			    SrsName : 'EPSG:4148'
 			};
 
-			var parameters = L.Util.extend(defaultParameters);
-			var URL = rootUrl + L.Util.getParamString(parameters);
+		var parameters = L.Util.extend(defaultParameters);
+		var URL = rootUrl + L.Util.getParamString(parameters);
 
-			var WFSLayer = null;
-			var ajax = $.ajax({
-			    url : URL,
-			    dataType : 'jsonp',
-			    jsonpCallback : 'getJson',
-			    success : function (response) {
-			        WFSLayer = L.geoJson(response, {
-			            style: function (feature) {
-			                return {
-			                	radius: 2.0,
-			                    stroke: false,
-			                    fillColor: 'FFFFFF',
-			                    fillOpacity: 0
-			                };
-			            },
-			            onEachFeature: function (feature, layer) {
-			                popupOptions = {maxWidth: 150};
-			                layer.bindPopup('<table><tr><th scope="row">Dam Number</th><td>' + Autolinker.link(String(feature.properties['dam_no'])) + '</td></tr><tr><th scope="row">Dam Name</th><td>' + Autolinker.link(String(feature.properties['dam_name'])) +  '</td></tr><tr><th scope="row">Province</th><td>' + Autolinker.link(String(feature.properties['province']))  + '</td></tr></table>');
-			            }
-			        }).addTo(map);
-			    }
-			});
+		var WFSLayer = null;
+		var ajax = $.ajax({
+		    url : URL,
+		    dataType : 'jsonp',
+		    jsonpCallback : 'getJson',
+		    success : function (response) {
+		        WFSLayer = L.geoJson(response, {
+		            style: function (feature) {
+		                return {
+		                	radius: 2.0,
+		                    stroke: false,
+		                    fillColor: 'FFFFFF',
+		                    fillOpacity: 0
+		                };
+		            },
+		            onEachFeature: function (feature, layer) {
+		                popupOptions = {maxWidth: 150};
+		                layer.bindPopup('<table><tr><th scope="row">Dam Number</th><td>' + Autolinker.link(String(feature.properties['dam_no'])) + '</td></tr><tr><th scope="row">Dam Name</th><td>' + Autolinker.link(String(feature.properties['dam_name'])) +  '</td></tr><tr><th scope="row">Province</th><td>' + Autolinker.link(String(feature.properties['province']))  + '</td></tr></table>');
+		            }
+		        }).addTo(map);
+		    }
+		});
 
-			 map.on('zoomend ', function(e) {
-         	if ( map.getZoom() > 9 ){ map.removeLayer( WFSLayer )}
-         		else if ( map.getZoom() <= 9 ){ map.addLayer( WFSLayer )}
-    		});
+		 map.on('zoomend ', function(e) {
+	 	if ( map.getZoom() > 9 ){ map.removeLayer( WFSLayer )}
+	 		else if ( map.getZoom() <= 9 ){ map.addLayer( WFSLayer )}
+		});
+
+
+		var geojsonLayer = new L.GeoJSON();
+
+	    function loadGeoJson(data) {
+	        console.log(data);
+	        geojsonLayer.addData(data);
+	    }
+
+	    
+	    
+	    $.ajax({
+	        url: URL,
+	        dataType: 'jsonp',
+	        jsonpCallback : 'getJson',
+	        contentType: 'application/json',
+	        success: loadGeoJson
+	    });
 
 		
 		function pop_Dam(feature, layer) {					
@@ -119,37 +137,42 @@
 		cluster_groupDamJSON.addLayer(exp_DamJSON);
 		//add comment sign to hide this layer on the map in the initial view.
 		//cluster_groupDamJSON.addTo(map);
-		var overlay_Dams = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
+		var dwa_Dams = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
 			layers: 'Dams',
 			format: 'image/png',
 			transparent: true,
 			continuousWorld : true,
 		}).addTo(map);
-		var overlay_Schemes = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
+
+		map.on('zoomend ', function(e) {
+	     	if ( map.getZoom() < 10 ){ map.removeLayer( dwa_dams )}
+	     		else if ( map.getZoom() >= 10 ){ map.addLayer( dwa_dams )}
+		});
+		var dwa_Schemes = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
 			layers: 'dwaregister:Schemes',
 			format: 'image/png',
 			transparent: true,
 			continuousWorld : true,
 		}).addTo(map);
-		var overlay_Ownership = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
+		var dwa_Ownership = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
 			layers: 'dwaregister:ownership',
 			format: 'image/png',
 			transparent: true,
 			continuousWorld : true,
 		}).addTo(map);
-		var overlay_Progressstatus = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
+		var dwa_Progressstatus = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
 			layers: 'dwaregister:progress_status',
 			format: 'image/png',
 			transparent: true,
 			continuousWorld : true,
 		}).addTo(map);
-		var overlay_Subdivision = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
+		var dwa_Subdivision = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
 			layers: 'dwaregister:subdivision',
 			format: 'image/png',
 			transparent: true,
 			continuousWorld : true,
 		}).addTo(map);
-		var overlay_Unalienatedlandcleaned = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
+		var dwa_Unalienatedlandcleaned = L.tileLayer.wms('http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms', {
 			layers: 'dwaregister:unalienated_land_cleaned',
 			format: 'image/png',
 			transparent: true,
@@ -161,66 +184,66 @@
 
         
 		var searchControl = new L.Control.Search({layer: exp_DamJSON , propertyName: 'dam_name', circleLocation:false});
-	searchControl.on('search_locationfound', function(e) {
-		
-		e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
-		if(e.layer._popup)
-			e.layer.openPopup();
-	}).on('search_collapsed', function(e) {
-		featuresLayer.eachLayer(function(layer) {	//restore feature color
-			featuresLayer.resetStyle(layer);
-		});	
-	});
-	searchControl.addTo(map);
+		searchControl.on('search_locationfound', function(e) {
+			
+			e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
+			if(e.layer._popup)
+				e.layer.openPopup();
+		}).on('search_collapsed', function(e) {
+			featuresLayer.eachLayer(function(layer) {	//restore feature color
+				featuresLayer.resetStyle(layer);
+			});	
+		});
+		searchControl.addTo(map);
 
-	printProvider = L.print.provider({
-          capabilities: printConfig,
-          method: 'POST',
-		  dpi: 150,
-		  outputFormat: 'pdf',
-		  customParams: {
-			  mapTitle: 'Kirchhoff'
-		  }
-	  });
+		printProvider = L.print.provider({
+	          capabilities: printConfig,
+	          method: 'POST',
+			  dpi: 150,
+			  outputFormat: 'pdf',
+			  customParams: {
+				  mapTitle: 'Kirchhoff'
+			  }
+		  });
 
-	printControl = L.control.print({
-		  provider: printProvider
-	  });
+		printControl = L.control.print({
+			  provider: printProvider
+		  });
 
-	  map.addControl(printControl);
-
-
-	map.addEventListener ('click',onMapClick);
- 	popup = new L.Popup ({maxWidth:400});
-    function onMapClick(e) {					
-		var latlngstr = '(' + e.latlng.lat.toFixed(3) + ',' + e.latlng.lng.toFixed(3) + ')';
-        var BBOX = map.getBounds()._southWest.lng+ ","+map.getBounds()._southWest.lat+","+map.getBounds()._northEast.lng+","+map.getBounds()._northEast.lat;
-        var WIDTH = map.getSize().x;
-        var HEIGHT = map.getSize().y;
-        var X = map.layerPointToContainerPoint(e.layerPoint).x;
-        var Y = map.layerPointToContainerPoint(e.layerPoint).y;
-        var URL = 'http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms?Service=wms&version=1.1.1&request=getfeatureinfo&layers=Dams,dwaregister:ownership,dwaregister:progress_status,dwaregister:subdivision,dwaregister:unalienated_land_cleaned&QUERY_LAYERS=Dams,dwaregister:ownership,dwaregister:progress_status,dwaregister:subdivision,dwaregister:unalienated_land_cleaned&styles=&BBOX='+BBOX+'&feature_count=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&format=images%2Fpng&info_format=text%2Fhtml&srs=EPSG%3A4326&X='+X+'&Y='+Y+' ';
-        popup.setLatLng(e.latlng);
-        popup.setContent("<iframe src='"+URL+"' width='300' height='300' frameborder='0'><p>Your browser does not support iframes.</p></iframe>");
-        map.openPopup(popup);
-		}
+		  map.addControl(printControl);
 
 
+		map.addEventListener ('click',onMapClick);
+	 	popup = new L.Popup ({maxWidth:400});
+	    function onMapClick(e) {					
+			var latlngstr = '(' + e.latlng.lat.toFixed(3) + ',' + e.latlng.lng.toFixed(3) + ')';
+	        var BBOX = map.getBounds()._southWest.lng+ ","+map.getBounds()._southWest.lat+","+map.getBounds()._northEast.lng+","+map.getBounds()._northEast.lat;
+	        var WIDTH = map.getSize().x;
+	        var HEIGHT = map.getSize().y;
+	        var X = map.layerPointToContainerPoint(e.layerPoint).x;
+	        var Y = map.layerPointToContainerPoint(e.layerPoint).y;
+	        var URL = 'http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms?Service=wms&version=1.1.1&request=getfeatureinfo&layers=Dams,dwaregister:ownership,dwaregister:progress_status,dwaregister:subdivision,dwaregister:unalienated_land_cleaned&QUERY_LAYERS=Dams,dwaregister:ownership,dwaregister:progress_status,dwaregister:subdivision,dwaregister:unalienated_land_cleaned&styles=&BBOX='+BBOX+'&feature_count=5&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&format=images%2Fpng&info_format=text%2Fhtml&srs=EPSG%3A4326&X='+X+'&Y='+Y+' ';
+	        popup.setLatLng(e.latlng);
+	        popup.setContent("<iframe src='"+URL+"' width='300' height='300' frameborder='0'><p>Your browser does not support iframes.</p></iframe>");
+	        map.openPopup(popup);
+			}
 
-	var baseMaps = {
-		'OSM Standard': basemap_0,
-		'MapQuestOpen OSM': basemap_1,
-		'Esri WorldImagery': basemap_2};
-		L.control.layers(baseMaps,{"Unalienatedlandcleaned": overlay_Unalienatedlandcleaned,"Subdivision": overlay_Subdivision,"Progressstatus": overlay_Progressstatus,"Ownership": overlay_Ownership,"Schemes": overlay_Schemes,"Dams": overlay_Dams},{collapsed:true}).addTo(map);
-		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
-     
-	var legend1 = L.control({position: 'bottomright'});
-		legend1.onAdd = function(map) {
-			var div = L.DomUtil.create('div', 'info legend');
-			div.innerHTML += "<iframe src='"+ "http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=40&HEIGHT=10&LAYER=dwaregister:ownership&LEGEND_OPTIONS=forceLabels:on;forceTITLES:off" +"' width='300' height='200' frameborder='0'></iframe>"
-			return div;
-		};
-		
+
+
+		var baseMaps = {
+			'OSM Standard': basemap_0,
+			'MapQuestOpen OSM': basemap_1,
+			'Esri WorldImagery': basemap_2};
+			L.control.layers(baseMaps,{"Unalienatedlandcleaned": dwa_Unalienatedlandcleaned,"Subdivision": dwa_Subdivision,"Progressstatus": dwa_Progressstatus,"Ownership": dwa_Ownership,"Schemes": dwa_Schemes,"Dams": dwa_Dams},{collapsed:true}).addTo(map);
+			L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
+	     
+		var legend1 = L.control({position: 'bottomright'});
+			legend1.onAdd = function(map) {
+				var div = L.DomUtil.create('div', 'info legend');
+				div.innerHTML += "<iframe src='"+ "http://kirchhoffgistomcat.mooo.com:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=40&HEIGHT=10&LAYER=dwaregister:ownership&LEGEND_OPTIONS=forceLabels:on;forceTITLES:off" +"' width='300' height='200' frameborder='0'></iframe>"
+				return div;
+			};
+			
 		//legend1.addTo(map);
 		
 		
@@ -266,32 +289,32 @@
 		
 		// add layers and control
 	// Add and remove layers
-map.on('overlayadd', function (eventLayer) {
-    // Switch to the Permafrost legend...
-    if (eventLayer.name === 'Dams') {
-        //map.removeControl(legend2);     
-        legend3.addTo(map);
-    }
-    if (eventLayer.name === 'Ownership') {
-        map.removeControl(legend3);
-        legend1.addTo(map);
-    }
-    if (eventLayer.name === 'Progress Status') {
-        map.removeControl(legend1);
-        legend4.addTo(map);
-    }
-    if (eventLayer.name === 'Subdivision') {
-        map.removeControl(legend4);
-        legend2.addTo(map);
-    }
-    if (eventLayer.name === 'Unalienated State Land') {
-        map.removeControl(legend2);
-        legend5.addTo(map);
-    }
-    else
-         map.removeControl(legend5);
-   
-});
+	map.on('overlayadd', function (eventLayer) {
+	    // Switch to the Permafrost legend...
+	    if (eventLayer.name === 'Dams') {
+	        //map.removeControl(legend2);     
+	        legend3.addTo(map);
+	    }
+	    if (eventLayer.name === 'Ownership') {
+	        map.removeControl(legend3);
+	        legend1.addTo(map);
+	    }
+	    if (eventLayer.name === 'Progress Status') {
+	        map.removeControl(legend1);
+	        legend4.addTo(map);
+	    }
+	    if (eventLayer.name === 'Subdivision') {
+	        map.removeControl(legend4);
+	        legend2.addTo(map);
+	    }
+	    if (eventLayer.name === 'Unalienated State Land') {
+	        map.removeControl(legend2);
+	        legend5.addTo(map);
+	    }
+	    else
+	         map.removeControl(legend5);
+	   
+	});
 
     
 	</script>
