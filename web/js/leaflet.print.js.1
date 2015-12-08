@@ -1,0 +1,516 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=1020">
+    
+    
+    <title>Leaflet.print/leaflet.print.js at master · aratcliffe/Leaflet.print · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="aratcliffe/Leaflet.print" name="twitter:title" /><meta content="Leaflet.print - Plugin for printing a Leaflet map using either Mapfish or the GeoServer print module." name="twitter:description" /><meta content="https://avatars1.githubusercontent.com/u/491126?v=3&amp;s=400" name="twitter:image:src" />
+      <meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="https://avatars1.githubusercontent.com/u/491126?v=3&amp;s=400" property="og:image" /><meta content="aratcliffe/Leaflet.print" property="og:title" /><meta content="https://github.com/aratcliffe/Leaflet.print" property="og:url" /><meta content="Leaflet.print - Plugin for printing a Leaflet map using either Mapfish or the GeoServer print module." property="og:description" />
+      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    
+    <meta name="pjax-timeout" content="1000">
+    
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_source" data-pjax-transient>
+
+    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="A90023DE:4076:36FEC0:56618FBC" name="octolytics-dimension-request_id" />
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
+<meta content="Rails, view, blob#show" data-pjax-transient="true" name="analytics-event" />
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+    <meta class="js-ga-set" name="dimension4" content="New repo nav">
+
+
+
+
+        <meta name="hostname" content="github.com">
+    <meta name="user-login" content="">
+
+        <meta name="expected-hostname" content="github.com">
+
+      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#4078c0">
+      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+    <meta content="d1f9d4f91dc0cd0d69ff524b7c81f175ca1cfff3" name="form-nonce" />
+
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-b717b344d9d206cc1a342c1cd346e8064871a02e71ce7c7301d1b02fe4912781.css" media="all" rel="stylesheet" />
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github2-a2501013b84e6062c9171a31d4fdb2225390126ddc5d8453188bc41b2a82ce18.css" media="all" rel="stylesheet" />
+    
+    
+    
+
+
+    <meta http-equiv="x-pjax-version" content="17858b84514a1ff84378421120bb06e5">
+
+      
+  <meta name="description" content="Leaflet.print - Plugin for printing a Leaflet map using either Mapfish or the GeoServer print module.">
+  <meta name="go-import" content="github.com/aratcliffe/Leaflet.print git https://github.com/aratcliffe/Leaflet.print.git">
+
+  <meta content="491126" name="octolytics-dimension-user_id" /><meta content="aratcliffe" name="octolytics-dimension-user_login" /><meta content="11756595" name="octolytics-dimension-repository_id" /><meta content="aratcliffe/Leaflet.print" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="11756595" name="octolytics-dimension-repository_network_root_id" /><meta content="aratcliffe/Leaflet.print" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/aratcliffe/Leaflet.print/commits/master.atom" rel="alternate" title="Recent Commits to Leaflet.print:master" type="application/atom+xml">
+
+  </head>
+
+
+  <body class="logged_out   env-production  vis-public page-blob">
+    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+
+    
+    
+    
+
+
+
+      
+      <div class="header header-logged-out" role="banner">
+  <div class="container clearfix">
+
+    <a class="header-logo-wordmark" href="https://github.com/" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <span class="mega-octicon octicon-logo-github"></span>
+    </a>
+
+    <div class="header-actions" role="navigation">
+        <a class="btn btn-primary" href="/join" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+      <a class="btn" href="/login?return_to=%2Faratcliffe%2FLeaflet.print%2Fblob%2Fmaster%2Fdist%2Fleaflet.print.js" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+    </div>
+
+    <div class="site-search repo-scope js-site-search" role="search">
+      <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="/aratcliffe/Leaflet.print/search" class="js-site-search-form" data-global-search-url="/search" data-repo-search-url="/aratcliffe/Leaflet.print/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+  <label class="js-chromeless-input-container form-control">
+    <div class="scope-badge">This repository</div>
+    <input type="text"
+      class="js-site-search-focus js-site-search-field is-clearable chromeless-input"
+      data-hotkey="s"
+      name="q"
+      placeholder="Search"
+      aria-label="Search this repository"
+      data-global-scope-placeholder="Search GitHub"
+      data-repo-scope-placeholder="Search"
+      tabindex="1"
+      autocapitalize="off">
+  </label>
+</form>
+    </div>
+
+      <ul class="header-nav left" role="navigation">
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/explore" data-ga-click="(Logged out) Header, go to explore, text:explore">Explore</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/features" data-ga-click="(Logged out) Header, go to features, text:features">Features</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://enterprise.github.com/" data-ga-click="(Logged out) Header, go to enterprise, text:enterprise">Enterprise</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/pricing" data-ga-click="(Logged out) Header, go to pricing, text:pricing">Pricing</a>
+          </li>
+      </ul>
+
+  </div>
+</div>
+
+
+
+    <div id="start-of-content" class="accessibility-aid"></div>
+
+    <div id="js-flash-container">
+</div>
+
+
+    <div role="main" class="main-content">
+        <div itemscope itemtype="http://schema.org/WebPage">
+    <div id="js-repo-pjax-container" class="context-loader-container js-repo-nav-next" data-pjax-container>
+      
+<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+  <div class="container repohead-details-container">
+
+    
+
+<ul class="pagehead-actions">
+
+  <li>
+      <a href="/login?return_to=%2Faratcliffe%2FLeaflet.print"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <span class="octicon octicon-eye"></span>
+    Watch
+  </a>
+  <a class="social-count" href="/aratcliffe/Leaflet.print/watchers">
+    8
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Faratcliffe%2FLeaflet.print"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <span class="octicon octicon-star"></span>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/aratcliffe/Leaflet.print/stargazers">
+      48
+    </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Faratcliffe%2FLeaflet.print"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <span class="octicon octicon-repo-forked"></span>
+        Fork
+      </a>
+
+    <a href="/aratcliffe/Leaflet.print/network" class="social-count">
+      14
+    </a>
+  </li>
+</ul>
+
+    <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public ">
+  <span class="octicon octicon-repo"></span>
+  <span class="author"><a href="/aratcliffe" class="url fn" itemprop="url" rel="author"><span itemprop="title">aratcliffe</span></a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong><a href="/aratcliffe/Leaflet.print" data-pjax="#js-repo-pjax-container">Leaflet.print</a></strong>
+
+  <span class="page-context-loader">
+    <img alt="" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" />
+  </span>
+
+</h1>
+
+  </div>
+  <div class="container">
+    
+<nav class="reponav js-repo-nav js-sidenav-container-pjax js-octicon-loaders"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container"
+     data-issue-count-url="/aratcliffe/Leaflet.print/issues/counts">
+
+  <a href="/aratcliffe/Leaflet.print" aria-label="Code" aria-selected="true" class="js-selected-navigation-item selected reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /aratcliffe/Leaflet.print">
+    <span class="octicon octicon-code"></span>
+    Code
+</a>
+    <a href="/aratcliffe/Leaflet.print/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /aratcliffe/Leaflet.print/issues">
+      <span class="octicon octicon-issue-opened"></span>
+      Issues
+      <span class="counter">2</span>
+
+</a>
+  <a href="/aratcliffe/Leaflet.print/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /aratcliffe/Leaflet.print/pulls">
+    <span class="octicon octicon-git-pull-request"></span>
+    Pull requests
+    <span class="counter">0</span>
+
+</a>
+
+  <a href="/aratcliffe/Leaflet.print/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /aratcliffe/Leaflet.print/pulse">
+    <span class="octicon octicon-pulse"></span>
+    Pulse
+</a>
+  <a href="/aratcliffe/Leaflet.print/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /aratcliffe/Leaflet.print/graphs">
+    <span class="octicon octicon-graph"></span>
+    Graphs
+</a>
+
+</nav>
+
+  </div>
+</div>
+
+<div class="container repo-container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+
+<a href="/aratcliffe/Leaflet.print/blob/60158774e43b8d67379a6a820640995ff475c988/dist/leaflet.print.js" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
+
+<!-- blob contrib key: blob_contributors:v21:1b9f4109bc67f155fb775b8a8fa0d0c8 -->
+
+  <div class="file-navigation js-zeroclipboard-container">
+    
+<div class="select-menu js-menu-container js-select-menu left">
+  <button class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
+    title="master"
+    type="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
+    <i>Branch:</i>
+    <span class="js-select-button css-truncate-target">master</span>
+  </button>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <span class="octicon octicon-x js-menu-close" role="button" aria-label="Close"></span>
+        <span class="select-menu-title">Switch branches/tags</span>
+      </div>
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab" role="tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab" role="tab">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/aratcliffe/Leaflet.print/blob/gh-pages/dist/leaflet.print.js"
+               data-name="gh-pages"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <span class="select-menu-item-text css-truncate-target" title="gh-pages">
+                gh-pages
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open selected"
+               href="/aratcliffe/Leaflet.print/blob/master/dist/leaflet.print.js"
+               data-name="master"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <span class="select-menu-item-text css-truncate-target" title="master">
+                master
+              </span>
+            </a>
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div class="btn-group right">
+      <a href="/aratcliffe/Leaflet.print/find/master"
+            class="js-show-file-finder btn btn-sm"
+            data-pjax
+            data-hotkey="t">
+        Find file
+      </a>
+      <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button">Copy path</button>
+    </div>
+    <div class="breadcrumb js-zeroclipboard-target">
+      <span class="repo-root js-repo-root"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/aratcliffe/Leaflet.print" class="" data-branch="master" data-pjax="true" itemscope="url"><span itemprop="title">Leaflet.print</span></a></span></span><span class="separator">/</span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/aratcliffe/Leaflet.print/tree/master/dist" class="" data-branch="master" data-pjax="true" itemscope="url"><span itemprop="title">dist</span></a></span><span class="separator">/</span><strong class="final-path">leaflet.print.js</strong>
+    </div>
+  </div>
+
+
+  <div class="commit-tease">
+      <span class="right">
+        <a class="commit-tease-sha" href="/aratcliffe/Leaflet.print/commit/60158774e43b8d67379a6a820640995ff475c988" data-pjax>
+          6015877
+        </a>
+        <time datetime="2015-11-22T21:59:07Z" is="relative-time">Nov 23, 2015</time>
+      </span>
+      <div>
+        <img alt="@aratcliffe" class="avatar" height="20" src="https://avatars3.githubusercontent.com/u/491126?v=3&amp;s=40" width="20" />
+        <a href="/aratcliffe" class="user-mention" rel="author">aratcliffe</a>
+          <a href="/aratcliffe/Leaflet.print/commit/60158774e43b8d67379a6a820640995ff475c988" class="message" data-pjax="true" title="Update dist files">Update dist files</a>
+      </div>
+
+    <div class="commit-tease-contributors">
+      <a class="muted-link contributors-toggle" href="#blob_contributors_box" rel="facebox">
+        <strong>2</strong>
+         contributors
+      </a>
+          <a class="avatar-link tooltipped tooltipped-s" aria-label="aratcliffe" href="/aratcliffe/Leaflet.print/commits/master/dist/leaflet.print.js?author=aratcliffe"><img alt="@aratcliffe" class="avatar" height="20" src="https://avatars3.githubusercontent.com/u/491126?v=3&amp;s=40" width="20" /> </a>
+    <a class="avatar-link tooltipped tooltipped-s" aria-label="stuporglue" href="/aratcliffe/Leaflet.print/commits/master/dist/leaflet.print.js?author=stuporglue"><img alt="@stuporglue" class="avatar" height="20" src="https://avatars1.githubusercontent.com/u/16576?v=3&amp;s=40" width="20" /> </a>
+
+
+    </div>
+
+    <div id="blob_contributors_box" style="display:none">
+      <h2 class="facebox-header" data-facebox-id="facebox-header">Users who have contributed to this file</h2>
+      <ul class="facebox-user-list" data-facebox-id="facebox-description">
+          <li class="facebox-user-list-item">
+            <img alt="@aratcliffe" height="24" src="https://avatars1.githubusercontent.com/u/491126?v=3&amp;s=48" width="24" />
+            <a href="/aratcliffe">aratcliffe</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="@stuporglue" height="24" src="https://avatars3.githubusercontent.com/u/16576?v=3&amp;s=48" width="24" />
+            <a href="/stuporglue">stuporglue</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+
+<div class="file">
+  <div class="file-header">
+  <div class="file-actions">
+
+    <div class="btn-group">
+      <a href="/aratcliffe/Leaflet.print/raw/master/dist/leaflet.print.js" class="btn btn-sm " id="raw-url">Raw</a>
+        <a href="/aratcliffe/Leaflet.print/blame/master/dist/leaflet.print.js" class="btn btn-sm js-update-url-with-hash">Blame</a>
+      <a href="/aratcliffe/Leaflet.print/commits/master/dist/leaflet.print.js" class="btn btn-sm " rel="nofollow">History</a>
+    </div>
+
+
+        <button type="button" class="octicon-btn disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <span class="octicon octicon-pencil"></span>
+        </button>
+        <button type="button" class="octicon-btn octicon-btn-danger disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <span class="octicon octicon-trashcan"></span>
+        </button>
+  </div>
+
+  <div class="file-info">
+      5 lines (5 sloc)
+      <span class="file-info-divider"></span>
+    13.5 KB
+  </div>
+</div>
+
+  
+
+  <div class="blob-wrapper data type-javascript">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tr>
+        <td id="L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-c">/*</span></td>
+      </tr>
+      <tr>
+        <td id="L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-c">	Leaflet.print, implements the Mapfish print protocol allowing a Leaflet map to be printed using either the Mapfish or GeoServer print module.</span></td>
+      </tr>
+      <tr>
+        <td id="L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-c">	(c) 2013, Adam Ratcliffe, GeoSmart Maps Limited</span></td>
+      </tr>
+      <tr>
+        <td id="L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-c">*/</span></td>
+      </tr>
+      <tr>
+        <td id="L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="LC5" class="blob-code blob-code-inner js-file-line">!function(t,i,e){L.print=L.print||{},L.print.Provider=L.Class.extend({includes:L.Mixin.Events,statics:{MAX_RESOLUTION:156543.03390625,MAX_EXTENT:[-20037508.34,-20037508.34,20037508.34,20037508.34],SRS:&quot;EPSG:3857&quot;,INCHES_PER_METER:39.3701,DPI:72,UNITS:&quot;m&quot;},options:{autoLoad:!1,autoOpen:!0,outputFormat:&quot;pdf&quot;,outputFilename:&quot;leaflet-map&quot;,method:&quot;POST&quot;,rotation:0,customParams:{},legends:!1},initialize:function(t){if(L.version&lt;=&quot;0.5.1&quot;)throw&quot;Leaflet.print requires Leaflet 0.6.0+. Download latest from https://github.com/Leaflet/Leaflet/&quot;;var i;t=L.setOptions(this,t),t.map&amp;&amp;this.setMap(t.map),t.capabilities?this._capabilities=t.capabilities:this.options.autoLoad&amp;&amp;this.loadCapabilities(),t.listeners&amp;&amp;(t.listeners.context&amp;&amp;(i=t.listeners.context,delete t.listeners.context),this.addEventListener(t.listeners,i))},loadCapabilities:function(){if(this.options.url){var t;t=this.options.url+&quot;/info.json&quot;,this.options.proxy&amp;&amp;(t=this.options.proxy+t),$.ajax({type:&quot;GET&quot;,dataType:&quot;json&quot;,url:t,success:L.Util.bind(this.onCapabilitiesLoad,this)})}},print:function(i){if(i=L.extend(L.extend({},this.options),i),!i.layout||!i.dpi)throw&quot;Must provide a layout name and dpi value to print&quot;;this.fire(&quot;beforeprint&quot;,{provider:this,map:this._map});var e,o=JSON.stringify(L.extend({units:L.print.Provider.UNITS,srs:L.print.Provider.SRS,layout:i.layout,dpi:i.dpi,outputFormat:i.outputFormat,outputFilename:i.outputFilename,layers:this._encodeLayers(this._map),pages:[{center:this._projectCoords(L.print.Provider.SRS,this._map.getCenter()),scale:this._getScale(),rotation:i.rotation}]},this.options.customParams,i.customParams,this._makeLegends(this._map)));&quot;GET&quot;===i.method?(e=this._capabilities.printURL+&quot;?spec=&quot;+encodeURIComponent(o),i.proxy&amp;&amp;(e=i.proxy+encodeURIComponent(e)),t.open(e),this.fire(&quot;print&quot;,{provider:this,map:this._map})):(e=this._capabilities.createURL,i.proxy&amp;&amp;(e=i.proxy+e),this._xhr&amp;&amp;this._xhr.abort(),this._xhr=$.ajax({type:&quot;POST&quot;,contentType:&quot;application/json; charset=UTF-8&quot;,processData:!1,dataType:&quot;json&quot;,url:e,data:o,success:L.Util.bind(this.onPrintSuccess,this),error:L.Util.bind(this.onPrintError,this)}))},getCapabilities:function(){return this._capabilities},setMap:function(t){this._map=t},setDpi:function(t){var i=this.options.dpi;i!==t&amp;&amp;(this.options.dpi=t,this.fire(&quot;dpichange&quot;,{provider:this,dpi:t}))},setLayout:function(t){var i=this.options.layout;i!==t&amp;&amp;(this.options.layout=t,this.fire(&quot;layoutchange&quot;,{provider:this,layout:t}))},setRotation:function(t){var i=this.options.rotation;i!==this.options.rotation&amp;&amp;(this.options.rotation=t,this.fire(&quot;rotationchange&quot;,{provider:this,rotation:t}))},_getLayers:function(t){var i,e,o,n=[],s=[],r=[],a=[];for(o in t._layers)if(t._layers.hasOwnProperty(o)){if(!t._layers.hasOwnProperty(o))continue;var l=t._layers[o];l instanceof L.TileLayer.WMS||l instanceof L.TileLayer?r.push(l):l instanceof L.ImageOverlay?a.push(l):l instanceof L.Marker?n.push(l):l instanceof L.Path&amp;&amp;l.toGeoJSON&amp;&amp;s.push(l)}n.sort(function(t,i){return t._icon.style.zIndex-i._icon.style.zIndex});var c;for(c=1;c&lt;n.length;c++)n[c]._icon.style.zIndex&lt;=n[c-1]._icon.style.zIndex&amp;&amp;(n[c]._icon.style.zIndex=n[c-1].icons.style.zIndex+1);for(r.sort(function(t,i){return t._container.style.zIndex-i._container.style.zIndex}),c=1;c&lt;r.length;c++)r[c]._container.style.zIndex&lt;=r[c-1]._container.style.zIndex&amp;&amp;(r[c]._container.style.zIndex=r[c-1]._container.style.zIndex+1);return i=[].slice.call(this,t._panes.overlayPane.childNodes),a.sort(function(t,e){return i.indexOf(t._image)-i.indexOf(e._image)}),t._pathRoot&amp;&amp;(e=[].slice.call(this,t._pathRoot.childNodes),s.sort(function(t,i){return e.indexOf(t._container)-e.indexOf(i._container)})),r.concat(s).concat(a).concat(n)},_getScale:function(){for(var t,i,e=this._map,o=e.getBounds(),n=1e3*L.print.Provider.INCHES_PER_METER,s=this._capabilities.scales,r=o.getSouthWest(),a=o.getNorthEast(),l=(r.lat+a.lat)/2,c=L.latLng(l,r.lng),p=L.latLng(l,a.lng),h=c.distanceTo(p),u=e.getSize().x,d=h/u/1e3,f=(d||1e-6)*n*L.print.Provider.DPI,_=Number.POSITIVE_INFINITY,y=s.length;y--;)t=Math.abs(f-Number(s[y].value)),_&gt;t&amp;&amp;(_=t,i=parseInt(Number(s[y].value),10));return i},_getLayoutByName:function(t){var i,e,o;for(e=0,o=this._capabilities.layouts.length;o&gt;e;e++)if(this._capabilities.layouts[e].name===t){i=this._capabilities.layouts[e];break}return i},_encodeLayers:function(t){var i,e,o=[],n=[],s=this._getLayers(t);for(e=0;e&lt;s.length;e++)i=s[e],i instanceof L.TileLayer.WMS?o.push(this._encoders.layers.tilelayerwms.call(this,i)):L.mapbox&amp;&amp;i instanceof L.mapbox.TileLayer?o.push(this._encoders.layers.tilelayermapbox.call(this,i)):i instanceof L.TileLayer?o.push(this._encoders.layers.tilelayer.call(this,i)):i instanceof L.ImageOverlay?o.push(this._encoders.layers.image.call(this,i)):(i instanceof L.Marker||i instanceof L.Path&amp;&amp;i.toGeoJSON)&amp;&amp;n.push(i);return n.length&amp;&amp;o.push(this._encoders.layers.vector.call(this,n)),o},_makeLegends:function(t,i){if(!this.options.legends)return[];var e,o,n,s,r,a,l=[],c=this._getLayers(t);for(s=0;s&lt;c.length;s++)if(r=c[s],r instanceof L.TileLayer.WMS){if(a={name:r.options.title||r.wmsParams.layers,classes:[]},e={SERVICE:&quot;WMS&quot;,LAYER:r.wmsParams.layers,REQUEST:&quot;GetLegendGraphic&quot;,VERSION:r.wmsParams.version,FORMAT:r.wmsParams.format,STYLE:r.wmsParams.styles,WIDTH:15,HEIGHT:15},e=L.extend(e,i),n=L.Util.template(r._url),o=r.wmsParams.layers.split(&quot;,&quot;),1===o.length)a.icons=[this._getAbsoluteUrl(n+L.Util.getParamString(e,n,!0))];else for(s=0;s&lt;o.length;s++)e.LAYER=o[s],a.classes.push({name:o[s],icons:[this._getAbsoluteUrl(n+L.Util.getParamString(e,n,!0))]});l.push(a)}return{legends:l}},_encoders:{layers:{httprequest:function(t){var i=t._url;return-1!==i.indexOf(&quot;{s}&quot;)&amp;&amp;(i=i.replace(&quot;{s}&quot;,t.options.subdomains[0])),i=this._getAbsoluteUrl(i),{baseURL:i,opacity:t.options.opacity}},tilelayer:function(t){var i,e=this._encoders.layers.httprequest.call(this,t),o=t._url.substring(0,t._url.indexOf(&quot;{z}&quot;)),n=[];for(-1!==o.indexOf(&quot;{s}&quot;)&amp;&amp;(o=o.replace(&quot;{s}&quot;,t.options.subdomains[0])),i=0;i&lt;=t.options.maxZoom;++i)n.push(L.print.Provider.MAX_RESOLUTION/Math.pow(2,i));return L.extend(e,{type:&quot;OSM&quot;,baseURL:o,extension:&quot;png&quot;,tileSize:[t.options.tileSize,t.options.tileSize],maxExtent:L.print.Provider.MAX_EXTENT,resolutions:n,singleTile:!1})},tilelayerwms:function(t){var i,e=this._encoders.layers.httprequest.call(this,t),o=t.options;L.extend(e,{type:&quot;WMS&quot;,layers:[o.layers].join(&quot;,&quot;).split(&quot;,&quot;).filter(function(t){return&quot;&quot;!==t}),format:o.format,styles:[o.styles].join(&quot;,&quot;).split(&quot;,&quot;).filter(function(t){return&quot;&quot;!==t}),singleTile:!0});for(i in t.wmsParams)t.wmsParams.hasOwnProperty(i)&amp;&amp;-1===&quot;detectretina,format,height,layers,request,service,srs,styles,version,width&quot;.indexOf(i.toLowerCase())&amp;&amp;(e.customParams||(e.customParams={}),e.customParams[i]=t.wmsParams[i]);return e},tilelayermapbox:function(t){var i,e=[];for(i=0;i&lt;=t.options.maxZoom;++i)e.push(L.print.Provider.MAX_RESOLUTION/Math.pow(2,i));var o={};return&quot;string&quot;==typeof t.options.access_token&amp;&amp;t.options.access_token.length&gt;0&amp;&amp;(o.access_token=t.options.access_token),{type:&quot;OSM&quot;,baseURL:t.options.tiles[0].substring(0,t.options.tiles[0].indexOf(&quot;{z}&quot;)),opacity:t.options.opacity,extension:&quot;png&quot;,tileSize:[t.options.tileSize,t.options.tileSize],maxExtent:L.print.Provider.MAX_EXTENT,resolutions:e,singleTile:!1,customParams:o}},image:function(t){return{type:&quot;Image&quot;,opacity:t.options.opacity,name:&quot;image&quot;,baseURL:this._getAbsoluteUrl(t._url),extent:this._projectBounds(L.print.Provider.SRS,t._bounds)}},vector:function(t){var i,e,o,n,s,r,a,l,c=[],p={},h={},u={},d=1;for(a=0,l=t.length;l&gt;a;a++){if(e=t[a],e instanceof L.Marker){var f=e.options.icon,_=f.options.iconUrl||L.Icon.Default.imagePath+&quot;/marker-icon.png&quot;,y=L.Util.isArray(f.options.iconSize)?new L.Point(f.options.iconSize[0],f.options.iconSize[1]):f.options.iconSize,m=L.Util.isArray(f.options.iconAnchor)?new L.Point(f.options.iconAnchor[0],f.options.iconAnchor[1]):f.options.iconAnchor,v=this.options.dpi/L.print.Provider.DPI;o={externalGraphic:this._getAbsoluteUrl(_),graphicWidth:y.x/v,graphicHeight:y.y/v,graphicXOffset:-m.x/v,graphicYOffset:-m.y/v}}else o=this._extractFeatureStyle(e);n=JSON.stringify(o),h=u[n],h?s=h:(u[n]=s=d++,p[s]=o),r=e instanceof L.Circle?this._circleGeoJSON(e):e.toGeoJSON(),r.geometry.coordinates=this._projectCoords(L.print.Provider.SRS,r.geometry.coordinates),r.properties._leaflet_style=s,null===i&amp;&amp;(i=e.options.opacity||1),c.push(r)}return{type:&quot;Vector&quot;,styles:p,opacity:i,styleProperty:&quot;_leaflet_style&quot;,geoJson:{type:&quot;FeatureCollection&quot;,features:c}}}}},_circleGeoJSON:function(t){var i,e=t._map.options.crs.projection,o=1;e===L.Projection.SphericalMercator?o=6378137:e===L.Projection.Mercator&amp;&amp;(o=e.R_MAJOR);var n=e.project(t.getLatLng()),s=1/Math.cos(t.getLatLng().lat*Math.PI/180),r=[];for(i=0;64&gt;i;i++){var a=2*i*Math.PI/64,l=L.point(Math.cos(a),Math.sin(a));r.push(e.unproject(n.add(l.multiplyBy(t.getRadius()*s/o))))}return L.polygon(r).toGeoJSON()},_extractFeatureStyle:function(t){var i=t.options;return{stroke:i.stroke,strokeColor:i.color,strokeWidth:i.weight,strokeOpacity:i.opacity,strokeLinecap:&quot;round&quot;,fill:i.fill,fillColor:i.fillColor||i.color,fillOpacity:i.fillOpacity}},_getAbsoluteUrl:function(t){var e;return L.Browser.ie?(e=i.createElement(&quot;a&quot;),e.style.display=&quot;none&quot;,i.body.appendChild(e),e.href=t,i.body.removeChild(e)):(e=i.createElement(&quot;a&quot;),e.href=t),e.href},_projectBounds:function(t,i){var e=i.getSouthWest(),o=i.getNorthEast();return this._projectCoords(t,e).concat(this._projectCoords(t,o))},_projectCoords:function(t,i){var e=t.toUpperCase().replace(&quot;:&quot;,&quot;&quot;),o=L.CRS[e];if(!o)throw&quot;Unsupported coordinate reference system: &quot;+t;return this._project(o,i)},_project:function(t,i){var e,o,n,s;if(&quot;number&quot;==typeof i[0]&amp;&amp;(i=new L.LatLng(i[1],i[0])),i instanceof L.LatLng)return o=t.project(i),[o.x,o.y];for(e=[],n=0,s=i.length;s&gt;n;n++)e.push(this._project(t,i[n]));return e},onCapabilitiesLoad:function(t){this._capabilities=t,this.options.layout||(this.options.layout=this._capabilities.layouts[0].name),this.options.dpi||(this.options.dpi=this._capabilities.dpis[0].value),this.fire(&quot;capabilitiesload&quot;,{provider:this,capabilities:this._capabilities})},onPrintSuccess:function(i){var e=i.getURL+(L.Browser.ie?&quot;?inline=true&quot;:&quot;&quot;);this.options.autoOpen&amp;&amp;(L.Browser.ie?t.open(e):t.location.href=e),this._xhr=null,this.fire(&quot;print&quot;,{provider:this,response:i})},onPrintError:function(t){this._xhr=null,this.fire(&quot;printexception&quot;,{provider:this,response:t})}}),L.print.provider=function(t){return new L.print.Provider(t)},L.Control.Print=L.Control.extend({options:{position:&quot;topleft&quot;,showLayouts:!0},initialize:function(t){L.Control.prototype.initialize.call(this,t),this._actionButtons={},this._actionsVisible=!1,this.options.provider&amp;&amp;this.options.provider instanceof L.print.Provider?this._provider=this.options.provider:this._provider=L.print.Provider(this.options.provider||{})},onAdd:function(t){var i,e,o=L.DomUtil.create(&quot;div&quot;,&quot;leaflet-control-print&quot;),n=L.DomUtil.create(&quot;div&quot;,&quot;leaflet-bar&quot;,o);return this._toolbarContainer=n,e=L.DomUtil.create(&quot;a&quot;,&quot;leaflet-print-print&quot;,n),e.href=&quot;#&quot;,e.title=&quot;Print map&quot;,L.DomEvent.on(e,&quot;click&quot;,L.DomEvent.stopPropagation).on(e,&quot;mousedown&quot;,L.DomEvent.stopPropagation).on(e,&quot;dblclick&quot;,L.DomEvent.stopPropagation).on(e,&quot;click&quot;,L.DomEvent.preventDefault).on(e,&quot;click&quot;,this.onPrint,this),this.options.showLayouts&amp;&amp;(i=this._provider.getCapabilities(),i?this._createActions(o,i):this._provider.once(&quot;capabilitiesload&quot;,this.onCapabilitiesLoad,this)),this._provider.setMap(t),o},onRemove:function(){var t,i;for(t in this._actionButtons)this._actionButtons.hasOwnProperty(t)&amp;&amp;(i=this._actionButtons[t],this._disposeButton(i.button,i.callback,i.scope));this._actionButtons={},this._actionsContainer=null},getProvider:function(){return this._provider},_createActions:function(t,i){var e,o,n,s=i.layouts,r=s.length,a=L.DomUtil.create(&quot;ul&quot;,&quot;leaflet-print-actions&quot;,t),l=100,c=r*l+(r-1);for(a.style.width=c+&quot;px&quot;,n=0;r&gt;n;n++)o=L.DomUtil.create(&quot;li&quot;,&quot;&quot;,a),e=this._createButton({title:&quot;Print map using the &quot;+s[n].name+&quot; layout&quot;,text:this._ellipsis(s[n].name,16),container:o,callback:this.onActionClick,context:this}),this._actionButtons[L.stamp(e)]={name:s[n].name,button:e,callback:this.onActionClick,context:this};this._actionsContainer=a},_createButton:function(t){var i=L.DomUtil.create(&quot;a&quot;,t.className||&quot;&quot;,t.container);return i.href=&quot;#&quot;,t.text&amp;&amp;(i.innerHTML=t.text),t.title&amp;&amp;(i.title=t.title),L.DomEvent.on(i,&quot;click&quot;,L.DomEvent.stopPropagation).on(i,&quot;mousedown&quot;,L.DomEvent.stopPropagation).on(i,&quot;dblclick&quot;,L.DomEvent.stopPropagation).on(i,&quot;click&quot;,L.DomEvent.preventDefault).on(i,&quot;click&quot;,t.callback,t.context),i},_showActionsToolbar:function(){this._actionsContainer&amp;&amp;(L.DomUtil.addClass(this._toolbarContainer,&quot;leaflet-print-actions-visible&quot;),this._actionsContainer.style.display=&quot;block&quot;,this._actionsVisible=!0)},_hideActionsToolbar:function(){this._actionsContainer.style.display=&quot;none&quot;,L.DomUtil.removeClass(this._toolbarContainer,&quot;leaflet-print-actions-visible&quot;),this._actionsVisible=!1},_ellipsis:function(t,i){return t&amp;&amp;t.length&gt;i&amp;&amp;(t=t.substr(0,i-3)+&quot;...&quot;),t},onCapabilitiesLoad:function(t){this._createActions(this._container,t.capabilities)},onActionClick:function(t){var i,e,o=&quot;&quot;+L.stamp(t.target);for(e in this._actionButtons)if(this._actionButtons.hasOwnProperty(e)&amp;&amp;e===o){i=this._actionButtons[e],this._provider.print({layout:i.name});break}this._hideActionsToolbar()},onPrint:function(){this.options.showLayouts?this._actionsVisible?this._hideActionsToolbar():this._showActionsToolbar():this._provider.print()}}),L.control.print=function(t){return new L.Control.Print(t)}}(this,document);</td>
+      </tr>
+</table>
+
+  </div>
+
+</div>
+
+<a href="#jump-to-line" rel="facebox[.linejump]" data-hotkey="l" style="display:none">Jump to Line</a>
+<div id="jump-to-line" style="display:none">
+  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="" class="js-jump-to-line-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <input class="linejump-input js-jump-to-line-field" type="text" placeholder="Jump to line&hellip;" aria-label="Jump to line" autofocus>
+    <button type="submit" class="btn">Go</button>
+</form></div>
+
+  </div>
+  <div class="modal-backdrop"></div>
+</div>
+
+    </div>
+  </div>
+
+    </div>
+
+      <div class="container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links right">
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+        <li><a href="https://github.com/pricing" data-ga-click="Footer, go to pricing, text:pricing">Pricing</a></li>
+
+    </ul>
+
+    <a href="https://github.com" aria-label="Homepage">
+      <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+</a>
+    <ul class="site-footer-links">
+      <li>&copy; 2015 <span title="0.04933s from github-fe124-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</a></li>
+        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+    
+    
+    
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="octicon octicon-alert"></span>
+      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+        <span class="octicon octicon-x"></span>
+      </button>
+      Something went wrong with that request. Please try again.
+    </div>
+
+
+      <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/frameworks-e950d80ee21d0cf6f731cc1154aab439be64e99276c7285cdcfb54fcc2bbebc5.js"></script>
+      <script async="async" crossorigin="anonymous" src="https://assets-cdn.github.com/assets/github-7cd13331c27dfa9085462a3ec9598c9096b839942024642dbd820baccac32476.js"></script>
+      
+      
+      
+    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
+      <span class="octicon octicon-alert"></span>
+      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    </div>
+  </body>
+</html>
+
