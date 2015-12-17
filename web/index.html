@@ -22,6 +22,8 @@
    		<script src="js/leaflet.draw.js"></script>
         <script src="js/leaflet.measurecontrol.js"></script>
         <script src="js/leaflet.defaultextent.js"></script>
+        <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+        <script src="js/leaflet-google.js"></script>
 		<script src="http://kirchhoffgistomcat.mooo.com:8080/geoserver/pdf/info.json?var=printConfig"></script>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	</head>
@@ -49,13 +51,16 @@
 		var basemap_0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
 			attribution: additional_attrib + '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 		});	
-		basemap_0.addTo(map);
+		
 		var basemap_1 = L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', { 
 			attribution: additional_attrib + 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data: &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 		});
 		var basemap_2 = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { 
 			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 		});
+
+		var googleLayer = new L.Google('ROADMAP');
+      		map.addLayer(googleLayer);
 		var rootUrl = 'http://kirchhoffgistomcat.mooo.com:8080/geoserver/ows';
 
 		var defaultParameters = {
@@ -220,7 +225,8 @@
 	var baseMaps = {
 		'OSM Standard': basemap_0,
 		'MapQuestOpen OSM': basemap_1,
-		'Esri WorldImagery': basemap_2};
+		'Esri WorldImagery': basemap_2,
+	    'Google ROADMAP':googleLayer};
 		L.control.layers(baseMaps,{"Unalienated_land cleaned": dwa_Unalienatedlandcleaned,"Subdivision": dwa_Subdivision,"Progress status": dwa_Progressstatus,"Ownership": dwa_Ownership,"Schemes": dwa_Schemes,"Dams": dwa_Dams},{collapsed:true}).addTo(map);
 		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
      
@@ -281,6 +287,7 @@
 		};
 		
 		//unalienated_land_legend.addTo(map);
+	
 		
 	map.on('overlayadd', function (eventLayer) {
 	    if (eventLayer.name === 'Dams') {
